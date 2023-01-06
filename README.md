@@ -34,12 +34,12 @@
   
 # Lancer l'emulation:
  
-    Lancer le scrip android:
+    Lancer le script android:
     
       npm run android
       
       Si vous avez choisi de télécharger l'application expo go sur mobile, flashez le QR code.
       
-      Sinon, si vous avez bien ouver le device en premier la connexion est automatique.
+      Sinon, si vous avez bien ouvert le device en premier la connexion est automatique.
       (En cas de problème en dessous du QRcode il y a une addresse "exp://........." copiez là dans l'émulateur)
     

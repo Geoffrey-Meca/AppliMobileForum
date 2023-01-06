@@ -6,10 +6,9 @@ export default function App() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View>
-        <Text>Bienvenue les copain, il est temps de se mettre au boulot !</Text>
+        <Text style={{textAlign: 'center'}}>Je refuse de travailler pour aujourd'hui</Text>
         <StatusBar style="auto" />
       </View>
-
     </SafeAreaView>
   );
 }
