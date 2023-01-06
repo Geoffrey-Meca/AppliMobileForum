@@ -6,7 +6,7 @@ export default function App() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View>
-        <Text style={{textAlign: 'center'}}>Je refuse de travailler pour aujourd'hui</Text>
+        <Text style={{textAlign: 'center'}}>MRCG</Text>
         <StatusBar style="auto" />
       </View>
     </SafeAreaView>
