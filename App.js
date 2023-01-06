@@ -3,8 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import LandingScreen from './src/Screens/ScreenHome';
 import { StyleSheet, View, Text } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { API_URL } from './api';
+import { getArticles } from './api';
 
 export default function App() {
 
@@ -12,13 +11,7 @@ export default function App() {
   
   useEffect(() => {
     const fetchData = async () => {
-      axios.get(`${API_URL}/articles?page=1`)
-      .then(res => {
-        setData(res.data);
-      })
-      .catch(error => {
-        console.log(error)
-      })
+      getArticles()
     };
     fetchData();
   }, []);
