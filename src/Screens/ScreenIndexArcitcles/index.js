@@ -3,6 +3,7 @@ import { Text, StyleSheet, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { getArticles } from '../../../api';
+import Footer from '../../Composants/Footer';
 
 export default function IndexArticleScreen({ navigation }) {
 
@@ -30,6 +31,7 @@ export default function IndexArticleScreen({ navigation }) {
                     <Text>Loading...</Text>
                 )}
             </View>
+          <Footer/>
         </SafeAreaView>
 
     )
