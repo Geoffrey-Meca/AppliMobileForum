@@ -7,11 +7,13 @@ import { getArticles } from './api';
 
 export default function App() {
 
-  const [data, setData] = useState(null);
+  const [articles, setArticles] = useState(null);
   
   useEffect(() => {
     const fetchData = async () => {
-      getArticles()
+      getArticles((data) => {
+        setArticles(data);
+      });
     };
     fetchData();
   }, []);
@@ -20,9 +22,9 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <LandingScreen />
       <View>
-      {data ? (
-      data['hydra:member'].map(item => (
-        <Text>{item.title}</Text>
+      {articles ? (
+      articles['hydra:member'].map((item, index) => (
+        <Text key={index}>{item.title}</Text>
         ))
       ) : (
         <Text>Loading...</Text>

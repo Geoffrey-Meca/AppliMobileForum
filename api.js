@@ -1,17 +1,29 @@
 import axios from 'axios';
 
-const API_URL = 'http://10.10.18.154:8000/api';
+const IP = '10.10.24.81'
+const API_URL = `http://${IP}:8000/api`;
 
-const getArticle = () => {
-    return axios.get(`${API_URL}/articles?page=1`)
+const getArticles = (callback) => {
+    const page = 1;
+    return axios.get(`${API_URL}/articles?page=${page}`)
     .then(res => {
-    setData(res.data);
+    return callback(res.data);
     })
     .catch(error => {
-    console.log(error)
+    return callback(error)
+    })
+}
+const getArticleById = (id) => {
+    return axios.get(`${API_URL}/articles/${id}`)
+    .then(res => {
+    setArticleById(res.data);
+    })
+    .catch(error => {
+    setArticleById(error)
     })
 }
 
 module.exports = {
-    getArticle
+    getArticles,
+    getArticleById
 }
