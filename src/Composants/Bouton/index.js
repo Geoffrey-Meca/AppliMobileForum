@@ -5,7 +5,7 @@ export default function BoutonApp(props) {
 
     return (
         <View style={styles.container}>
-            <Pressable style={styles.btn}>
+            <Pressable style={styles.btn} onPress={props.onPress}>
                 <Text style={styles.txt}>{props.text}</Text>
             </Pressable>
         </View>
@@ -27,13 +27,14 @@ const styles = StyleSheet.create({
 
         shadowColor: "red",
         shadowOffset: {
-            width: 0,
-            height: 12,
+            width: 100,
+            height: 100,
         },
-        shadowOpacity: 0,
-        shadowRadius: 16.00,
+        shadowOpacity: 100,
+        shadowRadius: 0,
 
         elevation: 24,
+
     },
     txt: {
         fontSize: 20,
