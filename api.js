@@ -215,7 +215,6 @@ const login = (email, password, callback) => {
     return axios.post(`${API_URL}/login_check`, data)
     .then(res => {
         console.log(res.data.token)
-        deviceStorage.saveKey("jwt", res.data.token);
         console.log(res.status)
         return callback(res.status);
     })
