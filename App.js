@@ -1,6 +1,8 @@
 import LandingScreen from './src/Screens/ScreenHome';
-import IndexArticleScreen from './src/Screens/ScreenIndexArcitcles';
+
 import ProfilScreen from './src/Screens/ScreenProfilPage';
+import IndexArticleScreen from './src/Screens/ScreenIndexArticles';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 

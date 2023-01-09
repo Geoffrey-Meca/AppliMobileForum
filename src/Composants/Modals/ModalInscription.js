@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { TextInput, StyleSheet, View, Text, Pressable } from 'react-native'
+import { setUser } from '../../../api';
 
 import BoutonApp from '../Bouton'
 
@@ -22,6 +23,9 @@ export default function ModalInscription(props) {
     const onChangeLastName = (val) => {
         setNewLastName(val)
     }
+    const handleSubmit = () => {
+        setUser(newEmail, newFirstName, newLastName, newPassword);
+      };
     return (
         <View style={styles.container}>
             <Pressable onPress={props.onPress}>
@@ -51,9 +55,11 @@ export default function ModalInscription(props) {
                     style={styles.input}
                     onChangeText={onChangeLastName}
                     value={newLastName}
-                    placeholder='LastName'
+                    placeholder='LastName' 
                 />
-                <BoutonApp text="Inscription" />
+                <BoutonApp text="Inscription" 
+                    onPress={handleSubmit}
+                />
             </View>
         </View>
     )
