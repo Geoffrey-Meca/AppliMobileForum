@@ -1,13 +1,27 @@
 import React from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import BoutonApp from '../../Composants/Bouton'
 
 export default function ProfilScreen({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.title}>Profil</Text>
-            <View>
+            <Text style={styles.title}>Profile</Text>
+            <View style={styles.inputContainer}>
+                <Text style={styles.txt}>Email:</Text>
+                <Text style={styles.txt}>FirstName:</Text>
+                <Text style={styles.txt}>LastName:</Text>
+                <Text style={styles.txt}>Rôle:</Text>
             </View>
+            <Text style={styles.title}>Modifier votre profile</Text>
+            <View style={styles.inputContainer}>
+                <Text style={styles.txt}>Email:</Text>
+                <Text style={styles.txt}>Password:</Text>
+                <Text style={styles.txt}>FirstName:</Text>
+                <Text style={styles.txt}>LastName:</Text>
+            </View>
+            <BoutonApp text="Modifier" />
+            <BoutonApp text="Supprimer compte" />
         </SafeAreaView>
     )
 }
@@ -17,11 +31,17 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "#0077B6",
     },
+    inputContainer: {
+        width: "70%",
+        margin: 10
+    },
     title: {
+        color: "#fff",
         fontSize: 40,
-        margin: 50,
+        marginTop: 30,
     },
     txt: {
+        color: "#fff",
         fontSize: 20,
         width: "70%",
         marginTop: 20

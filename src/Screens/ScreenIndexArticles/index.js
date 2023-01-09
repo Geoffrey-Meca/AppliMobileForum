@@ -9,20 +9,20 @@ export default function IndexArticleScreen({ navigation }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            getArticleById(370,(data) => {
+            getArticleById(370, (data) => {
                 setArticles(data);
             });
         };
         fetchData();
     }, []);
-    
+
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>{"Post du forum"}</Text>
             <View>
                 {articles ? (
 
-                        <Text>{articles.title}</Text>
+                    <Text>{articles.title}</Text>
                 ) : (
                     <Text>Loading...</Text>
                 )}
@@ -38,13 +38,14 @@ const styles = StyleSheet.create({
         backgroundColor: "#0077B6",
     },
     title: {
+        color: "#fff",
         fontSize: 40,
         margin: 50,
     },
     txt: {
+        color: "#fff",
         fontSize: 20,
         width: "70%",
         marginTop: 20
-
     }
 })
