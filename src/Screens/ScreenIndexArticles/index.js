@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Text, StyleSheet, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
-
 import { getArticleById } from '../../../api';
 
 export default function IndexArticleScreen({ navigation }) {
@@ -16,27 +15,25 @@ export default function IndexArticleScreen({ navigation }) {
         };
         fetchData();
     }, []);
-
-
+    
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>{"Post du forum"}</Text>
             <View>
                 {articles ? (
+
                         <Text>{articles.title}</Text>
                 ) : (
                     <Text>Loading...</Text>
                 )}
             </View>
         </SafeAreaView>
-
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#0077B6",
     },
@@ -46,7 +43,6 @@ const styles = StyleSheet.create({
     },
     txt: {
         fontSize: 20,
-
         width: "70%",
         marginTop: 20
 

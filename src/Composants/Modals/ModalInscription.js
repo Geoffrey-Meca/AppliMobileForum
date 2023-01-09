@@ -49,13 +49,13 @@ export default function ModalInscription(props) {
                     style={styles.input}
                     onChangeText={onChangeFirstName}
                     value={newFirstName}
-                    placeholder='Firstname'
+                    placeholder='FirstName'
                 />
                 <TextInput
                     style={styles.input}
                     onChangeText={onChangeLastName}
                     value={newLastName}
-                    placeholder='Lastname'
+                    placeholder='LastName' 
                 />
                 <BoutonApp text="Inscription" 
                     onPress={handleSubmit}
