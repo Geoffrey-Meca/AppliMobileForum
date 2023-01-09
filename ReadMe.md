@@ -16,7 +16,7 @@
 
     https://developer.android.com/studio
   
-    Une foi le logiciel installé, 
+    Une fois le logiciel installé, 
   
     Cliquer directement sur les trois petits points en haut à droite de l'onglet "Get from VCS" (ne pas créer de nouveau projet)
   
@@ -67,3 +67,6 @@
 
 
     
+# Pour les dev sous linux :
+
+    Dans le terminal dans le répertoire de l'app lancer : npx expo go puis scanner le QR code ou la fonction a qui permet d'avoir l'application sur l'émulateur.
