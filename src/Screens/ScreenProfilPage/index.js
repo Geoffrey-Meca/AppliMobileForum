@@ -1,14 +1,27 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import BoutonApp from '../../Composants/Bouton'
+import { getUserById } from '../../../api';
 
 export default function ProfilScreen({ navigation }) {
+
+    const [user, setUser] = useState("");
+
+    useEffect(() => {
+        const fetchData = async () => {
+            getUserById(1, (data) => {
+                setUser(data);
+            });
+        };
+        fetchData();
+    }, []);
+
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Profile</Text>
             <View style={styles.inputContainer}>
-                <Text style={styles.txt}>Email:</Text>
+                <Text style={styles.txt}>Email: {user.email}</Text>
                 <Text style={styles.txt}>FirstName:</Text>
                 <Text style={styles.txt}>LastName:</Text>
                 <Text style={styles.txt}>Rôle:</Text>
