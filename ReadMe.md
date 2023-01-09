@@ -42,4 +42,28 @@
       
       Sinon, si vous avez bien ouvert le device en premier la connexion est automatique.
       (En cas de problème en dessous du QRcode il y a une addresse "exp://........." copiez là dans l'émulateur)
+
+# Requête local:
+
+    Pour faire fonctionner les requêtes:
+
+      Ouvrir un terminal et faire écrire ipconfig.
+      Récuperer l'ipv4 et la coller dans le fichier api.js situé à la racine du projet
+
+      La syntaxte pour requêter l'api est la suivante:
+        axios.get(`${API_URL}/articles?page=1`)
+
+      Pour ensuite récuperer les données, il suffit d'ajouter un .then() avec fonction fléché avec paramètre res.
+      Et pour retourné une erreur si il y en a, ajouté à la fin .catch() avec fonction fléch" avec paramètre err.
+
+      Voiçi un example ci-dessous:
+        axios.get(`${API_URL}/comments?page=1`)
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(error => {
+          console.log(error)
+        })
+
+
     
