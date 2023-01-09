@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { Text, StyleSheet, View } from 'react-native'
+import { Text, StyleSheet, View} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { getArticleById } from '../../../api';
+
+import { getArticleById, login } from '../../../api';
 import Footer from '../../Composants/Footer';
+
 
 export default function IndexArticleScreen({ navigation }) {
 
     const [articles, setArticles] = useState(null);
-
+    login('geoffrey@gmail.com', 'password', (data) => {
+        console.log(data)
+    })
     useEffect(() => {
         const fetchData = async () => {
             getArticleById(370, (data) => {
