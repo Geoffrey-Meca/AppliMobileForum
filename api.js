@@ -207,9 +207,22 @@ const deleteComment = (id, callback) => {
         return callback(error)
     });
 }
-
-const login = (email, password, token) => {
-
+const login = (email, password, callback) => {
+    const data = {
+        email: email,
+        password: password
+    }
+    return axios.post(`${API_URL}/login_check`, data)
+    .then(res => {
+        console.log(res.data.token)
+        deviceStorage.saveKey("jwt", res.data.token);
+        console.log(res.status)
+        return callback(res.status);
+    })
+    .catch(error => {
+        console.log(error)
+        return callback(error)
+    });
 }
 
 module.exports = {
