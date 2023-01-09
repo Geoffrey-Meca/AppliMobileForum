@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Text, StyleSheet, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { getArticles } from '../../../api';
+import { getArticleById } from '../../../api';
 
 export default function IndexArticleScreen({ navigation }) {
 
@@ -10,7 +10,7 @@ export default function IndexArticleScreen({ navigation }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            getArticles((data) => {
+            getArticleById(370,(data) => {
                 setArticles(data);
             });
         };
@@ -23,9 +23,7 @@ export default function IndexArticleScreen({ navigation }) {
             <Text style={styles.title}>{"Post du forum"}</Text>
             <View>
                 {articles ? (
-                    articles['hydra:member'].map((item, index) => (
-                        <Text key={index}>{item.title}</Text>
-                    ))
+                        <Text>{articles.title}</Text>
                 ) : (
                     <Text>Loading...</Text>
                 )}
