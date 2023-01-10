@@ -1,6 +1,7 @@
 import axios from 'axios';
+import * as SecureStore from 'expo-secure-store'
 
-const IP = '10.10.25.2'
+const IP = '192.168.1.48'
 const API_URL = `http://${IP}:8000/api`;
 
 const getArticles = (page, callback) => {
@@ -91,7 +92,14 @@ const getUsers = (page, callback) => {
         })
 }
 const getUserById = (id, callback) => {
-    return axios.get(`${API_URL}/user/${id}`)
+    SecureStore.getItemAsync('jwt')
+    .then((jwt) => {
+        console.log(jwt)
+        return axios.get(`${API_URL}/user/${id}`, {
+            headers: {
+                Authorization: `Bearer ${jwt}`
+            }
+        })
         .then(res => {
             console.log(res.data)
             return callback(res.data);
@@ -100,6 +108,7 @@ const getUserById = (id, callback) => {
             console.log(error)
             return callback(error)
         })
+    });
 }
 const setUser = (email, firstname, lastname, password, callback) => {
     const data = {
@@ -214,9 +223,11 @@ const login = (email, password, callback) => {
     }
     return axios.post(`${API_URL}/login_check`, data)
     .then(res => {
-        console.log(res.data.token)
-        console.log(res.status)
-        return callback(res.status);
+        SecureStore.setItemAsync('jwt', res.data.token)
+        .then(() => {
+            console.log(res.status)
+            return callback(res.status);
+        })
     })
     .catch(error => {
         console.log(error)
