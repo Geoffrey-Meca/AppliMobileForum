@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { TextInput, StyleSheet, View, Text, Pressable } from 'react-native'
+import { login } from '../../../api';
 
 import BoutonApp from '../Bouton'
 
@@ -15,6 +16,11 @@ export default function ModalConnexion(props) {
     const onChangePassword = (val) => {
         setNewPassword(val)
     }
+    const handleSubmit = () => {
+        login(newEmail, newPassword, (res =>  {
+            console.log(res)
+        }));
+      };
     return (
         <View style={styles.container}>
             <Pressable onPress={props.onPress}>
@@ -34,7 +40,9 @@ export default function ModalConnexion(props) {
                     value={newPassword}
                     placeholder='Password'
                 />
-                <BoutonApp text="Connexion" />
+                <BoutonApp text="Connexion" 
+                    onPress={handleSubmit}
+                />
             </View>
         </View>
     )

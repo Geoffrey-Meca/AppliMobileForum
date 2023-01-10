@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store'
 
-const IP = '192.168.1.48'
+const IP = '10.10.27.151'
 const API_URL = `http://${IP}:8000/api`;
 
 const getArticles = (page, callback) => {
@@ -234,7 +234,6 @@ const login = (email, password, callback) => {
         return callback(error)
     });
 }
-
 module.exports = {
     getArticles,
     getArticleById,

@@ -24,7 +24,9 @@ export default function ModalInscription(props) {
         setNewLastName(val)
     }
     const handleSubmit = () => {
-        setUser(newEmail, newFirstName, newLastName, newPassword);
+        setUser(newEmail, newFirstName, newLastName, newPassword, (res => {
+            console.log(res)
+        }));
       };
     return (
         <View style={styles.container}>
