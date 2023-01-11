@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState} from 'react';
-import { View, StyleSheet, Text, Pressable, TextInput } from 'react-native'
+import { View, StyleSheet, Text, TextInput } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import BoutonApp from '../../Composants/Bouton'
 import Footer from '../../Composants/Footer';

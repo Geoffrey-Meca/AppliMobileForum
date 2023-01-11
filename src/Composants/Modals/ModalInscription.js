@@ -95,12 +95,13 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     input: {
-        backgroundColor: "#fff",
+        backgroundColor: "#F0F0F0",
         borderColor: 'black',
         borderWidth: 1,
-        borderRadius: 5,
-        width: '70 %',
-        height: 40,
-        margin: 10
+        borderRadius: 3,
+        width: '80 %',
+        height: 42,
+        margin: '5%',
+        padding: 5
     },
 })
