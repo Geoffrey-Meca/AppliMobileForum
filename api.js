@@ -1,32 +1,37 @@
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store'
 
-const jwtToken = SecureStore.getItemAsync('jwt');
-
+const getJwtToken = async () => {
+    const token = await SecureStore.getItemAsync('jwt');
+    if(token){
+        api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    }
+}
 const api = axios.create({
     baseURL: 'https://rany-alo.students-laplateforme.io/app-mobile-forum/public/api',
     headers: {
-        Authorization: 'Bearer ' + jwtToken,
         'Content-type': 'application/json'
     }
-})
-const request = (method, url, data, callback) => {
-    api({
+});
+
+const request = async (method, url, data, callback) => {
+    await getJwtToken();
+    return api({
         method: method,
         url: url,
         data: data
     }).then(res => {
             // console.log(res)
-            return callback(res.data);
+            return callback(res);
         })
         .catch(error => {
             console.log(`Erreur ${error.response.data.code}`)
             console.log(error.response.data.message)
             if(error.response.data.code == 401){
-                // SecureStore.deleteItemAsync('jwt')
+                SecureStore.deleteItemAsync('jwt')
                 return callback('Token requis (W.I.P)')
             }
-            return callback(error)
+            return callback(error.response)
         });
 };
 
@@ -96,7 +101,7 @@ const getCommentById = (id, callback) => {
     });
 }
 const postComment = (articleId, content, callback) => {
-    request("post", `/commentPost/article${articleId}`, {content}, (res) => {
+    request("post", `/commentPost/article/${articleId}`, {content}, (res) => {
         return callback(res)
     });
 }
@@ -119,13 +124,11 @@ const login = (email, password, callback) => {
     .then(res => {
         SecureStore.setItemAsync('jwt', res.data.token)
         .then(() => {
-            console.log(res.status)
-            return callback(res.status);
+            return callback(res);
         })
     })
     .catch(error => {
-        console.log(error)
-        return callback(error)
+        return callback(error.response)
     });
 }
 module.exports = {
