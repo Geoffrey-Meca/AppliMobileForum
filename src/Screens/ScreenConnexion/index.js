@@ -1,15 +1,14 @@
-import React, { useState } from 'react'
-import { TextInput, StyleSheet, View, Text, Pressable } from 'react-native'
+import React from 'react'
+import { useState } from 'react'
+import { TextInput, StyleSheet, View, Text } from 'react-native'
 import { login } from '../../../api';
+import { SafeAreaView } from 'react-native-safe-area-context'
+import BoutonApp from '../../Composants/Bouton'
+import Footer from '../../Composants/Footer';
 
-import BoutonApp from '../Bouton'
-
-
-export default function ModalConnexion(props) {
-
+export default function ConnexionScreen(props) {
     const [newEmail, setNewEmail] = useState("")
     const [newPassword, setNewPassword] = useState("")
-
     const onChangeEmail = (val) => {
         setNewEmail(val)
     }
@@ -21,13 +20,12 @@ export default function ModalConnexion(props) {
             console.log(res)
         }));
       };
-    return (
+
+  return (
+    <SafeAreaView style={styles.container}>
         <View style={styles.container}>
-            <Pressable onPress={props.onPress}>
-                <Text style={styles.closeBtn}>X</Text>
-            </Pressable>
             <View style={styles.formContainer}>
-                <Text style={styles.title}>Identidiez-vous</Text>
+                <Text style={styles.title}>Identifiez-vous</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={onChangeEmail}
@@ -44,34 +42,28 @@ export default function ModalConnexion(props) {
                     onPress={handleSubmit}
                 />
             </View>
+            <Footer/>
         </View>
-    )
+    </SafeAreaView>
+  )
 }
 const styles = StyleSheet.create({
     container: {
-        position: "absolute",
-        backgroundColor: "#023E8A",
+        position: "relative",
+        backgroundColor: "#0077B6",
         width: "100%",
-        height: 600,
-        top: "50%"
-    },
-    closeBtn: {
-        backgroundColor: "grey",
-        textAlign: "center",
-        fontSize: 25,
-        width: 30,
-        height: 30,
-        top: 0,
-        left: "92%"
+        height: "100%",
+        top: 0
     },
     formContainer: {
         justifyContent: 'center',
         alignItems: 'center',
     },
     title: {
-        color: '#fff',
+        color: '#FFFFFF',
         fontSize: 30,
-        marginBottom: 20
+        marginBottom: 20,
+        textAlign: 'center'
     },
     input: {
         backgroundColor: "#F0F0F0",
