@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { TextInput, StyleSheet, View, Text, Pressable } from 'react-native'
-import { setUser } from '../../../api';
+import { postUser } from '../../../api';
 
 import BoutonApp from '../Bouton'
 
@@ -24,7 +24,7 @@ export default function ModalInscription(props) {
         setNewLastName(val)
     }
     const handleSubmit = () => {
-        setUser(newEmail, newFirstName, newLastName, newPassword, (res => {
+        postUser(newEmail, newFirstName, newLastName, newPassword, (res => {
             console.log(res)
         }));
       };
