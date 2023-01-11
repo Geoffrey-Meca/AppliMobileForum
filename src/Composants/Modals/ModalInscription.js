@@ -1,7 +1,7 @@
 //import React, { useState } from 'react'
 import React from 'react';
 import { useState} from 'react';
-import { TextInput, StyleSheet, View, Text, Pressable } from 'react-native'
+import { TextInput, StyleSheet, View, Text, Pressable, Alert } from 'react-native'
 import { postUser } from '../../../api';
 
 import BoutonApp from '../Bouton'
@@ -27,7 +27,11 @@ export default function ModalInscription(props) {
     }
     const handleSubmit = () => {
         postUser(newEmail, newFirstName, newLastName, newPassword, (res => {
-            console.log(res)
+            if(res.status != 201){
+                Alert.alert(`Impossible de crée l'utilisateur`, `${res.data.violations[0].message}`, [{
+                    style: 'cancel'
+                }])
+            }
         }));
       };
     return (

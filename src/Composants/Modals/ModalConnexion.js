@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TextInput, StyleSheet, View, Text, Pressable } from 'react-native'
+import { TextInput, StyleSheet, View, Text, Pressable, Alert } from 'react-native'
 import { login } from '../../../api';
 
 import BoutonApp from '../Bouton'
@@ -18,7 +18,11 @@ export default function ModalConnexion(props) {
     }
     const handleSubmit = () => {
         login(newEmail, newPassword, (res =>  {
-            console.log(res)
+            if(res.status != 200){
+                Alert.alert(`Identifiants incorrectes`, 'Votre e-mail ou mot de passe sont incorrectes', [{
+                    style: 'cancel'
+                }])
+            }
         }));
       };
     return (

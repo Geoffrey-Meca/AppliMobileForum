@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Text, StyleSheet, View} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { getArticles, getUsers } from '../../../api';
+import { getArticles, postComment } from '../../../api';
 import Footer from '../../Composants/Footer';
 
 
@@ -14,6 +14,7 @@ export default function IndexArticleScreen({ navigation }) {
         const fetchData = async () => {
             getArticles(1, (data) => {
                 setArticles(data);
+                console.log(data)
             });
         };
         fetchData();
