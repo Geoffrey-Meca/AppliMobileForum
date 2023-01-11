@@ -1,8 +1,13 @@
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store'
 
-const IP = '10.10.27.151'
-const API_URL = `http://${IP}:8000/api`;
+//const IP = '10.10.27.151'
+
+
+//const API_URL = `http://${IP}:8000/api`;
+
+const API_URL = "https://christophep-calmes.students-laplateforme.io/public/api";
+
 
 const getArticles = (page, callback) => {
     return axios.get(`${API_URL}/articles?page=${page}`)

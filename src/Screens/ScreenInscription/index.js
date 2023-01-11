@@ -1,18 +1,16 @@
-//import React, { useState } from 'react'
-import React from 'react';
+import React from 'react'
 import { useState} from 'react';
-import { TextInput, StyleSheet, View, Text, Pressable } from 'react-native'
-import { setUser } from '../../../api';
+import { View, StyleSheet, Text, Pressable, TextInput } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import BoutonApp from '../../Composants/Bouton'
+import Footer from '../../Composants/Footer';
 
-import BoutonApp from '../Bouton'
 
-export default function ModalInscription(props) {
-
-    const [newEmail, setNewEmail] = useState("")
-    const [newPassword, setNewPassword] = useState("")
-    const [newFirstName, setNewFirstName] = useState("")
-    const [newLastName, setNewLastName] = useState("")
-
+export default function InscriptionScreen(props) {
+    const [newEmail, setNewEmail] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [newFirstName, setNewFirstName] = useState("");
+    const [newLastName, setNewLastName] = useState("");
     const onChangeEmail = (val) => {
         setNewEmail(val)
     }
@@ -30,13 +28,12 @@ export default function ModalInscription(props) {
             console.log(res)
         }));
       };
-    return (
-        <View style={styles.container}>
-            <Pressable onPress={props.onPress}>
-                <Text style={styles.closeBtn}>X</Text>
-            </Pressable>
-            <View style={styles.formContainer}>
-                <Text style={styles.title}>Inscrivez-vous</Text>
+  return (
+    <SafeAreaView style={styles.container}>
+       <View style={styles.container}>
+
+            <View style={styles.formContainer}></View>
+                <Text style={styles.title}>Inscription</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={onChangeEmail}
@@ -64,43 +61,38 @@ export default function ModalInscription(props) {
                 <BoutonApp text="Inscription" 
                     onPress={handleSubmit}
                 />
-            </View>
-        </View>
-    )
+    <Footer/>
+    </View>
+    </SafeAreaView>
+  )
 }
+
 const styles = StyleSheet.create({
     container: {
-        position: "absolute",
-        backgroundColor: "#023E8A",
+        position: "relative",
+        backgroundColor: "#0077B6",
         width: "100%",
-        height: 500,
-        top: "30%"
-    },
-    closeBtn: {
-        backgroundColor: "grey",
-        textAlign: "center",
-        fontSize: 25,
-        width: 30,
-        height: 30,
-        top: 0,
-        left: "92%"
+        height: "100%",
+        top: 0
     },
     formContainer: {
         justifyContent: 'center',
         alignItems: 'center',
     },
     title: {
-        color: '#fff',
+        color: '#FFFFFF',
         fontSize: 30,
-        marginBottom: 20
+        marginBottom: 20,
+        textAlign: 'center'
     },
     input: {
-        backgroundColor: "#fff",
+        backgroundColor: "#F0F0F0",
         borderColor: 'black',
         borderWidth: 1,
-        borderRadius: 5,
-        width: '70 %',
-        height: 40,
-        margin: 10
+        borderRadius: 3,
+        width: '80 %',
+        height: 42,
+        margin: '5%',
+        padding: 5
     },
 })
