@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text , StyleSheet} from 'react-native';
+import { Text , StyleSheet, View} from 'react-native';
 
 
 const today=new Date();
@@ -8,18 +8,25 @@ const year = today.getFullYear();
 export default function Footer() {
 
     return (
-        <Text style={stylesFooter.text}>Copyrigth {year} Coucou</Text>
+        <View style={styles.container}>
+            <Text style={styles.text}>Copyrigth {year}</Text>
+        </View>
+ 
     )
 }
-const stylesFooter = StyleSheet.create({
-    text: {
+const styles = StyleSheet.create({
+    container: {
         position: "absolute",
         bottom: 0,
-        height:50,
-        paddingTop: 15,
+        justifyContent: "center",
+        height:"10%",
         width: "100%",
-        textAlign: "center",
         backgroundColor: "#0096C7",
+    },
+    text: {
+        
+        textAlign: "center",
+        
         color: "#FFFFFF"
         }
 })
