@@ -1,232 +1,121 @@
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store'
 
-//const IP = '10.10.27.151'
+const jwtToken = SecureStore.getItemAsync('jwt');
 
-
-//const API_URL = `http://${IP}:8000/api`;
-
-const API_URL = "https://christophep-calmes.students-laplateforme.io/public/api";
-
+const api = axios.create({
+    baseURL: 'https://rany-alo.students-laplateforme.io/app-mobile-forum/public/api',
+    headers: {
+        Authorization: 'Bearer ' + jwtToken,
+        'Content-type': 'application/json'
+    }
+})
+const request = (method, url, data, callback) => {
+    api({
+        method: method,
+        url: url,
+        data: data
+    }).then(res => {
+            // console.log(res)
+            return callback(res.data);
+        })
+        .catch(error => {
+            console.log(`Erreur ${error.response.data.code}`)
+            console.log(error.response.data.message)
+            if(error.response.data.code == 401){
+                // SecureStore.deleteItemAsync('jwt')
+                return callback('Token requis (W.I.P)')
+            }
+            return callback(error)
+        });
+};
 
 const getArticles = (page, callback) => {
-    return axios.get(`${API_URL}/articles?page=${page}`)
-        .then(res => {
-            console.log(res.data)
-            return callback(res.data);
-        })
-        .catch(error => {
-            console.log(error)
-            return callback(error)
-        })
-}
-const getArticleById = (id, callback) => {
-    return axios.get(`${API_URL}/article/${id}`)
-        .then(res => {
-            console.log(res.data)
-            return callback(res.data);
-        })
-        .catch(error => {
-            console.log(error)
-            return callback(error)
-        })
-}
-const setArticle = (title, content, image, callback) => {
-    const data = {
-        title: title,
-        content: content,
-        image: image
-    }
-    return axios.post(`${API_URL}/articlePost`, data)
-        .then(res => {
-            console.log(res.status)
-            return callback(res.status);
-        })
-        .catch(error => {
-            console.log(error)
-            return callback(error)
-        });
-}
-const editArticle = (id, title, content, image, callback) => {
-    const data = {
-        title: title,
-        content: content,
-        image: image
-    }
-    return axios.patch(`${API_URL}/articleEdit/${id}`, data)
-        .then(res => {
-            console.log(res.status)
-            return callback(res.status);
-        })
-        .catch(error => {
-            console.log(error)
-            return callback(error)
-        });
-}
-const deleteArticle = (id, callback) => {
-    return axios.delete(`${API_URL}/articleDelete/${id}`)
-        .then(res => {
-            console.log(res.status)
-            return callback(res.status);
-        })
-        .catch(error => {
-            console.log(error)
-            return callback(error)
-        });
-}
-const getMe = (token, callback) => {
-    return axios.get(`${API_URL}/profileMe`)
-        .then(res => {
-            console.log(res.status)
-            return callback(res.data);
-        })
-        .catch(error => {
-            console.log(error)
-            return callback(error)
-        })
-}
-const getUsers = (page, callback) => {
-    return axios.get(`${API_URL}/users?page=${page}`)
-        .then(res => {
-            console.log(res.data)
-            return callback(res.data);
-        })
-        .catch(error => {
-            console.log(error)
-            return callback(error)
-        })
-}
-const getUserById = (id, callback) => {
-    SecureStore.getItemAsync('jwt')
-    .then((jwt) => {
-        console.log(jwt)
-        return axios.get(`${API_URL}/user/${id}`, {
-            headers: {
-                Authorization: `Bearer ${jwt}`
-            }
-        })
-        .then(res => {
-            console.log(res.data)
-            return callback(res.data);
-        })
-        .catch(error => {
-            console.log(error)
-            return callback(error)
-        })
+    request("get", `/articles?_page=${page}`, null, (res) => {
+            return callback(res)
     });
 }
-const setUser = (email, firstname, lastname, password, callback) => {
-    const data = {
-        email: email,
-        firstname: firstname,
-        lastname: lastname,
-        password: password
-    }
-    return axios.post(`${API_URL}/inscription`, data)
-        .then(res => {
-            console.log(res.status)
-            return callback(res.status);
-        })
-        .catch(error => {
-            console.log(error)
-            return callback(error)
-        });
+const getArticleById = (id, callback) => {
+    request("get", `/articles/${id}`, null, (res) => {
+            return callback(res)
+    });
 }
-const editUser = (id, email, firstname, lastname, password, callback) => {
-    const data = {
-        email: email,
-        firstname: firstname,
-        lastname: lastname,
-        password: password
-    }
-    return axios.patch(`${API_URL}/userProfileEdit/${id}`, data)
-        .then(res => {
-            console.log(res.status)
-            return callback(res.status);
-        })
-        .catch(error => {
-            console.log(error)
-            return callback(error)
-        });
+const postArticle = (title, content, image, callback) => {
+    request("post", `/articles`, {title, content, image}, (res) => {
+        return callback(res)
+    });
+}
+const patchArticle = (id, title, content, image, callback) => {
+    request("patch", `/articles/${id}`, {title, content, image}, (res) => {
+        return callback(res)
+    });
+}
+const deleteArticle = (id, callback) => {
+    request("delete", `/articleDelete/${id}`, null, (res) => {
+        return callback(res)
+    });
+}
+const getMe = (callback) => {
+    request("get", `/profileMe`, null, (res) => {
+        return callback(res)
+    });
+}
+const getUsers = (page, callback) => {
+    request("get", `/users?_page=${page}`, null, (res) => {
+        return callback(res)
+    });
+}
+const getUserById = (id, callback) => {
+    request("get", `/user/${id}`, null, (res) => {
+        return callback(res)
+    });
+}
+const postUser = (email, firstname, lastname, password, callback) => {
+    request("post", `/inscription`, {email, firstname, lastname, password}, (res) => {
+        return callback(res)
+    });
+}
+const patchUser = (id, email, firstname, lastname, password, callback) => {
+    request("patch", `/userProfileEdit${id}`, {email, firstname, lastname, password}, (res) => {
+        return callback(res)
+    });
 }
 const deleteUser = (id, callback) => {
-    return axios.delete(`${API_URL}/userDelete/${id}`)
-        .then(res => {
-            console.log(res.status)
-            return callback(res.status);
-        })
-        .catch(error => {
-            console.log(error)
-            return callback(error)
-        });
+    request("delete", `/userDelete/${id}`, null, (res) => {
+        return callback(res)
+    });
 }
 const getComments = (page, callback) => {
-    return axios.get(`${API_URL}/comments?page=${page}`)
-        .then(res => {
-            console.log(res.data)
-            return callback(res.data);
-        })
-        .catch(error => {
-            console.log(error)
-            return callback(error)
-        })
+    request("get", `/comments?_page=${page}`, null, (res) => {
+        return callback(res)
+    });
 }
 const getCommentById = (id, callback) => {
-    return axios.get(`${API_URL}/comment/${id}`)
-        .then(res => {
-            console.log(res.data)
-            return callback(res.data);
-        })
-        .catch(error => {
-            console.log(error)
-            return callback(error)
-        })
+    request("get", `/comment/${id}`, null, (res) => {
+        return callback(res)
+    });
 }
-const setComment = (articleId, content, callback) => {
-    const data = {
-        content: content,
-    }
-    return axios.post(`${API_URL}/commentPost/article/${articleId}`, data)
-        .then(res => {
-            console.log(res.status)
-            return callback(res.status);
-        })
-        .catch(error => {
-            console.log(error)
-            return callback(error)
-        });
+const postComment = (articleId, content, callback) => {
+    request("post", `/commentPost/article${articleId}`, {content}, (res) => {
+        return callback(res)
+    });
 }
-const editComment = (id, content, callback) => {
-    const data = {
-        content: content,
-    }
-    return axios.patch(`${API_URL}/commentEdit/${articleId}`, data)
-        .then(res => {
-            console.log(res.status)
-            return callback(res.status);
-        })
-        .catch(error => {
-            console.log(error)
-            return callback(error)
-        });
+const patchComment = (id, content, callback) => {
+    request("patch", `/commentEdit/${id}`, {content}, (res) => {
+        return callback(res)
+    });
 }
 const deleteComment = (id, callback) => {
-    return axios.delete(`${API_URL}/commentDelete/${id}`)
-        .then(res => {
-            console.log(res.status)
-            return callback(res.status);
-        })
-        .catch(error => {
-            console.log(error)
-            return callback(error)
-        });
+    request("delete", `/commentDelete/${id}`, null, (res) => {
+        return callback(res)
+    });
 }
 const login = (email, password, callback) => {
     const data = {
         email: email,
         password: password
     }
-    return axios.post(`${API_URL}/login_check`, data)
+    return axios.post(`https://rany-alo.students-laplateforme.io/app-mobile-forum/public/api/login_check`, data)
     .then(res => {
         SecureStore.setItemAsync('jwt', res.data.token)
         .then(() => {
@@ -242,19 +131,19 @@ const login = (email, password, callback) => {
 module.exports = {
     getArticles,
     getArticleById,
-    setArticle,
-    editArticle,
+    postArticle,
+    patchArticle,
     deleteArticle,
     getMe,
     getUsers,
     getUserById,
-    setUser,
-    editUser,
+    postUser,
+    patchUser,
     deleteUser,
     getComments,
     getCommentById,
-    setComment,
-    editComment,
+    postComment,
+    patchComment,
     deleteComment,
     login,
 }
