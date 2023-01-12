@@ -21,18 +21,17 @@ const request = async (method, url, data, callback) => {
         url: url,
         data: data
     }).then(res => {
-            // console.log(res)
             return callback(res);
         })
-        .catch(error => {
-            console.log(`Erreur ${error.response.data.code}`)
-            console.log(error.response.data.message)
-            if(error.response.data.code == 401){
-                SecureStore.deleteItemAsync('jwt')
-                return callback('Token requis (W.I.P)')
-            }
-            return callback(error.response)
-        });
+    .catch(error => {
+        console.log(`Erreur ${error.response.data.code}`)
+        console.log(error.response.data.message)
+        if(error.response.data.code == 401){
+            SecureStore.deleteItemAsync('jwt')
+            return callback('Token requis (W.I.P)')
+        }
+        return callback(error.response)
+    });
 };
 
 const getArticles = (page, callback) => {
