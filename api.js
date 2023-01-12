@@ -26,9 +26,11 @@ const request = async (method, url, data, callback) => {
     .catch(error => {
         console.log(`Erreur ${error.response.data.code}`)
         console.log(error.response.data.message)
-        if(error.response.data.code == 401){
+        if(error.response.data.message == 'JWT Token expired'){
             SecureStore.deleteItemAsync('jwt')
-            return callback('Token requis (W.I.P)')
+            return callback(Alert.alert(`Vous avez été déconnecté`, `Veuillez vous re-connecter pour continuer`, [{
+                style: 'cancel'
+            }]))
         }
         return callback(error.response)
     });
@@ -115,19 +117,14 @@ const deleteComment = (id, callback) => {
     });
 }
 const login = (email, password, callback) => {
-    const data = {
-        email: email,
-        password: password
-    }
-    return axios.post(`https://rany-alo.students-laplateforme.io/app-mobile-forum/public/api/login_check`, data)
-    .then(res => {
-        SecureStore.setItemAsync('jwt', res.data.token)
-        .then(() => {
+    request("post", `/login_check`, {email, password}, (res) => {
+        if(res.status == 200){
+            SecureStore.setItemAsync('jwt', res.data.token)
+            .then(() => {
             return callback(res);
-        })
-    })
-    .catch(error => {
-        return callback(error.response)
+            })
+        }
+        return callback(res)
     });
 }
 module.exports = {
