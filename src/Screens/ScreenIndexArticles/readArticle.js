@@ -16,15 +16,12 @@ export default function ReadArticle (navigation) {
         }
         fetchData();
       }, []);
-    
-
-
     if(debug) {
         console.log('id Article ' +navigation['route']['params']['articleId'])
         console.log('Article content '+ article.title)
         console.log('Content Article ' + article.createdAt)
+        console.log('Comments '+ article.comments)
     }
-
         function brassageDate (date) {
             if(date) {
                 let buffer =  date.split('T')
@@ -37,20 +34,14 @@ export default function ReadArticle (navigation) {
             }
       
         }
-
-
-
-
   return (
     <SafeAreaView style={styles.container}>
-    
     {article ? (
     <Fragment>
         <Text style={styles.title}>{article.title}</Text>
         <Text style={styles.date}>Le {brassageDate(article.createdAt)}</Text>
         <Text style={styles.date}>Par : {article.userId.lastname +' '+article.userId.firstname}</Text>
         <Text style={styles.txt}>{article.content}</Text>
-        
     </Fragment>) : (
         <Text style={styles.txt}>...loading</Text>
     )
