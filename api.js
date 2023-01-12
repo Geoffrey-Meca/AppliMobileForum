@@ -35,8 +35,9 @@ const getArticles = (page, callback) => {
             return callback(res)
     });
 }
+
 const getArticleById = (id, callback) => {
-    request("get", `/articles/${id}`, null, (res) => {
+    request("get", `/article/${id}`, null, (res) => {
             return callback(res)
     });
 }
