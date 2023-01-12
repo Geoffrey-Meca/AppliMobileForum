@@ -9,7 +9,7 @@ export default function Footer() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Copyrigth {year}</Text>
+            <Text style={styles.text}>Copyright {year}</Text>
         </View>
  
     )

@@ -31,7 +31,7 @@ export default function ModalConnexion(props) {
                 <Text style={styles.closeBtn}>X</Text>
             </Pressable>
             <View style={styles.formContainer}>
-                <Text style={styles.title}>Identidiez-vous</Text>
+                <Text style={styles.title}>Identifiez-vous</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={onChangeEmail}
