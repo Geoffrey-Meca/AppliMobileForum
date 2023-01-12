@@ -12,9 +12,8 @@ export default function IndexArticleScreen({ navigation }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            getArticles(1, (data) => {
-                setArticles(data);
-                console.log(data)
+            getArticles(1, (res) => {
+                setArticles(res.data);
             });
         };
         fetchData();
