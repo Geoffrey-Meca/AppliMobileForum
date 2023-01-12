@@ -36,12 +36,12 @@ const request = async (method, url, data, callback) => {
 
 const getArticles = (page, callback) => {
     request("get", `/articles?_page=${page}`, null, (res) => {
-            return callback(res)
+        return callback(res)
     });
 }
 const getArticleById = (id, callback) => {
-    request("get", `/articles/${id}`, null, (res) => {
-            return callback(res)
+    request("get", `/article/${id}`, null, (res) => {
+        return callback(res)
     });
 }
 const postArticle = (title, content, image, callback) => {
