@@ -67,7 +67,3 @@ const styles = StyleSheet.create({
         marginBottom: 10
     }
 })
-
-//    <Text style={styles.linkArticle} key={index}>{item.title}</Text>  
-// () => {item['@id'].replace(/[^0-9]/g, '')}
-// navigation.navigate

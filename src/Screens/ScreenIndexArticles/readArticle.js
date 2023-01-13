@@ -1,34 +1,42 @@
-const debug = true
+
 import React, { useState, useEffect, Fragment } from 'react'
-import { SafeAreaView, Text, StyleSheet } from 'react-native';
+import { SafeAreaView, Text, StyleSheet, ScrollView,View } from 'react-native';
 import { getArticleById } from '../../../api';
+import AffichageComment from '../../Composants/comments/affichageComment';
 import Footer from '../../Composants/Footer';
 
 export default function ReadArticle (navigation) {
-    
+    const debug = true
     const articleId = navigation['route']['params']['articleId']
     const [article, setArticle] = useState('')
     useEffect(() => {
         const fetchData = async() => {
-          getArticleById(articleId, (data) => {
-            setArticle(data)
+          getArticleById(articleId, (res) => {
+            setArticle(res.data)
         })
         }
         fetchData();
       }, []);
     if(debug) {
+        // Test pour la débug
         console.log('id Article ' +navigation['route']['params']['articleId'])
         console.log('Article content '+ article.title)
         console.log('Content Article ' + article.createdAt)
+        console.log('lastname' + article.userId)
         // Test condition d'affichage des commentaires.
-        if(article.comments == 0) {
+        /*if(article.comments == 0 && article) {
             console.log('voïd comments')
         } else {
             console.log('Comments '+ article.comments)
-            console.log(article)
-
-
-        }
+            //console.log('Comments en string' +  JSON.stringify(article.comments))
+            const temp = article.comments
+            {temp.map((item, key)=>{
+                console.log(item.key)
+            })
+            }
+   
+       
+        }*/
     }
         function brassageDate (date) {
             if(date) {
@@ -44,25 +52,41 @@ export default function ReadArticle (navigation) {
         }
   return (
     <SafeAreaView style={styles.container}>
-    {article ? (
-    <Fragment>
-        <Text style={styles.title}>{article.title}</Text>
-        <Text style={styles.date}>Le {brassageDate(article.createdAt)}</Text>
-        <Text style={styles.date}>Par : {article.userId.lastname +' '+article.userId.firstname}</Text>
-        <Text style={styles.txt}>{article.content}</Text>
-    </Fragment>) : (
-        <Text style={styles.txt}>...loading</Text>
-    )
-}
-    <Footer/>
+          
+            {article && article.comments ? (
+                <Fragment>
+                   
+                        <Text style={styles.title}>{article.title}</Text>
+                        <Text style={styles.date}>Le {brassageDate(article.createdAt)}</Text>
+                        <Text style={styles.date}>Par : {article.userId.lastname +' '+article.userId.firstname}</Text>
+                        <Text style={styles.txt}>{article.content}</Text>
+                    
+                    <ScrollView>
+                        {article.comments.map(comment => (
+                            <Fragment key={comment['@id'].replace(/[^0-9]/g, '')}>
+                                <Text style={styles.date}>Le : {brassageDate(comment.createdAt)}</Text>
+                                <Text style={styles.txt}>Par : {comment.userId.firstname} {comment.userId.lastname} </Text>
+                                <Text style={styles.txt}>{comment.content}</Text>
+                            </Fragment>
+                        ))}
+                    </ScrollView>
+                </Fragment>
+                
+        ) : (
+                <Text style={styles.txt}>...loading</Text>
+            )
+        }
+       
+
     </SafeAreaView>
+
   )
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: "center",
         backgroundColor: "#0077B6",
+        width: "auto"
     },
     title: {
         color: "#FFFFFF",
@@ -79,6 +103,13 @@ const styles = StyleSheet.create({
         textAlign: "justify"
 
     },
+    content: {
+        textAlign: "justify",
+        marginLeft: "1%",
+        width: "100%",
+        color: "#FFFFFF",
+        fontSize: 8
+    },
     date: {
         color: "#FFFFFF",
         fontSize: 16,
@@ -91,3 +122,8 @@ const styles = StyleSheet.create({
         marginBottom: 10
     }
 })
+
+/*
+{`${brassageDate(comment.createdAt)} - ${comment.content}`}
+
+*/

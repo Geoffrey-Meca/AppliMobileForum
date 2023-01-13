@@ -27,13 +27,3 @@ export default function App() {
     </NavigationContainer>
   )
 }
-/*
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={LandingScreen} />
-        <Stack.Screen name="Articles" component={IndexArticleScreen} />
-        <Stack.Screen name="Profil" component={ProfilScreen} />
-        <Stack.Screen name="Inscription" component={InscriptionScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-*/
