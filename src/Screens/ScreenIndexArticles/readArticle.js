@@ -20,7 +20,15 @@ export default function ReadArticle (navigation) {
         console.log('id Article ' +navigation['route']['params']['articleId'])
         console.log('Article content '+ article.title)
         console.log('Content Article ' + article.createdAt)
-        console.log('Comments '+ article.comments)
+        // Test condition d'affichage des commentaires.
+        if(article.comments == 0) {
+            console.log('voïd comments')
+        } else {
+            console.log('Comments '+ article.comments)
+            console.log(article)
+
+
+        }
     }
         function brassageDate (date) {
             if(date) {

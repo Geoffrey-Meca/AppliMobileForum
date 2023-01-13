@@ -8,7 +8,7 @@ if (debug) {
 }
   return (
     <View>
-        <Text>{data}</Text>
+        <Text>{this.props.data}</Text>
     </View>
   )
 }
