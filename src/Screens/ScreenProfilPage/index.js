@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import BoutonApp from '../../Composants/Bouton'
-import { getUserById } from '../../../api';
+import { getMe } from '../../../api';
 
 export default function ProfilScreen({ navigation }) {
 
@@ -10,8 +10,8 @@ export default function ProfilScreen({ navigation }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            getUserById(1, (data) => {
-                setUser(data);
+            getMe((res) => {
+                setUser(res.data);
             });
         };
         fetchData();
@@ -22,9 +22,9 @@ export default function ProfilScreen({ navigation }) {
             <Text style={styles.title}>Profile</Text>
             <View style={styles.inputContainer}>
                 <Text style={styles.txt}>Email: {user.email}</Text>
-                <Text style={styles.txt}>FirstName:</Text>
-                <Text style={styles.txt}>LastName:</Text>
-                <Text style={styles.txt}>Rôle:</Text>
+                <Text style={styles.txt}>FirstName: {user.firstname}</Text>
+                <Text style={styles.txt}>LastName: {user.lastname}</Text>
+                <Text style={styles.txt}>Rôle: </Text>
             </View>
             <Text style={styles.title}>Modifier votre profile</Text>
             <View style={styles.inputContainer}>

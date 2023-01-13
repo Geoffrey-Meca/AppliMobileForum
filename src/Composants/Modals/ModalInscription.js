@@ -1,8 +1,8 @@
 //import React, { useState } from 'react'
 import React from 'react';
 import { useState} from 'react';
-import { TextInput, StyleSheet, View, Text, Pressable } from 'react-native'
-import { postUser } from '../../../api';
+import { TextInput, StyleSheet, View, Text, Pressable, Alert } from 'react-native'
+import { postUser, login } from '../../../api';
 
 import BoutonApp from '../Bouton'
 
@@ -25,9 +25,22 @@ export default function ModalInscription(props) {
     const onChangeLastName = (val) => {
         setNewLastName(val)
     }
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         postUser(newEmail, newFirstName, newLastName, newPassword, (res => {
-            console.log(res)
+            if(res.status != 201){
+                Alert.alert(`Impossible de crée l'utilisateur`, `${res.data.violations[0].message}`, [{
+                    style: 'cancel'
+                }])
+            }
+            else{
+                login(newEmail, newPassword, (res => {
+                    if(res.status != 200){
+                        Alert.alert(`Connexion automatique échoué, veuillez vous connecter`, `${res.data.violations[0].message}`, [{
+                            style: 'cancel'
+                        }])
+                    }
+                }))
+            }
         }));
       };
     return (
@@ -95,12 +108,13 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     input: {
-        backgroundColor: "#fff",
+        backgroundColor: "#F0F0F0",
         borderColor: 'black',
         borderWidth: 1,
-        borderRadius: 5,
-        width: '70 %',
-        height: 40,
-        margin: 10
+        borderRadius: 3,
+        width: '80 %',
+        height: 42,
+        margin: '5%',
+        padding: 5
     },
 })

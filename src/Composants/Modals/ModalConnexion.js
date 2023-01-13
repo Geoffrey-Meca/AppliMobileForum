@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TextInput, StyleSheet, View, Text, Pressable } from 'react-native'
+import { TextInput, StyleSheet, View, Text, Pressable, Alert } from 'react-native'
 import { login } from '../../../api';
 
 import BoutonApp from '../Bouton'
@@ -18,7 +18,11 @@ export default function ModalConnexion(props) {
     }
     const handleSubmit = () => {
         login(newEmail, newPassword, (res =>  {
-            console.log(res)
+            if(res.status != 200){
+                Alert.alert(`Erreur`, `${res.data.message}`, [{
+                    style: 'cancel'
+                }])
+            }
         }));
       };
     return (
@@ -27,7 +31,7 @@ export default function ModalConnexion(props) {
                 <Text style={styles.closeBtn}>X</Text>
             </Pressable>
             <View style={styles.formContainer}>
-                <Text style={styles.title}>Identidiez-vous</Text>
+                <Text style={styles.title}>Identifiez-vous</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={onChangeEmail}
@@ -74,12 +78,13 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     input: {
-        backgroundColor: "#fff",
+        backgroundColor: "#F0F0F0",
         borderColor: 'black',
         borderWidth: 1,
-        borderRadius: 5,
-        width: '70 %',
-        height: 40,
-        margin: 10
+        borderRadius: 3,
+        width: '80 %',
+        height: 42,
+        margin: '5%',
+        padding: 5
     },
 })

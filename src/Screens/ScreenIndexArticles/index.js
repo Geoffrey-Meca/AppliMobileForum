@@ -4,7 +4,7 @@ const debug = false;
 import React, { useState, useEffect } from 'react'
 import { Text, SafeAreaView, StyleSheet, View, Pressable} from 'react-native'
 
-import { getArticles, getUsers } from '../../../api';
+import { getArticles, postComment } from '../../../api';
 import Footer from '../../Composants/Footer';
 
 
@@ -14,11 +14,8 @@ export default function IndexArticleScreen({ navigation }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            getArticles(1, (data) => {
-                setArticles(data);
-                if (debug) {
-                    console.log('data index '+ data);
-                }
+            getArticles(1, (res) => {
+                setArticles(res.data);
             });
         };
         fetchData();
