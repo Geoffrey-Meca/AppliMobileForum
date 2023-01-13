@@ -10,8 +10,8 @@ export default function ReadArticle (navigation) {
     const [article, setArticle] = useState('')
     useEffect(() => {
         const fetchData = async() => {
-          getArticleById(articleId, (data) => {
-            setArticle(data)
+          getArticleById(articleId, (res) => {
+            setArticle(res.data)
         })
         }
         fetchData();
