@@ -19,7 +19,7 @@ export default function ModalConnexion(props) {
     const handleSubmit = () => {
         login(newEmail, newPassword, (res =>  {
             if(res.status != 200){
-                Alert.alert(`Identifiants incorrectes`, 'Votre e-mail ou mot de passe sont incorrectes', [{
+                Alert.alert(`Erreur`, `${res.data.message}`, [{
                     style: 'cancel'
                 }])
             }

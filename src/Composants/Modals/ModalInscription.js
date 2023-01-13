@@ -2,7 +2,7 @@
 import React from 'react';
 import { useState} from 'react';
 import { TextInput, StyleSheet, View, Text, Pressable, Alert } from 'react-native'
-import { postUser } from '../../../api';
+import { postUser, login } from '../../../api';
 
 import BoutonApp from '../Bouton'
 
@@ -25,12 +25,21 @@ export default function ModalInscription(props) {
     const onChangeLastName = (val) => {
         setNewLastName(val)
     }
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         postUser(newEmail, newFirstName, newLastName, newPassword, (res => {
             if(res.status != 201){
                 Alert.alert(`Impossible de crée l'utilisateur`, `${res.data.violations[0].message}`, [{
                     style: 'cancel'
                 }])
+            }
+            else{
+                login(newEmail, newPassword, (res => {
+                    if(res.status != 200){
+                        Alert.alert(`Connexion automatique échoué, veuillez vous connecter`, `${res.data.violations[0].message}`, [{
+                            style: 'cancel'
+                        }])
+                    }
+                }))
             }
         }));
       };
