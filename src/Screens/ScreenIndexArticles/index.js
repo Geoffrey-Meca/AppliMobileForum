@@ -2,10 +2,11 @@
 
 const debug = false;
 import React, { useState, useEffect } from 'react'
-import { Text, SafeAreaView, StyleSheet, View, Pressable, Button} from 'react-native'
+import { Text, SafeAreaView, StyleSheet, View, Pressable, Button } from 'react-native'
 
 import { getArticles, postComment } from '../../../api';
 import Footer from '../../Composants/Footer';
+import Header from '../../Composants/Header'
 
 
 export default function IndexArticleScreen({ navigation }) {
@@ -22,77 +23,79 @@ export default function IndexArticleScreen({ navigation }) {
         const fetchData = () => {
             getArticles(page, (res) => {
                 setArticles(res.data);
-            });}
+            });
+        }
         fetchData()
     }, [page]);
 
     const pageCheck = (page) => {
-        if(page == pagesNom){
+        if (page == pagesNom) {
             setPage(pagesNom)
             setNext(true)
         }
-        else if (page == 1){
+        else if (page == 1) {
             setPrevious(true)
         }
     }
-    
-    const pagesNom = Math.ceil(articles['hydra:totalItems']/5);
 
-function goToArticle (id) {
-    navigation.navigate("ReadArticle", {
-        articleId: id
-      });
+    const pagesNom = Math.ceil(articles['hydra:totalItems'] / 5);
+
+    function goToArticle(id) {
+        navigation.navigate("ReadArticle", {
+            articleId: id
+        });
     }
 
     return (
         <SafeAreaView style={styles.container}>
+            <Header />
             <Text style={styles.title}>{"Post du forum"}</Text>
             <View>
-            {articles ? (articles['hydra:member'].map((item, index) => (
-                <Pressable style={styles.linkArticle} key={index} onPress={() => goToArticle(item['@id'].replace(/[^0-9]/g, ''))}>
-                    <Text style={styles.linkArticle} key={index}>{item.title}</Text>  
-                </Pressable>
+                {articles ? (articles['hydra:member'].map((item, index) => (
+                    <Pressable style={styles.linkArticle} key={index} onPress={() => goToArticle(item['@id'].replace(/[^0-9]/g, ''))}>
+                        <Text style={styles.linkArticle} key={index}>{item.title}</Text>
+                    </Pressable>
                 ))
-            ) : (
-                <Text>Loading...</Text>
-            )}
+                ) : (
+                    <Text>Loading...</Text>
+                )}
             </View>
             <View style={styles.pagination}>
-            <Button
-              onPress={() => {
-                setPage(1);
-            }}
-              title="<<"
-              color="#841584"
-              disabled={previous}
-            />
-                        <Button
-              onPress={() => {
-                setPage(page-1);
-            }}
-              title="<"
-              color="#841584"
-              disabled={previous}
-            />
-            <Button
-              onPress={() => {
-                setPage(page+1);
-            } }
-              title=">"
-              color="#841584"
-              disabled={next}
-            />
-            <Button
-              onPress={() => {
-                setPage(pagesNom);
-            } }
-              title=">>"
-              color="#841584"
-              disabled={next}
-            />
+                <Button
+                    onPress={() => {
+                        setPage(1);
+                    }}
+                    title="<<"
+                    color="#841584"
+                    disabled={previous}
+                />
+                <Button
+                    onPress={() => {
+                        setPage(page - 1);
+                    }}
+                    title="<"
+                    color="#841584"
+                    disabled={previous}
+                />
+                <Button
+                    onPress={() => {
+                        setPage(page + 1);
+                    }}
+                    title=">"
+                    color="#841584"
+                    disabled={next}
+                />
+                <Button
+                    onPress={() => {
+                        setPage(pagesNom);
+                    }}
+                    title=">>"
+                    color="#841584"
+                    disabled={next}
+                />
 
             </View>
-          <Footer/>
+            <Footer />
         </SafeAreaView>
     )
 }
@@ -123,7 +126,3 @@ const styles = StyleSheet.create({
         flexDirection: "row"
     }
 })
-
-//    <Text style={styles.linkArticle} key={index}>{item.title}</Text>  
-// () => {item['@id'].replace(/[^0-9]/g, '')}
-// navigation.navigate

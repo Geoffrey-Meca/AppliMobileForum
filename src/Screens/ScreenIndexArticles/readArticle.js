@@ -4,60 +4,56 @@ import { SafeAreaView, Text, StyleSheet } from 'react-native';
 import { getArticleById } from '../../../api';
 import Footer from '../../Composants/Footer';
 
-export default function ReadArticle (navigation) {
-    
+export default function ReadArticle(navigation) {
+
     const articleId = navigation['route']['params']['articleId']
     const [article, setArticle] = useState('')
     useEffect(() => {
-        const fetchData = async() => {
-          getArticleById(articleId, (res) => {
-            setArticle(res.data)
-        })
+        const fetchData = async () => {
+            getArticleById(articleId, (res) => {
+                setArticle(res.data)
+            })
         }
         fetchData();
-      }, []);
-    
+    }, []);
 
 
-    if(debug) {
-        console.log('id Article ' +navigation['route']['params']['articleId'])
-        console.log('Article content '+ article.title)
+
+    if (debug) {
+        console.log('id Article ' + navigation['route']['params']['articleId'])
+        console.log('Article content ' + article.title)
         console.log('Content Article ' + article.createdAt)
     }
 
-        function brassageDate (date) {
-            if(date) {
-                let buffer =  date.split('T')
-                let ymd = buffer[0]
-                let brassage = ymd.split('-')
-                let dmy = brassage[2] + '/' + brassage[1] + '/' + brassage[0]
-                return dmy
-            } else {
-                return false
-            }
-      
+    function brassageDate(date) {
+        if (date) {
+            let buffer = date.split('T')
+            let ymd = buffer[0]
+            let brassage = ymd.split('-')
+            let dmy = brassage[2] + '/' + brassage[1] + '/' + brassage[0]
+            return dmy
+        } else {
+            return false
         }
+    }
 
+    return (
+        <SafeAreaView style={styles.container}>
 
+            {article ? (
+                <Fragment>
+                    <Text style={styles.title}>{article.title}</Text>
+                    <Text style={styles.date}>Le {brassageDate(article.createdAt)}</Text>
+                    <Text style={styles.date}>Par : {article.userId.lastname + ' ' + article.userId.firstname}</Text>
+                    <Text style={styles.txt}>{article.content}</Text>
 
-
-  return (
-    <SafeAreaView style={styles.container}>
-    
-    {article ? (
-    <Fragment>
-        <Text style={styles.title}>{article.title}</Text>
-        <Text style={styles.date}>Le {brassageDate(article.createdAt)}</Text>
-        <Text style={styles.date}>Par : {article.userId.lastname +' '+article.userId.firstname}</Text>
-        <Text style={styles.txt}>{article.content}</Text>
-        
-    </Fragment>) : (
-        <Text style={styles.txt}>...loading</Text>
+                </Fragment>) : (
+                <Text style={styles.txt}>...loading</Text>
+            )
+            }
+            <Footer />
+        </SafeAreaView>
     )
-}
-    <Footer/>
-    </SafeAreaView>
-  )
 }
 const styles = StyleSheet.create({
     container: {
