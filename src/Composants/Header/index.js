@@ -5,7 +5,7 @@ import Burger from '../Burger'
 const days = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"]
 const months = ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octotre", "Novembre", "Decembre"]
 
-export default function Header() {
+export default function Header({ navigation }) {
 
     const date = new Date()
     const [isOpen, setIsOpen] = useState(false)

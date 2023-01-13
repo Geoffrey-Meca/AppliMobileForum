@@ -64,6 +64,7 @@ export default function LandingScreen({ navigation }) {
                 </View>
                 <Text style={styles.txt}>Bienvenue sur CODEHUB, il est temps de se mettre au boulot !</Text>
                 <BoutonApp text="Visiter le Forum" onPress={() => navigation.navigate('Articles')} />
+
                 {isLogged ? (
                     <Fragment>
                         <BoutonApp text="Profile" onPress={() => navigation.navigate('Profil')} />
