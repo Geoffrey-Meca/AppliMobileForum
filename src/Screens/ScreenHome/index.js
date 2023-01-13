@@ -3,7 +3,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { Text, StyleSheet, Image, View, ScrollView, Alert } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+import Header from '../../Composants/Header'
 import BoutonApp from '../../Composants/Bouton'
 import ModalConnexion from '../../Composants/Modals/ModalConnexion';
 import ModalInscription from '../../Composants/Modals/ModalInscription';
@@ -18,7 +18,7 @@ export default function LandingScreen({ navigation }) {
     useEffect(() => {
         const checkAuth = () => {
             SecureStore.getItemAsync('jwt').then((token) => {
-                if (token){
+                if (token) {
                     setLogging(true);
                 } else {
                     setLogging(false)
@@ -35,45 +35,48 @@ export default function LandingScreen({ navigation }) {
         setIsFormInscriptionVisible(!isFormInscriptionVisible)
     }
 
-    function logout (){
+    function logout() {
         Alert.alert(
             "Vous êtes sur le point de vous déconnecter",
             "Êtes-vous sur de vouloir procéder ?",
             [
-              {
-                text: "Non",
-              },
-              { text: "Oui", onPress: () => {
-                SecureStore.deleteItemAsync('jwt').then(
-                    setLogging(false)
-                )
-              } }
+                {
+                    text: "Non",
+                },
+                {
+                    text: "Oui", onPress: () => {
+                        SecureStore.deleteItemAsync('jwt').then(
+                            setLogging(false)
+                        )
+                    }
+                }
             ]
-          );
+        );
     }
 
     return (
         <SafeAreaView style={styles.container}>
+            <Header />
             <ScrollView>
                 <View style={styles.imgContainer}>
                     <Image
                         style={styles.img}
-                        source={require('../../../assets/LogoAlternative45.webp')}
+                        source={require('../../../assets/Logo/LogoAlternative45.webp')}
                     />
                 </View>
                 <Text style={styles.txt}>Bienvenue sur CODEHUB, il est temps de se mettre au boulot !</Text>
                 <BoutonApp text="Visiter le Forum" onPress={() => navigation.navigate('Articles')} />
-                    {isLogged ? (
-                        <Fragment>
-                            <BoutonApp text="Profile" onPress={() => navigation.navigate('Profil')} />
-                            <BoutonApp text="Déconnexion" onPress={logout} />
-                        </Fragment>
-                    ) : (
-                        <Fragment>
-                            <BoutonApp text="Connexion" onPress={_toggleFormConnexion} />
-                            <BoutonApp text="Inscription" onPress={_toggleFormInscription} />
-                        </Fragment>
-                    )}
+                {isLogged ? (
+                    <Fragment>
+                        <BoutonApp text="Profile" onPress={() => navigation.navigate('Profil')} />
+                        <BoutonApp text="Déconnexion" onPress={logout} />
+                    </Fragment>
+                ) : (
+                    <Fragment>
+                        <BoutonApp text="Connexion" onPress={_toggleFormConnexion} />
+                        <BoutonApp text="Inscription" onPress={_toggleFormInscription} />
+                    </Fragment>
+                )}
                 {isFormConnexionVisible && <ModalConnexion onPress={_toggleFormConnexion} />}
                 {isFormInscriptionVisible && <ModalInscription onPress={_toggleFormInscription} />}
                 <StatusBar style="auto" />
