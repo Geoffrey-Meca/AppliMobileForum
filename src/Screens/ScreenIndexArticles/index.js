@@ -1,6 +1,8 @@
+// Debug on => true debug off = false
+
+const debug = false;
 import React, { useState, useEffect } from 'react'
-import { Text, StyleSheet, View} from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text, SafeAreaView, StyleSheet, View, Pressable} from 'react-native'
 
 import { getArticles, postComment } from '../../../api';
 import Footer from '../../Composants/Footer';
@@ -18,13 +20,20 @@ export default function IndexArticleScreen({ navigation }) {
         };
         fetchData();
     }, []);
+function goToArticle (id) {
+    navigation.navigate("ReadArticle", {
+        articleId: id
+      });
+    }
 
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>{"Post du forum"}</Text>
             <View>
             {articles ? (articles['hydra:member'].map((item, index) => (
-                <Text key={index}>{item.title}</Text>
+                <Pressable style={styles.linkArticle} key={index} onPress={() => goToArticle(item['@id'].replace(/[^0-9]/g, ''))}>
+                    <Text style={styles.linkArticle} key={index}>{item.title}</Text>  
+                </Pressable>
                 ))
             ) : (
                 <Text>Loading...</Text>
@@ -42,14 +51,23 @@ const styles = StyleSheet.create({
         backgroundColor: "#0077B6",
     },
     title: {
-        color: "#fff",
+        color: "#FFFFFF",
         fontSize: 40,
         margin: 50,
     },
     txt: {
-        color: "#fff",
+        color: "#FFFFFF",
         fontSize: 20,
         width: "70%",
         marginTop: 20
+    },
+    linkArticle: {
+        color: "#FFFFFF",
+        fontSize: 19,
+        marginBottom: 10
     }
 })
+
+//    <Text style={styles.linkArticle} key={index}>{item.title}</Text>  
+// () => {item['@id'].replace(/[^0-9]/g, '')}
+// navigation.navigate
