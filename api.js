@@ -26,8 +26,8 @@ const request = async (method, url, data, callback) => {
     .catch(error => {
         console.log(`Erreur ${error.response.data.code}`)
         console.log(error.response.data.message)
-        if(error.response.data.message == 'JWT Token expired'){
-            SecureStore.deleteItemAsync('jwt')
+        if(error.response.data.message == 'Expired JWT Token'){
+            // SecureStore.deleteItemAsync('jwt')
             return callback(Alert.alert(`Vous avez été déconnecté`, `Veuillez vous re-connecter pour continuer`, [{
                 style: 'cancel'
             }]))
