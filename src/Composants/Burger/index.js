@@ -19,6 +19,7 @@ export default function Burger(props) {
                 <Text style={styles.txt}>COUCOUCOUCOU</Text>
             </View>
         </View>
+
     )
 }
 const styles = StyleSheet.create({
@@ -29,15 +30,15 @@ const styles = StyleSheet.create({
         top: "0.5%",
         backgroundColor: "#ADE8F4",
         position: "absolute",
+        zIndex: 1
     },
     img: {
-        backgroundColor: "green"
+        // backgroundColor: "green"
     },
     linksContainer: {
         height: "100%",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "red",
     },
     txt: {
         color: "#fff",

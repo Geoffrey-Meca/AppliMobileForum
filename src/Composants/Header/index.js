@@ -14,42 +14,36 @@ export default function Header() {
         setIsOpen(!isOpen)
     }
     return (
-        <View style={styles.headerContainer}>
-            <View style={styles.container}>
-                <Pressable style={styles.burger} onPress={_toggleBurger}>
-                    <Image
-                        style={styles.imgBurger}
-                        source={!isOpen && require("../../../assets/Burger/menu_FILL0_wght400_GRAD0_opsz48.png")}
-                    />
-                </Pressable>
-                {isOpen && <Burger onPress={_toggleBurger} style={styles.burgerOpen} />}
-
-                <Text style={styles.txt}>{`${days[date.getDay()]} ${date.getDate()} ${months[date.getMonth()]}`}
-                </Text>
-
+        <View style={styles.container}>
+            <Pressable style={styles.burger} onPress={_toggleBurger}>
                 <Image
-                    style={styles.img}
-                    source={require("../../../assets/Logo/logoHeader.webp")}
+                    style={styles.imgBurger}
+                    source={!isOpen && require("../../../assets/Burger/menu_FILL0_wght400_GRAD0_opsz48.png")}
                 />
-            </View>
+            </Pressable>
+            {isOpen && <Burger onPress={_toggleBurger} />}
+
+            <Text style={styles.txt}>{`${days[date.getDay()]} ${date.getDate()} ${months[date.getMonth()]}`}
+            </Text>
+
+            <Image
+                style={styles.img}
+                source={require("../../../assets/Logo/logoHeader.webp")}
+            />
         </View>
     )
 }
 const styles = StyleSheet.create({
-    headerContainer: {
-        // width: "100%",
-        // height: "100%",
-    },
     container: {
         width: "100%",
         height: "12%",
         flexDirection: "row",
-        backgroundColor: 'red',
         justifyContent: "space-between",
         alignItems: "center",
         backgroundColor: "#0096C7",
         paddingHorizontal: "3%",
-
+        marginTop: "13%",
+        zIndex: 1
     },
     txt: {
         color: "#fff"
@@ -66,8 +60,4 @@ const styles = StyleSheet.create({
     imgBurger: {
         width: "100%",
     },
-    burgerOpen: {
-        width: "100%",
-        height: "100%",
-    }
 })

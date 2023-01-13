@@ -3,7 +3,6 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { Text, StyleSheet, Image, View, ScrollView, Alert } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Header from '../../Composants/Header'
 import BoutonApp from '../../Composants/Bouton'
 import ModalConnexion from '../../Composants/Modals/ModalConnexion';
 import ModalInscription from '../../Composants/Modals/ModalInscription';
@@ -56,7 +55,6 @@ export default function LandingScreen({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Header />
             <ScrollView>
                 <View style={styles.imgContainer}>
                     <Image
@@ -79,7 +77,7 @@ export default function LandingScreen({ navigation }) {
                 )}
                 {isFormConnexionVisible && <ModalConnexion onPress={_toggleFormConnexion} />}
                 {isFormInscriptionVisible && <ModalInscription onPress={_toggleFormInscription} />}
-                <StatusBar style="auto" />
+                <StatusBar style="light" />
             </ScrollView>
         </SafeAreaView>
     )
