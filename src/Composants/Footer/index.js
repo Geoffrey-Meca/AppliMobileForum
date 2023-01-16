@@ -1,25 +1,29 @@
-import React from 'react'
-import { Text, StyleSheet, View } from 'react-native';
-
-
-const today = new Date();
-const year = today.getFullYear();
+import React, { Fragment } from 'react'
+import { Text , StyleSheet, View} from 'react-native';
 
 export default function Footer() {
-
+    const today=new Date();
+    const year = today.getFullYear();
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>Copyright {year}</Text>
-        </View>
-
+        (year == 2023 ? (
+            <View style={styles.container}>
+                <Text style={styles.text}>Copyright {year}</Text>
+            </View>
+            ):(
+            <View style={styles.container}>
+                <Text style={styles.text}>Copyright 2023 - {year}</Text>
+            </View>
+        ))
     )
 }
 const styles = StyleSheet.create({
     container: {
         position: "absolute",
-        bottom: 0,
+        flex:1,
+        bottom: "0%",
         justifyContent: "center",
-        height: "10%",
+        height:"5%",
+
         width: "100%",
         backgroundColor: "#0096C7",
     },
