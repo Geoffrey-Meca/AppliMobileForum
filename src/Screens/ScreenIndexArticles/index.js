@@ -1,20 +1,22 @@
 // Debug on => true debug off = false
-
 const debug = false;
 import React, { useState, useEffect } from 'react'
 import { Text, SafeAreaView, StyleSheet, View, Pressable, Button } from 'react-native'
 
-import { getArticles, postComment } from '../../../api';
+import { getArticles } from '../../../api';
 import Footer from '../../Composants/Footer';
 import Header from '../../Composants/Header'
+import Pagination from '../../Composants/Pagination';
 
 
 export default function IndexArticleScreen({ navigation }) {
 
     const [articles, setArticles] = useState('');
     const [next, setNext] = useState(false)
-    const [previous, setPrevious] = useState(true)
+
     const [page, setPage] = useState(1);
+    const [previous, setPrevious] = useState(true)
+    const pagesNom = Math.ceil(articles['hydra:totalItems'] / 5);
 
     useEffect(() => {
         setNext(false)
@@ -38,8 +40,6 @@ export default function IndexArticleScreen({ navigation }) {
         }
     }
 
-    const pagesNom = Math.ceil(articles['hydra:totalItems'] / 5);
-
     function goToArticle(id) {
         navigation.navigate("ReadArticle", {
             articleId: id
@@ -48,7 +48,7 @@ export default function IndexArticleScreen({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Header />
+            <Header nav={navigation} />
             <Text style={styles.title}>{"Post du forum"}</Text>
             <View>
                 {articles ? (articles['hydra:member'].map((item, index) => (
@@ -62,38 +62,37 @@ export default function IndexArticleScreen({ navigation }) {
             </View>
             <View style={styles.pagination}>
                 <Button
+                    style={styles.btn}
                     onPress={() => {
                         setPage(1);
                     }}
                     title="<<"
-                    color="#841584"
                     disabled={previous}
                 />
                 <Button
+                    style={styles.btn}
                     onPress={() => {
                         setPage(page - 1);
                     }}
                     title="<"
-                    color="#841584"
                     disabled={previous}
                 />
                 <Button
+                    style={styles.btn}
                     onPress={() => {
                         setPage(page + 1);
                     }}
                     title=">"
-                    color="#841584"
                     disabled={next}
                 />
                 <Button
+                    style={styles.btn}
                     onPress={() => {
                         setPage(pagesNom);
                     }}
                     title=">>"
-                    color="#841584"
                     disabled={next}
                 />
-
             </View>
             <Footer />
         </SafeAreaView>
@@ -123,6 +122,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     pagination: {
-        flexDirection: "row"
+        flexDirection: "row",
+        margin: 50,
     }
 })

@@ -33,9 +33,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 100,
         shadowRadius: 0,
-
         elevation: 24,
-
     },
     txt: {
         fontSize: 20,
