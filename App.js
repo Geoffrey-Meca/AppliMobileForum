@@ -16,7 +16,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: true }}>
         <Stack.Screen name="Home" component={LandingScreen} />
         <Stack.Screen name="Articles" component={IndexArticleScreen} />
         <Stack.Screen name="ReadArticle" component={ReadArticle} />

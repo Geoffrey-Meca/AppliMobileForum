@@ -1,42 +1,41 @@
 
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect } from 'react'
 import { SafeAreaView, Text, StyleSheet, ScrollView,View } from 'react-native';
 import { getArticleById } from '../../../api';
-import AffichageComment from '../../Composants/comments/affichageComment';
 import Footer from '../../Composants/Footer';
+import * as SecureStore from 'expo-secure-store'
+
+
+
+
 
 export default function ReadArticle (navigation) {
     const debug = true
     const articleId = navigation['route']['params']['articleId']
     const [article, setArticle] = useState('')
     useEffect(() => {
+    
         const fetchData = async() => {
-          getArticleById(articleId, (res) => {
-            setArticle(res.data)
-        })
-        }
+            getArticleById(articleId, (res) => {
+              setArticle(res.data)
+          })
+          }
         fetchData();
-      }, []);
+       },
+      []
+      
+      
+      );
+      
+
     if(debug) {
         // Test pour la débug
         console.log('id Article ' +navigation['route']['params']['articleId'])
         console.log('Article content '+ article.title)
         console.log('Content Article ' + article.createdAt)
         console.log('lastname' + article.userId)
-        // Test condition d'affichage des commentaires.
-        /*if(article.comments == 0 && article) {
-            console.log('voïd comments')
-        } else {
-            console.log('Comments '+ article.comments)
-            //console.log('Comments en string' +  JSON.stringify(article.comments))
-            const temp = article.comments
-            {temp.map((item, key)=>{
-                console.log(item.key)
-            })
-            }
-   
-       
-        }*/
+     
+
     }
         function brassageDate (date) {
             if(date) {
@@ -54,39 +53,58 @@ export default function ReadArticle (navigation) {
     <SafeAreaView style={styles.container}>
           
             {article && article.comments ? (
-                <Fragment>
-                   
+          
+                 <View style={styles.content}>  
                         <Text style={styles.title}>{article.title}</Text>
                         <Text style={styles.date}>Le {brassageDate(article.createdAt)}</Text>
                         <Text style={styles.date}>Par : {article.userId.lastname +' '+article.userId.firstname}</Text>
                         <Text style={styles.txt}>{article.content}</Text>
-                    
-                    <ScrollView>
-                        {article.comments.map(comment => (
-                            <Fragment key={comment['@id'].replace(/[^0-9]/g, '')}>
-                                <Text style={styles.date}>Le : {brassageDate(comment.createdAt)}</Text>
-                                <Text style={styles.txt}>Par : {comment.userId.firstname} {comment.userId.lastname} </Text>
-                                <Text style={styles.txt}>{comment.content}</Text>
-                            </Fragment>
-                        ))}
-                    </ScrollView>
-                </Fragment>
+
+                        
+                <ScrollView style={styles.comments}>
+                    {article.comments.map(comment => (
+                        <View key={comment['@id'].replace(/[^0-9]/g, '')}>
+                            <View style={styles.OneComments}>
+                                <Text>Le : {brassageDate(comment.createdAt)} Par : {comment.userId.firstname} {comment.userId.lastname} </Text>
+                                <Text>{comment.content}</Text>
+                            </View>
+                        </View>
+                    ))}
+                </ScrollView>
+
+         
+                </View>
                 
         ) : (
                 <Text style={styles.txt}>...loading</Text>
             )
         }
        
-
+    <Footer />
     </SafeAreaView>
 
   )
 }
 const styles = StyleSheet.create({
     container: {
+        flex: 2,
         alignItems: "center",
         backgroundColor: "#0077B6",
-        width: "auto"
+        width: "auto",
+        overflow: "scroll"
+    },
+    comments: {
+        width: "100%",
+        height: "110%",
+        textAlign: "left",
+        flex: 1
+
+    },
+    OneComments: {
+        backgroundColor: "#90E0EF",
+        color: "#000000",
+        margin: "2%",
+        padding: "2%"
     },
     title: {
         color: "#FFFFFF",
@@ -123,7 +141,18 @@ const styles = StyleSheet.create({
     }
 })
 
-/*
-{`${brassageDate(comment.createdAt)} - ${comment.content}`}
 
+// test
+/*
+           <ScrollView style={styles.comments}>
+                        {article.comments.map(comment => (
+                            <View key={comment['@id'].replace(/[^0-9]/g, '')}>
+                                <View style={styles.OneComments}>
+                                    <Text>Le : {brassageDate(comment.createdAt)}</Text>
+                                    <Text>Par : {comment.userId.firstname} {comment.userId.lastname} </Text>
+                                    <Text>{comment.content}</Text>
+                                </View>
+                            </View>
+                        ))}
+                    </ScrollView>
 */
