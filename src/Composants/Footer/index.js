@@ -23,13 +23,12 @@ const styles = StyleSheet.create({
         bottom: "0%",
         justifyContent: "center",
         height:"5%",
+
         width: "100%",
         backgroundColor: "#0096C7",
     },
     text: {
-        
         textAlign: "center",
-        
         color: "#FFFFFF"
-        }
+    }
 })

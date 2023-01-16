@@ -6,37 +6,20 @@ import Footer from '../../Composants/Footer';
 import * as SecureStore from 'expo-secure-store'
 
 
+export default function ReadArticle(navigation) {
 
-
-
-export default function ReadArticle (navigation) {
-    const debug = true
     const articleId = navigation['route']['params']['articleId']
     const [article, setArticle] = useState('')
-    useEffect(() => {
     
-        const fetchData = async() => {
+    useEffect(() => {
+        const fetchData = async () => {
             getArticleById(articleId, (res) => {
-              setArticle(res.data)
-          })
-          }
+                setArticle(res.data)
+            })
+        }
         fetchData();
-       },
-      []
-      
-      
-      );
-      
+    }, []);
 
-    if(debug) {
-        // Test pour la débug
-        console.log('id Article ' +navigation['route']['params']['articleId'])
-        console.log('Article content '+ article.title)
-        console.log('Content Article ' + article.createdAt)
-        console.log('lastname' + article.userId)
-     
-
-    }
         function brassageDate (date) {
             if(date) {
                 let buffer =  date.split('T')
@@ -47,7 +30,6 @@ export default function ReadArticle (navigation) {
             } else {
                 return false
             }
-      
         }
   return (
     <SafeAreaView style={styles.container}>
@@ -140,19 +122,3 @@ const styles = StyleSheet.create({
         marginBottom: 10
     }
 })
-
-
-// test
-/*
-           <ScrollView style={styles.comments}>
-                        {article.comments.map(comment => (
-                            <View key={comment['@id'].replace(/[^0-9]/g, '')}>
-                                <View style={styles.OneComments}>
-                                    <Text>Le : {brassageDate(comment.createdAt)}</Text>
-                                    <Text>Par : {comment.userId.firstname} {comment.userId.lastname} </Text>
-                                    <Text>{comment.content}</Text>
-                                </View>
-                            </View>
-                        ))}
-                    </ScrollView>
-*/
