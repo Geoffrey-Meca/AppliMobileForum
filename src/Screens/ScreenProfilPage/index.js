@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import BoutonApp from '../../Composants/Bouton'
 import { getMe } from '../../../api';
 import Header from '../../Composants/Header'
@@ -20,7 +19,7 @@ export default function ProfilScreen({ navigation }) {
     }, []);
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <Header nav={navigation} />
 
             <Text style={styles.title}>Profile</Text>
@@ -40,7 +39,7 @@ export default function ProfilScreen({ navigation }) {
             <BoutonApp text="Modifier" />
             <BoutonApp text="Supprimer compte" />
             <Footer />
-        </SafeAreaView>
+        </View>
     )
 }
 const styles = StyleSheet.create({

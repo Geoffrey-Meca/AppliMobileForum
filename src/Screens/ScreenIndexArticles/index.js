@@ -6,7 +6,6 @@ import { Text, SafeAreaView, StyleSheet, View, Pressable, Button } from 'react-n
 import { getArticles } from '../../../api';
 import Footer from '../../Composants/Footer';
 import Header from '../../Composants/Header'
-import Pagination from '../../Composants/Pagination';
 
 
 export default function IndexArticleScreen({ navigation }) {

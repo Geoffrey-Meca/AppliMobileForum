@@ -1,25 +1,22 @@
 
 import React, { useState, useEffect } from 'react'
-import { SafeAreaView, Text, StyleSheet, ScrollView, View } from 'react-native';
+import { Text, StyleSheet, ScrollView, View } from 'react-native';
 import { getArticleById } from '../../../api';
 import Footer from '../../Composants/Footer';
-import * as SecureStore from 'expo-secure-store'
-
 import Header from '../../Composants/Header'
 
-export default function ReadArticle(navigation) {
+export default function ReadArticle({ route, navigation }) {
 
-    const articleId = navigation['route']['params']['articleId']
+    const articleId = route.params
     const [article, setArticle] = useState('')
-
+    const fetchData = async () => {
+        getArticleById(articleId.articleId, (res) => {
+            setArticle(res.data)
+        })
+    }
     useEffect(() => {
-        const fetchData = async () => {
-            getArticleById(articleId, (res) => {
-                setArticle(res.data)
-            })
-        }
         fetchData();
-    }, []);
+    }, [fetchData]);
 
     function brassageDate(date) {
         if (date) {
@@ -33,8 +30,8 @@ export default function ReadArticle(navigation) {
         }
     }
     return (
-        <SafeAreaView style={styles.container}>
-
+        <View style={styles.container}>
+            <Header nav={navigation} />
             {article && article.comments ? (
 
                 <View style={styles.content}>
@@ -42,7 +39,6 @@ export default function ReadArticle(navigation) {
                     <Text style={styles.date}>Le {brassageDate(article.createdAt)}</Text>
                     <Text style={styles.date}>Par : {article.userId.lastname + ' ' + article.userId.firstname}</Text>
                     <Text style={styles.txt}>{article.content}</Text>
-
 
                     <ScrollView style={styles.comments}>
                         {article.comments.map(comment => (
@@ -54,18 +50,13 @@ export default function ReadArticle(navigation) {
                             </View>
                         ))}
                     </ScrollView>
-
-
                 </View>
-
             ) : (
                 <Text style={styles.txt}>...loading</Text>
             )
             }
-
             <Footer />
-        </SafeAreaView>
-
+        </View>
     )
 }
 const styles = StyleSheet.create({

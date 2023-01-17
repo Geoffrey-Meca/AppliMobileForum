@@ -2,7 +2,6 @@ import React from 'react'
 import { useState } from 'react'
 import { TextInput, StyleSheet, View, Text } from 'react-native'
 import { login } from '../../../api';
-import { SafeAreaView } from 'react-native-safe-area-context'
 import BoutonApp from '../../Composants/Bouton'
 import Footer from '../../Composants/Footer';
 import Header from '../../Composants/Header'
