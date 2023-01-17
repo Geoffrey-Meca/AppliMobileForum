@@ -1,12 +1,12 @@
 import React from 'react'
-import { useState} from 'react';
+import { useState } from 'react';
 import { View, StyleSheet, Text, TextInput } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import BoutonApp from '../../Composants/Bouton'
 import Footer from '../../Composants/Footer';
+import Header from '../../Composants/Header'
 
 
-export default function InscriptionScreen(props) {
+export default function InscriptionScreen({ navigation }) {
     const [newEmail, setNewEmail] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [newFirstName, setNewFirstName] = useState("");
@@ -27,12 +27,12 @@ export default function InscriptionScreen(props) {
         setUser(newEmail, newFirstName, newLastName, newPassword, (res => {
             console.log(res)
         }));
-      };
-  return (
-    <SafeAreaView style={styles.container}>
-       <View style={styles.container}>
-
-            <View style={styles.formContainer}></View>
+    };
+    return (
+        <View style={styles.container}>
+            <Header nav={navigation} />
+            <View style={styles.inscriptionContainer}>
+                <View style={styles.formContainer}></View>
                 <Text style={styles.title}>Inscription</Text>
                 <TextInput
                     style={styles.input}
@@ -56,24 +56,26 @@ export default function InscriptionScreen(props) {
                     style={styles.input}
                     onChangeText={onChangeLastName}
                     value={newLastName}
-                    placeholder='LastName' 
+                    placeholder='LastName'
                 />
-                <BoutonApp text="Inscription" 
+                <BoutonApp text="Inscription"
                     onPress={handleSubmit}
                 />
-    <Footer/>
-    </View>
-    </SafeAreaView>
-  )
+                <Footer />
+            </View>
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({
     container: {
-        position: "relative",
+        flex: 1,
+        alignItems: "center",
         backgroundColor: "#0077B6",
+    },
+    inscriptionContainer: {
         width: "100%",
         height: "100%",
-        top: 0
     },
     formContainer: {
         justifyContent: 'center',

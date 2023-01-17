@@ -14,16 +14,16 @@ export default function LandingScreen({ navigation }) {
     const [isFormConnexionVisible, setIsFormConnexionVisible] = useState(false)
     const [isFormInscriptionVisible, setIsFormInscriptionVisible] = useState(false)
 
+    const checkAuth = () => {
+        SecureStore.getItemAsync('jwt').then((token) => {
+            if (token) {
+                setLogging(true);
+            } else {
+                setLogging(false)
+            }
+        })
+    }
     useEffect(() => {
-        const checkAuth = () => {
-            SecureStore.getItemAsync('jwt').then((token) => {
-                if (token) {
-                    setLogging(true);
-                } else {
-                    setLogging(false)
-                }
-            })
-        }
         checkAuth()
     }, [])
 

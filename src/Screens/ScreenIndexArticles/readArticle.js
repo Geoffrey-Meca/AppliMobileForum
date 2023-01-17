@@ -1,71 +1,63 @@
 
 import React, { useState, useEffect } from 'react'
-import { SafeAreaView, Text, StyleSheet, ScrollView,View } from 'react-native';
+import { Text, StyleSheet, ScrollView, View } from 'react-native';
 import { getArticleById } from '../../../api';
 import Footer from '../../Composants/Footer';
-import * as SecureStore from 'expo-secure-store'
+import Header from '../../Composants/Header'
 
+export default function ReadArticle({ route, navigation }) {
 
-export default function ReadArticle(navigation) {
-
-    const articleId = navigation['route']['params']['articleId']
+    const articleId = route.params
     const [article, setArticle] = useState('')
-    
+    const fetchData = async () => {
+        getArticleById(articleId.articleId, (res) => {
+            setArticle(res.data)
+        })
+    }
     useEffect(() => {
-        const fetchData = async () => {
-            getArticleById(articleId, (res) => {
-                setArticle(res.data)
-            })
-        }
         fetchData();
-    }, []);
+    }, [fetchData]);
 
-        function brassageDate (date) {
-            if(date) {
-                let buffer =  date.split('T')
-                let ymd = buffer[0]
-                let brassage = ymd.split('-')
-                let dmy = brassage[2] + '/' + brassage[1] + '/' + brassage[0]
-                return dmy
-            } else {
-                return false
-            }
+    function brassageDate(date) {
+        if (date) {
+            let buffer = date.split('T')
+            let ymd = buffer[0]
+            let brassage = ymd.split('-')
+            let dmy = brassage[2] + '/' + brassage[1] + '/' + brassage[0]
+            return dmy
+        } else {
+            return false
         }
-  return (
-    <SafeAreaView style={styles.container}>
-          
+    }
+    return (
+        <View style={styles.container}>
+            <Header nav={navigation} />
             {article && article.comments ? (
-          
-                 <View style={styles.content}>  
-                        <Text style={styles.title}>{article.title}</Text>
-                        <Text style={styles.date}>Le {brassageDate(article.createdAt)}</Text>
-                        <Text style={styles.date}>Par : {article.userId.lastname +' '+article.userId.firstname}</Text>
-                        <Text style={styles.txt}>{article.content}</Text>
 
-                        
-                <ScrollView style={styles.comments}>
-                    {article.comments.map(comment => (
-                        <View key={comment['@id'].replace(/[^0-9]/g, '')}>
-                            <View style={styles.OneComments}>
-                                <Text>Le : {brassageDate(comment.createdAt)} Par : {comment.userId.firstname} {comment.userId.lastname} </Text>
-                                <Text>{comment.content}</Text>
+                <View style={styles.content}>
+                    <Text style={styles.title}>{article.title}</Text>
+                    <Text style={styles.date}>Le {brassageDate(article.createdAt)}</Text>
+                    <Text style={styles.date}>Par : {article.userId.lastname + ' ' + article.userId.firstname}</Text>
+                    <Text style={styles.txt}>{article.content}</Text>
+
+                    <ScrollView style={styles.comments}>
+                        {article.comments.map(comment => (
+                            <View key={comment['@id'].replace(/[^0-9]/g, '')}>
+                                <View style={styles.OneComments}>
+                                    <Text>Le : {brassageDate(comment.createdAt)} Par : {comment.userId.firstname} {comment.userId.lastname} </Text>
+                                    <Text>{comment.content}</Text>
+                                </View>
                             </View>
-                        </View>
-                    ))}
-                </ScrollView>
-
-         
+                        ))}
+                    </ScrollView>
                 </View>
-                
-        ) : (
+            ) : (
                 <Text style={styles.txt}>...loading</Text>
             )
-        }
-       
-    <Footer />
-    </SafeAreaView>
-
-  )
+            }
+            <Footer />
+        </View>
+    )
 }
 const styles = StyleSheet.create({
     container: {
