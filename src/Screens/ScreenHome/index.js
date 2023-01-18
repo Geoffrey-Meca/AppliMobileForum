@@ -62,8 +62,8 @@ export default function LandingScreen({ navigation }) {
                         <BoutonApp text="Inscription" onPress={_toggleFormInscription} />
                     </Fragment>
                 )}
-                {isFormConnexionVisible && <ModalConnexion onPress={_toggleFormConnexion} />}
-                {isFormInscriptionVisible && <ModalInscription onPress={_toggleFormInscription} />}
+                {isFormConnexionVisible && <ModalConnexion onPress={_toggleFormConnexion} nav={navigation} />}
+                {isFormInscriptionVisible && <ModalInscription onPress={_toggleFormInscription} nav={navigation} />}
                 <StatusBar style="light" />
             </ScrollView>
         </SafeAreaView>

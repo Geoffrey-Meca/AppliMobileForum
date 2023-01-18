@@ -1,34 +1,37 @@
 import React, { useState } from 'react'
 import { TextInput, StyleSheet, View, Text, Pressable, Alert } from 'react-native'
-import { useNavigation } from '@react-navigation/native';
 import { login } from '../../../api';
 
 import BoutonApp from '../Bouton'
 
 
 export default function ModalConnexion(props) {
-
     const [newEmail, setNewEmail] = useState("")
     const [newPassword, setNewPassword] = useState("")
-    const navigation = useNavigation()
+    const emailRegex = /^\S+@\S+\.\S+$/;
 
     const onChangeEmail = (val) => {
-        setNewEmail(val)
+        setNewEmail(val);
     }
     const onChangePassword = (val) => {
         setNewPassword(val)
     }
     const handleSubmit = () => {
-        login(newEmail, newPassword, (res =>  {
-            if(res.status != 200){
-                Alert.alert(`Erreur`, `${res.data.message}`, [{
-                    style: 'cancel'
-                }])
-            }
-            else{
-                navigation.navigate('Articles')
-            }
-        }));
+        if(emailRegex.test(newEmail)){
+            login(newEmail, newPassword, (res =>  {
+                if(res.status != 200){
+                    Alert.alert(`Erreur`, `${res.data.message}`, [{
+                        style: 'cancel'
+                    }])
+                }
+                else{
+                    props.nav.navigate('Articles')
+                }
+            }));
+        }
+        else{
+            Alert.alert('E-mail invalide', 'Veuillez entrer un e-mail valide pour continuer')
+        }
       };
     return (
         <View style={styles.container}>
@@ -42,6 +45,7 @@ export default function ModalConnexion(props) {
                     onChangeText={onChangeEmail}
                     value={newEmail}
                     placeholder='Email'
+                    keyboardType='email-address'
                 />
                 <TextInput
                     style={styles.input}

@@ -24,25 +24,30 @@ export default function InscriptionScreen({ navigation }) {
         setNewLastName(val)
     }
     const handleSubmit = () => {
-        setUser(newEmail, newFirstName, newLastName, newPassword, (res => {
-            if(res.status != 201){
-                Alert.alert(`Impossible de crée l'utilisateur`, `${res.data.violations[0].message}`, [{
-                    style: 'cancel'
-                }])
-            }
-            else{
-                login(newEmail, newPassword, (res => {
-                    if(res.status != 200){
-                        Alert.alert(`Connexion automatique échoué, veuillez vous connecter`, `${res.data.violations[0].message}`, [{
-                            style: 'cancel'
-                        }])
-                    }
-                    else{
-                        navigation.navigate('Articles')
-                    }
-                }))
-            }
-        }));
+        if(emailRegex.test(newEmail)){
+            postUser(newEmail, newFirstName, newLastName, newPassword, (res => {
+                if(res.status != 201){
+                    Alert.alert(`Impossible de crée l'utilisateur`, `${res.data.violations[0].message}`, [{
+                        style: 'cancel'
+                    }])
+                }
+                else{
+                    login(newEmail, newPassword, (res => {
+                        if(res.status != 200){
+                            Alert.alert(`Connexion automatique échoué, veuillez vous connecter`, `${res.data.violations[0].message}`, [{
+                                style: 'cancel'
+                            }])
+                        }
+                        else{
+                            navigation.navigate('Articles')
+                        }
+                    }))
+                }
+            }));
+        }
+        else{
+            Alert.alert('E-mail invalide', 'Veuillez entrer un e-mail valide pour continuer')
+        }
     };
     return (
         <View style={styles.container}>
@@ -55,6 +60,7 @@ export default function InscriptionScreen({ navigation }) {
                     onChangeText={onChangeEmail}
                     value={newEmail}
                     placeholder='Email'
+                    keyboardType='email-address'
                 />
                 <TextInput
                     style={styles.input}

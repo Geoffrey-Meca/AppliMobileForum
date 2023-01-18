@@ -3,7 +3,6 @@ import React from 'react';
 import { useState} from 'react';
 import { TextInput, StyleSheet, View, Text, Pressable, Alert } from 'react-native'
 import { postUser, login } from '../../../api';
-import { useNavigation } from '@react-navigation/native';
 
 import BoutonApp from '../Bouton'
 
@@ -13,7 +12,6 @@ export default function ModalInscription(props) {
     const [newPassword, setNewPassword] = useState("")
     const [newFirstName, setNewFirstName] = useState("")
     const [newLastName, setNewLastName] = useState("")
-    const navigation = useNavigation()
 
     const onChangeEmail = (val) => {
         setNewEmail(val)
@@ -27,26 +25,32 @@ export default function ModalInscription(props) {
     const onChangeLastName = (val) => {
         setNewLastName(val)
     }
+    const emailRegex = /^\S+@\S+\.\S+$/;
     const handleSubmit = async () => {
-        postUser(newEmail, newFirstName, newLastName, newPassword, (res => {
-            if(res.status != 201){
-                Alert.alert(`Impossible de crée l'utilisateur`, `${res.data.violations[0].message}`, [{
-                    style: 'cancel'
-                }])
-            }
-            else{
-                login(newEmail, newPassword, (res => {
-                    if(res.status != 200){
-                        Alert.alert(`Connexion automatique échoué, veuillez vous connecter`, `${res.data.violations[0].message}`, [{
-                            style: 'cancel'
-                        }])
-                    }
-                    else{
-                        navigation.navigate('Articles')
-                    }
-                }))
-            }
-        }));
+        if(emailRegex.test(newEmail)){
+            postUser(newEmail, newFirstName, newLastName, newPassword, (res => {
+                if(res.status != 201){
+                    Alert.alert(`Impossible de crée l'utilisateur`, `${res.data.violations[0].message}`, [{
+                        style: 'cancel'
+                    }])
+                }
+                else{
+                    login(newEmail, newPassword, (res => {
+                        if(res.status != 200){
+                            Alert.alert(`Connexion automatique échoué, veuillez vous connecter`, `${res.data.violations[0].message}`, [{
+                                style: 'cancel'
+                            }])
+                        }
+                        else{
+                            props.nav.navigate('Articles')
+                        }
+                    }))
+                }
+            }));
+        }
+        else{
+            Alert.alert('E-mail invalide', 'Veuillez entrer un e-mail valide pour continuer')
+        }
       };
     return (
         <View style={styles.container}>
@@ -60,6 +64,7 @@ export default function ModalInscription(props) {
                     onChangeText={onChangeEmail}
                     value={newEmail}
                     placeholder='Email'
+                    keyboardType='email-address'
                 />
                 <TextInput
                     style={styles.input}
