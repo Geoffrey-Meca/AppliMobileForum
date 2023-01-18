@@ -25,7 +25,23 @@ export default function InscriptionScreen({ navigation }) {
     }
     const handleSubmit = () => {
         setUser(newEmail, newFirstName, newLastName, newPassword, (res => {
-            console.log(res)
+            if(res.status != 201){
+                Alert.alert(`Impossible de crée l'utilisateur`, `${res.data.violations[0].message}`, [{
+                    style: 'cancel'
+                }])
+            }
+            else{
+                login(newEmail, newPassword, (res => {
+                    if(res.status != 200){
+                        Alert.alert(`Connexion automatique échoué, veuillez vous connecter`, `${res.data.violations[0].message}`, [{
+                            style: 'cancel'
+                        }])
+                    }
+                    else{
+                        navigation.navigate('Articles')
+                    }
+                }))
+            }
         }));
     };
     return (
@@ -45,6 +61,7 @@ export default function InscriptionScreen({ navigation }) {
                     onChangeText={onChangePassword}
                     value={newPassword}
                     placeholder='Password'
+                    secureTextEntry={true}
                 />
                 <TextInput
                     style={styles.input}

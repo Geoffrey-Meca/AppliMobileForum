@@ -3,6 +3,7 @@ import React from 'react';
 import { useState} from 'react';
 import { TextInput, StyleSheet, View, Text, Pressable, Alert } from 'react-native'
 import { postUser, login } from '../../../api';
+import { useNavigation } from '@react-navigation/native';
 
 import BoutonApp from '../Bouton'
 
@@ -12,6 +13,7 @@ export default function ModalInscription(props) {
     const [newPassword, setNewPassword] = useState("")
     const [newFirstName, setNewFirstName] = useState("")
     const [newLastName, setNewLastName] = useState("")
+    const navigation = useNavigation()
 
     const onChangeEmail = (val) => {
         setNewEmail(val)
@@ -39,6 +41,9 @@ export default function ModalInscription(props) {
                             style: 'cancel'
                         }])
                     }
+                    else{
+                        navigation.navigate('Articles')
+                    }
                 }))
             }
         }));
@@ -61,6 +66,7 @@ export default function ModalInscription(props) {
                     onChangeText={onChangePassword}
                     value={newPassword}
                     placeholder='Password'
+                    secureTextEntry={true}
                 />
                 <TextInput
                     style={styles.input}

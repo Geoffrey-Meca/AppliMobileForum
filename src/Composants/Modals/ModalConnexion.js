@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { TextInput, StyleSheet, View, Text, Pressable, Alert } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 import { login } from '../../../api';
 
 import BoutonApp from '../Bouton'
@@ -9,6 +10,7 @@ export default function ModalConnexion(props) {
 
     const [newEmail, setNewEmail] = useState("")
     const [newPassword, setNewPassword] = useState("")
+    const navigation = useNavigation()
 
     const onChangeEmail = (val) => {
         setNewEmail(val)
@@ -22,6 +24,9 @@ export default function ModalConnexion(props) {
                 Alert.alert(`Erreur`, `${res.data.message}`, [{
                     style: 'cancel'
                 }])
+            }
+            else{
+                navigation.navigate('Articles')
             }
         }));
       };
@@ -43,6 +48,7 @@ export default function ModalConnexion(props) {
                     onChangeText={onChangePassword}
                     value={newPassword}
                     placeholder='Password'
+                    secureTextEntry={true}
                 />
                 <BoutonApp text="Connexion" 
                     onPress={handleSubmit}

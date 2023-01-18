@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 // Importation de react
-import React from 'react';
+import React, {useEffect, useState } from 'react';
 // Importation des Pages Screen
 import LandingScreen from './src/Screens/ScreenHome';
 import ProfilScreen from './src/Screens/ScreenProfilPage';
@@ -11,14 +11,15 @@ import ReadArticle from './src/Screens/ScreenIndexArticles/readArticle';
 // Importation pour la navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import * as SecureStore from 'expo-secure-store'
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
 
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+return (
+  <NavigationContainer>
+  <Drawer.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
         <Drawer.Screen name="Home" component={LandingScreen} />
         <Drawer.Screen name="Articles" component={IndexArticleScreen} />
         <Drawer.Screen name="ReadArticle" component={ReadArticle} />

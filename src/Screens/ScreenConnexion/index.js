@@ -17,7 +17,14 @@ export default function ConnexionScreen({ navigation }) {
     }
     const handleSubmit = () => {
         login(newEmail, newPassword, (res => {
-            console.log(res)
+            if(res.status != 200){
+                Alert.alert(`Erreur`, `${res.data.message}`, [{
+                    style: 'cancel'
+                }])
+            }
+            else{
+                navigation.navigate('Articles')
+            }
         }));
     };
 
@@ -38,6 +45,7 @@ export default function ConnexionScreen({ navigation }) {
                         onChangeText={onChangePassword}
                         value={newPassword}
                         placeholder='Password'
+                        secureTextEntry={true}
                     />
                     <BoutonApp text="Connexion"
                         onPress={handleSubmit}
