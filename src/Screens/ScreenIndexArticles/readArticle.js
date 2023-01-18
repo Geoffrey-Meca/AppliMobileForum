@@ -1,40 +1,30 @@
+
 import React, { useState, useEffect } from 'react'
 import { Text, StyleSheet, ScrollView, View } from 'react-native';
 import { getArticleById } from '../../../api';
 import Footer from '../../Composants/Footer';
 import Header from '../../Composants/Header';
-import * as SecureStore from 'expo-secure-store';
 import BoutonApp from '../../Composants/Bouton';
 import ModalAddComment from '../../Composants/Modals/ModalAddComment';
+import isLogged from '../../../useAuth';
+
 
 export default function ReadArticle({ route, navigation }) {
-
+    
     const articleId = route.params
     const [article, setArticle] = useState('')
-    const [isLogged, setLogging] = useState(false);
     const [isOpenAdd, setIsOpenAdd] = useState(false);
+    console.log(isLogged())
+    let debug = isLogged()
     const fetchData = async () => {
         getArticleById(articleId.articleId, (res) => {
             setArticle(res.data)
         })
     }
-    const checkAuth = () => {
-        SecureStore.getItemAsync('jwt').then((token) => {
-            if (token) {
-                setLogging(true);
-            } else {
-                setLogging(false)
-            }
-        })
-    }
-
     useEffect(() => {
         fetchData();
-        checkAuth();
-    }, [articleId, isLogged]);
-    if(debug) {
-        console.log(isLogged);
-    }
+    }, [articleId]);
+
     function openAdd() {
         setIsOpenAdd(!isOpenAdd)
     }
@@ -50,6 +40,8 @@ export default function ReadArticle({ route, navigation }) {
             
         }
     }
+  
+    console.log(isLogged())
     return (
         <View style={styles.container}>
           
@@ -62,7 +54,7 @@ export default function ReadArticle({ route, navigation }) {
                     <Text style={styles.date}>Le {brassageDate(article.createdAt)}</Text>
                     <Text style={styles.date}>Par : {article.userId.lastname + ' ' + article.userId.firstname}</Text>
                     <Text style={styles.txt}>{article.content}</Text>
-                    {isLogged ? (<BoutonApp text="Add" onPress={openAdd} />): (<Text>Disconnect</Text>)}
+                    {debug ? (<BoutonApp text="Add" onPress={openAdd} />): (<Text>Disconnect</Text>)}
                     {isOpenAdd && <ModalAddComment close={openAdd} onPress={openAdd} id={articleId.articleId}/> }
                         {article.comments.map(comment => (
                             <View key={comment['@id'].replace(/[^0-9]/g, '')}>
