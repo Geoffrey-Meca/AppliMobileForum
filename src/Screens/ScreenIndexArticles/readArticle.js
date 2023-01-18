@@ -23,16 +23,16 @@ export default function ReadArticle({ route, navigation }) {
         fetchData();
     }, [articleId]);
 
-   async function openAdd() {
+    async function openAdd() {
         // Permet de forcé le refresh des commentaires.
 
-        if(isOpenAdd) {
+        if (isOpenAdd) {
             await fetchData();
         }
         setIsOpenAdd(!isOpenAdd)
     }
     function brassageDate(date) {
-        if  (date  == null || date == '') {
+        if (date == null || date == '') {
             return false
         } else {
             let buffer = date.split('T')
@@ -40,24 +40,25 @@ export default function ReadArticle({ route, navigation }) {
             let brassage = ymd.split('-')
             let dmy = brassage[2] + '/' + brassage[1] + '/' + brassage[0]
             return dmy
+
         }
     }
 
-  
+
     return (
         <View style={styles.container}>
-          
+
             <Header nav={navigation} />
             <ScrollView style={styles.comments}>
-            {article && article.comments ? (
+                {article && article.comments ? (
 
-                <View style={styles.content}>
-                    <Text style={styles.title}>{article.title}</Text>
-                    <Text style={styles.date}>Le {brassageDate(article.createdAt)}</Text>
-                    <Text style={styles.date}>Par : {article.userId.lastname + ' ' + article.userId.firstname}</Text>
-                    <Text style={styles.txt}>{article.content}</Text>
-                    {log ? (<BoutonApp text="Add" onPress={openAdd} />): (<Text></Text>)}
-                    {isOpenAdd && <ModalAddComment close={openAdd} onPress={openAdd} id={articleId.articleId}/> }
+                    <View style={styles.content}>
+                        <Text style={styles.title}>{article.title}</Text>
+                        <Text style={styles.date}>Le {brassageDate(article.createdAt)}</Text>
+                        <Text style={styles.date}>Par : {article.userId.lastname + ' ' + article.userId.firstname}</Text>
+                        <Text style={styles.txt}>{article.content}</Text>
+                        {log ? (<BoutonApp text="Add" onPress={openAdd} />) : (<Text></Text>)}
+                        {isOpenAdd && <ModalAddComment close={openAdd} onPress={openAdd} id={articleId.articleId} />}
                         {article.comments.map(comment => (
                             <View key={comment['@id'].replace(/[^0-9]/g, '')}>
                                 <View style={styles.OneComments}>
@@ -66,12 +67,12 @@ export default function ReadArticle({ route, navigation }) {
                                 </View>
                             </View>
                         ))}
-                </View>
-            ) : (
-                <Text style={styles.txt}>...loading</Text>
-            )
-            }
-             </ScrollView>
+                    </View>
+                ) : (
+                    <Text style={styles.txt}>...loading</Text>
+                )
+                }
+            </ScrollView>
             <Footer />
         </View>
     )
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
 
     },
     OneComments: {
- 
+
         backgroundColor: "#90E0EF",
         color: "#000000",
         marginLeft: "3%",

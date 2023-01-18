@@ -16,26 +16,37 @@ import ArticleEditScreen from './src/Screens/ScreenPanelAdmin/indexArticle';
 // Importation pour la navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import CustomDrawer from './src/Composants/Burger/CustomDrawer';
 
 const Drawer = createDrawerNavigator();
 
+const DrawerNavigator = () => {
+  return (
+    <Drawer.Navigator
+      initialRouteName="Home"
+      screenOptions={{ headerShown: false }}
+      drawerContent={(props) => <CustomDrawer {...props} />}
+    >
+      <Drawer.Screen name="Home" component={LandingScreen} />
+      <Drawer.Screen name="Articles" component={IndexArticleScreen} />
+      <Drawer.Screen name="ReadArticle" component={ReadArticle} />
+      <Drawer.Screen name="Profil" component={ProfilScreen} />
+      <Drawer.Screen name="Connexion" component={ConnexionScreen} />
+      <Drawer.Screen name="Inscription" component={InscriptionScreen} />
+      <Drawer.Screen name="AdminScreen" component={AdminScreen} />
+      <Drawer.Screen name="Users" component={IndexUsersScreen} />
+      <Drawer.Screen name="User" component={UserProfileEditScreen} />
+      <Drawer.Screen name="ArticlesAdmin" component={IndexArticlesScreen} />
+      <Drawer.Screen name="ArticleAdmin" component={ArticleEditScreen} />
+    </Drawer.Navigator>
+  )
+}
+
 export default function App() {
 
-return (
-  <NavigationContainer>
-  <Drawer.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
-        <Drawer.Screen name="Home" component={LandingScreen} />
-        <Drawer.Screen name="Articles" component={IndexArticleScreen} />
-        <Drawer.Screen name="ReadArticle" component={ReadArticle} />
-        <Drawer.Screen name="Profil" component={ProfilScreen} />
-        <Drawer.Screen name="Connexion" component={ConnexionScreen} />
-        <Drawer.Screen name="Inscription" component={InscriptionScreen} />
-        <Drawer.Screen name="AdminScreen" component={AdminScreen} />
-        <Drawer.Screen name="Users" component={IndexUsersScreen} />
-        <Drawer.Screen name="User" component={UserProfileEditScreen} />
-        <Drawer.Screen name="ArticlesAdmin" component={IndexArticlesScreen} />
-        <Drawer.Screen name="ArticleAdmin" component={ArticleEditScreen} />
-      </Drawer.Navigator>
+  return (
+    <NavigationContainer>
+      <DrawerNavigator />
     </NavigationContainer>
   )
 }
