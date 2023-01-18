@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 
 import { Text, StyleSheet, Image, View, ScrollView, Alert } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
@@ -6,26 +6,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import BoutonApp from '../../Composants/Bouton'
 import ModalConnexion from '../../Composants/Modals/ModalConnexion';
 import ModalInscription from '../../Composants/Modals/ModalInscription';
+import isLogged from '../../../useAuth'
 import * as SecureStore from 'expo-secure-store'
 
 export default function LandingScreen({ navigation }) {
-
-    const [isLogged, setLogging] = useState(false);
     const [isFormConnexionVisible, setIsFormConnexionVisible] = useState(false)
     const [isFormInscriptionVisible, setIsFormInscriptionVisible] = useState(false)
-
-    const checkAuth = () => {
-        SecureStore.getItemAsync('jwt').then((token) => {
-            if (token) {
-                setLogging(true);
-            } else {
-                setLogging(false)
-            }
-        })
-    }
-    useEffect(() => {
-        checkAuth()
-    }, [])
 
     const _toggleFormConnexion = () => {
         setIsFormConnexionVisible(!isFormConnexionVisible)
@@ -45,7 +31,7 @@ export default function LandingScreen({ navigation }) {
                 {
                     text: "Oui", onPress: () => {
                         SecureStore.deleteItemAsync('jwt').then(
-                            setLogging(false)
+                            navigation.navigate('Home')
                         )
                     }
                 }
@@ -65,7 +51,7 @@ export default function LandingScreen({ navigation }) {
                 <Text style={styles.txt}>Bienvenue sur CODEHUB, il est temps de se mettre au boulot !</Text>
                 <BoutonApp text="Visiter le Forum" onPress={() => navigation.navigate('Articles')} />
 
-                {isLogged ? (
+                {isLogged() ? (
                     <Fragment>
                         <BoutonApp text="Profile" onPress={() => navigation.navigate('Profil')} />
                         <BoutonApp text="Déconnexion" onPress={logout} />
@@ -76,8 +62,8 @@ export default function LandingScreen({ navigation }) {
                         <BoutonApp text="Inscription" onPress={_toggleFormInscription} />
                     </Fragment>
                 )}
-                {isFormConnexionVisible && <ModalConnexion onPress={_toggleFormConnexion} />}
-                {isFormInscriptionVisible && <ModalInscription onPress={_toggleFormInscription} />}
+                {isFormConnexionVisible && <ModalConnexion onPress={_toggleFormConnexion} nav={navigation} />}
+                {isFormInscriptionVisible && <ModalInscription onPress={_toggleFormInscription} nav={navigation} />}
                 <StatusBar style="light" />
             </ScrollView>
         </SafeAreaView>

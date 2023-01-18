@@ -16,9 +16,21 @@ export default function ConnexionScreen({ navigation }) {
         setNewPassword(val)
     }
     const handleSubmit = () => {
-        login(newEmail, newPassword, (res => {
-            console.log(res)
-        }));
+        if(emailRegex.test(newEmail)){
+            login(newEmail, newPassword, (res =>  {
+                if(res.status != 200){
+                    Alert.alert(`Erreur`, `${res.data.message}`, [{
+                        style: 'cancel'
+                    }])
+                }
+                else{
+                    navigation.navigate('Articles')
+                }
+            }));
+        }
+        else{
+            Alert.alert('E-mail invalide', 'Veuillez entrer un e-mail valide pour continuer')
+        }
     };
 
     return (
@@ -32,12 +44,14 @@ export default function ConnexionScreen({ navigation }) {
                         onChangeText={onChangeEmail}
                         value={newEmail}
                         placeholder='Email'
+                        keyboardType='email-address'
                     />
                     <TextInput
                         style={styles.input}
                         onChangeText={onChangePassword}
                         value={newPassword}
                         placeholder='Password'
+                        secureTextEntry={true}
                     />
                     <BoutonApp text="Connexion"
                         onPress={handleSubmit}
