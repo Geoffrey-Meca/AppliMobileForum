@@ -16,9 +16,9 @@ const Drawer = createDrawerNavigator();
 
 export default function App() {
 
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+return (
+  <NavigationContainer>
+  <Drawer.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
         <Drawer.Screen name="Home" component={LandingScreen} />
         <Drawer.Screen name="Articles" component={IndexArticleScreen} />
         <Drawer.Screen name="ReadArticle" component={ReadArticle} />
