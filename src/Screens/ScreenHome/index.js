@@ -1,3 +1,4 @@
+const debug = true
 import React, { Fragment, useState } from 'react'
 
 import { Text, StyleSheet, Image, View, ScrollView, Alert } from 'react-native'
@@ -8,6 +9,7 @@ import ModalConnexion from '../../Composants/Modals/ModalConnexion';
 import ModalInscription from '../../Composants/Modals/ModalInscription';
 import isLogged from '../../../useAuth'
 import * as SecureStore from 'expo-secure-store'
+
 
 export default function LandingScreen({ navigation }) {
     const [isFormConnexionVisible, setIsFormConnexionVisible] = useState(false)
@@ -32,12 +34,18 @@ export default function LandingScreen({ navigation }) {
                     text: "Oui", onPress: () => {
                         SecureStore.deleteItemAsync('jwt').then(
                             navigation.navigate('Articles')
+
                         )
+
                     }
                 }
             ]
         );
-        console.log(SecureStore.getItemAsync('jwt'))
+        if(debug) {
+            console.log(SecureStore.getItemAsync('jwt'))
+        }
+        
+
     }
 
     return (
