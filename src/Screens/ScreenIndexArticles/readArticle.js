@@ -10,13 +10,11 @@ import isLogged from '../../../useAuth';
 
 
 export default function ReadArticle({ route, navigation }) {
-    
     const articleId = route.params
     const [article, setArticle] = useState('')
     const [isOpenAdd, setIsOpenAdd] = useState(false);
-    console.log(isLogged())
-    let debug = isLogged()
-    const fetchData = async () => {
+    const log = isLogged()
+    let fetchData = async () => {
         getArticleById(articleId.articleId, (res) => {
             setArticle(res.data)
         })
@@ -25,7 +23,11 @@ export default function ReadArticle({ route, navigation }) {
         fetchData();
     }, [articleId]);
 
-    function openAdd() {
+   async function openAdd() {
+        // Permet de forcé le refresh des commentaires.
+        if(!isOpenAdd) {
+            await fetchData();
+        }
         setIsOpenAdd(!isOpenAdd)
     }
     function brassageDate(date) {
@@ -37,11 +39,10 @@ export default function ReadArticle({ route, navigation }) {
             let brassage = ymd.split('-')
             let dmy = brassage[2] + '/' + brassage[1] + '/' + brassage[0]
             return dmy
-            
         }
     }
+
   
-    console.log(isLogged())
     return (
         <View style={styles.container}>
           
@@ -54,7 +55,7 @@ export default function ReadArticle({ route, navigation }) {
                     <Text style={styles.date}>Le {brassageDate(article.createdAt)}</Text>
                     <Text style={styles.date}>Par : {article.userId.lastname + ' ' + article.userId.firstname}</Text>
                     <Text style={styles.txt}>{article.content}</Text>
-                    {debug ? (<BoutonApp text="Add" onPress={openAdd} />): (<Text>Disconnect</Text>)}
+                    {log ? (<BoutonApp text="Add" onPress={openAdd} />): (<Text></Text>)}
                     {isOpenAdd && <ModalAddComment close={openAdd} onPress={openAdd} id={articleId.articleId}/> }
                         {article.comments.map(comment => (
                             <View key={comment['@id'].replace(/[^0-9]/g, '')}>

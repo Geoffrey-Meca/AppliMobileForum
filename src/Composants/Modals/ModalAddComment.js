@@ -6,9 +6,8 @@ import { postComment } from '../../../api';
 import BoutonApp from '../Bouton'
 
 export default function ModalAddComment(props) {
-    if(debug) {
-    console.log(props.id)
-  }
+
+  const targetId = props.id 
   const [NewComment, setNewComment] = useState("");
   const onChangeComment = (val) => {
     setNewComment(val);
@@ -16,15 +15,15 @@ export default function ModalAddComment(props) {
   const AddComment = () => {
     
     if(debug){
-      console.log(props.id);
+      console.log(targetId);
       console.log(NewComment);
     }
     // Controle size of comment 
     if (NewComment.length >= 10) {
 
-        postComment(props.id, NewComment, (res =>  {
+        postComment(targetId, NewComment, (res =>  {
           if(res.status != 201){
-
+           
           } else {
             
           }

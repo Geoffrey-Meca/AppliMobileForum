@@ -31,12 +31,13 @@ export default function LandingScreen({ navigation }) {
                 {
                     text: "Oui", onPress: () => {
                         SecureStore.deleteItemAsync('jwt').then(
-                            navigation.navigate('Home')
+                            navigation.navigate('Articles')
                         )
                     }
                 }
             ]
         );
+        console.log(SecureStore.getItemAsync('jwt'))
     }
 
     return (
