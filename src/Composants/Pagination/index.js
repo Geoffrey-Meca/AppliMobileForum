@@ -1,24 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { Button, View, StyleSheet } from 'react-native';
-import { getArticles } from '../../../api';
+import { TouchableOpacity , View, StyleSheet, Text } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
-export default function Pagination() {
-    const [articles, setArticles] = useState('');
-
-    const [next, setNext] = useState(false)
-    const [previous, setPrevious] = useState(true)
-    const [page, setPage] = useState(1);
-    const pagesNom = Math.ceil(articles['hydra:totalItems'] / 5);
+export default function Pagination({ fetchData, page, setPage, totalItems, maxItems }) {
+    const [next, setNext] = useState(false);
+    const [previous, setPrevious] = useState(true);
+    const pagesNom = Math.ceil(totalItems / maxItems);
 
     useEffect(() => {
         setNext(false)
         setPrevious(false)
         pageCheck(page)
-        const fetchData = () => {
-            getArticles(page, (res) => {
-                setArticles(res.data);
-            });
-        }
         fetchData()
     }, [page]);
 
@@ -34,42 +26,57 @@ export default function Pagination() {
 
     return (
         <View style={styles.pagination}>
-            <Button
+            <TouchableOpacity
                 style={styles.btn}
                 onPress={() => {
                     setPage(1);
-                }}
-                title="<<"
+                }
+                }
                 disabled={previous}
-            />
-            <Button
+            ><Text><AntDesign name="banckward" size={24} color="black" /></Text></TouchableOpacity>
+            <TouchableOpacity
                 style={styles.btn}
                 onPress={() => {
                     setPage(page - 1);
-                }}
+                }
+                }
                 title="<"
                 disabled={previous}
-            />
-            <Button
+            ><Text><AntDesign name="caretleft" size={24} color="black" /></Text></TouchableOpacity>
+
+            <TouchableOpacity
                 style={styles.btn}
                 onPress={() => {
                     setPage(page + 1);
-                }}
-                title=">"
+                }
+                }
                 disabled={next}
-            />
-            <Button
+            ><Text><AntDesign name="caretright" size={24} color="black" /></Text></TouchableOpacity>
+            <TouchableOpacity
                 style={styles.btn}
                 onPress={() => {
                     setPage(pagesNom);
-                }}
-                title=">>"
+                }
+                }
                 disabled={next}
-            />
+            ><Text><AntDesign name="forward" size={24} color="black" /></Text></TouchableOpacity>
         </View>
     )
 }
 const styles = StyleSheet.create({
+    btn: {
+        alignItems: 'center',
+        textAlign: "center",
+        backgroundColor: '#CAF0F8',
+        height: "auto",
+        flex: 1,
+        padding: 5,
+        marginRight: 5,
+        marginLeft: 5,
+        borderRadius: 3,
+        borderColor: "black"
+
+    },
     pagination: {
         flexDirection: "row",
         margin: 50,

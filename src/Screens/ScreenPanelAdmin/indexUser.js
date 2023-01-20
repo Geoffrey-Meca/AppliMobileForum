@@ -1,8 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import { SafeAreaView, Text, View,TextInput, StyleSheet, Alert  } from 'react-native';
-import { getUserById } from '../../../api';
+import { getUserById, patchUser } from '../../../api';
 import Footer from '../../Composants/Footer';
-import { patchUser } from '../../../api';
 import { useRoute } from '@react-navigation/native';
 import BoutonAdmin from '../../Composants/Bouton/indexAdmin';
 import Header from '../../Composants/Header';

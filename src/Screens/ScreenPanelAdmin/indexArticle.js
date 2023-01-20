@@ -1,25 +1,19 @@
 import React, { useState, useEffect} from 'react'
-import { SafeAreaView, Text, View,TextInput, StyleSheet, Alert, ScrollView, Button  } from 'react-native';
-import { getArticleById } from '../../../api';
+import { SafeAreaView, Text, View,TextInput, StyleSheet, Alert, ScrollView } from 'react-native';
 import Footer from '../../Composants/Footer';
-import { patchArticle } from '../../../api';
 import { useRoute } from '@react-navigation/native';
 import BoutonAdmin from '../../Composants/Bouton/indexAdmin';
 import Header from '../../Composants/Header';
-import { patchComment } from '../../../api';
-import { deleteComment } from '../../../api';
-import { getCommentsByArticle } from '../../../api';
-
-
+import { patchComment, deleteComment, getCommentsByArticle, patchArticle, getArticleById } from '../../../api';
+import Pagination from '../../Composants/Pagination';
 
 export default function ArticleEditScreen ( {navigation} ) {
     
     const [article, setArticle] = useState('');
     const [comments, setComments] = useState('');
-    const [next, setNext] = useState(false)
     const [page, setPage] = useState(1);
-    const [previous, setPrevious] = useState(true);
-    const pagesNom = Math.ceil(comments['hydra:totalItems'] / 5);
+    const [totalItems, setTotalItems] = useState(0);
+    const maxItems = 5;
     const route = useRoute();
     const articleId = route.params.articleId;
     const refresh = route.params.refresh;
@@ -29,29 +23,17 @@ export default function ArticleEditScreen ( {navigation} ) {
     })
     }
     const fetchComments = async() => {
-      getCommentsByArticle(articleId,page, (res) => {
+      getCommentsByArticle(articleId, page, (res) => {
         setComments(res.data);
-        console.log(res.data['hydra:member']);        
+        setTotalItems(res.data['hydra:totalItems']);    
       })
     }
 
     useEffect(() => {
-      setNext(false)
-      setPrevious(false)
-      pageCheck(page)
       fetchData();
       fetchComments();
       if({"refresh": true}) {fetchData()}
       }, [articleId, route, refresh, page]);
-
-      const pageCheck = (page) => {
-        if (page == pagesNom) {
-            setPage(pagesNom)
-            setNext(true)
-        }
-        else if (page == 1) {
-            setPrevious(true)
-        }}
 
       const editArticle = async () => {
         patchArticle(articleId, article.title, article.content, (res => { 
@@ -74,7 +56,6 @@ export default function ArticleEditScreen ( {navigation} ) {
       const [comment, setComment] = useState('');
       const editComment = async (commentId) => {
         patchComment(commentId, comment.content, (res => { 
-            console.log(res);
             fetchData();
             Alert.alert(
                 'Le comment a été mis à jour avec succès.',
@@ -165,40 +146,13 @@ export default function ArticleEditScreen ( {navigation} ) {
                     <Text>Loading comments...</Text>
                 )}
                 </ScrollView>
-                <View style={styles.pagination}>
-                <Button
-                    style={styles.btn}
-                    onPress={() => {
-                        setPage(1);
-                    }}
-                    title="<<"
-                    disabled={previous}
+                <Pagination 
+                fetchData={fetchData}
+                page={page}
+                setPage={setPage}
+                totalItems={totalItems}
+                maxItems={maxItems}
                 />
-                <Button
-                    style={styles.btn}
-                    onPress={() => {
-                        setPage(page - 1);
-                    }}
-                    title="<"
-                    disabled={previous}
-                />
-                <Button
-                    style={styles.btn}
-                    onPress={() => {
-                        setPage(page + 1);
-                    }}
-                    title=">"
-                    disabled={next}
-                />
-                <Button
-                    style={styles.btn}
-                    onPress={() => {
-                        setPage(pagesNom);
-                    }}
-                    title=">>"
-                    disabled={next}
-                />
-            </View>
         <Footer/>
         </SafeAreaView>
       )
@@ -234,14 +188,5 @@ export default function ArticleEditScreen ( {navigation} ) {
             height: 42,
             margin: '5%',
             padding: 5
-        },
-        btn: {
-          flexDirection: "row",
-          justifyContent:"center"
-        },
-        pagination: {
-          justifyContent: "center",
-          flexDirection: "row",
-          marginBottom: 30,
-      },
+        }
     })

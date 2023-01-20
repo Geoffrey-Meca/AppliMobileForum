@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Text, StyleSheet, View, Pressable, TouchableOpacity, ScrollView } from 'react-native'
-import { AntDesign } from '@expo/vector-icons';
+import { Text, StyleSheet, View, Pressable, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Pagination from '../../Composants/Pagination';
 
 import { getArticles } from '../../../api';
 import Footer from '../../Composants/Footer';
@@ -11,34 +11,19 @@ import Header from '../../Composants/Header'
 export default function IndexArticleScreen({ navigation }) {
 
     const [articles, setArticles] = useState('');
-    const [next, setNext] = useState(false)
-
     const [page, setPage] = useState(1);
-    const [previous, setPrevious] = useState(true)
-    const pagesNom = Math.ceil(articles['hydra:totalItems'] / 5);
+    const [totalItems, setTotalItems] = useState(0);
+    const maxItems = 5;
+    const fetchData = () => {
+        getArticles(page, (res) => {
+            setArticles(res.data);
+            setTotalItems(res.data['hydra:totalItems']);
+        });
+    }
 
     useEffect(() => {
-        setNext(false)
-        setPrevious(false)
-        pageCheck(page)
-        const fetchData = () => {
-            getArticles(page, (res) => {
-                setArticles(res.data);
-            });
-        }
         fetchData()
-
     }, [page]);
-
-    const pageCheck = (page) => {
-        if (page == pagesNom) {
-            setPage(pagesNom)
-            setNext(true)
-        }
-        else if (page == 1) {
-            setPrevious(true)
-        }
-    }
 
     function goToArticle(id) {
         navigation.navigate("ReadArticle", {
@@ -62,62 +47,19 @@ export default function IndexArticleScreen({ navigation }) {
                     )}
                 </View>
             </ScrollView>
-            <View style={styles.pagination}>
-
-                <TouchableOpacity
-                    style={styles.btn}
-                    onPress={() => {
-                        setPage(1);
-                    }
-                    }
-                    disabled={previous}
-                ><Text><AntDesign name="banckward" size={24} color="black" /></Text></TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.btn}
-                    onPress={() => {
-                        setPage(page - 1);
-                    }
-                    }
-                    title="<"
-                    disabled={previous}
-                ><Text><AntDesign name="caretleft" size={24} color="black" /></Text></TouchableOpacity>
-
-                <TouchableOpacity
-                    style={styles.btn}
-                    onPress={() => {
-                        setPage(page + 1);
-                    }
-                    }
-                    disabled={next}
-                ><Text><AntDesign name="caretright" size={24} color="black" /></Text></TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.btn}
-                    onPress={() => {
-                        setPage(pagesNom);
-                    }
-                    }
-                    disabled={next}
-                ><Text><AntDesign name="forward" size={24} color="black" /></Text></TouchableOpacity>
-            </View>
+            <Pagination
+            fetchData={fetchData}
+            page={page}
+            setPage={setPage}
+            totalItems={totalItems}
+            maxItems={maxItems}
+            />
             <Footer />
         </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
-    btn: {
-        alignItems: 'center',
-        textAlign: "center",
-        backgroundColor: '#CAF0F8',
-        height: "auto",
-        flex: 1,
-        padding: 5,
-        marginRight: 5,
-        marginLeft: 5,
-        borderRadius: 3,
-        borderColor: "black"
-
-    },
     container: {
         flex: 1,
         alignItems: "center",
@@ -138,9 +80,5 @@ const styles = StyleSheet.create({
         color: "#FFFFFF",
         fontSize: 20,
         marginBottom: 20,
-    },
-    pagination: {
-        flexDirection: "row",
-        margin: 50,
     }
 })

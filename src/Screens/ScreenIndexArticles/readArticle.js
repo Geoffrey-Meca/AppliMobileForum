@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react'
 import { Text, StyleSheet, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,6 +11,7 @@ import { isLogged } from '../../../lib';
 
 export default function ReadArticle({ route, navigation }) {
     const articleId = route.params
+    let isLog = isLogged();
     const [article, setArticle] = useState('')
     const [isOpenAdd, setIsOpenAdd] = useState(false);
     let fetchData = async () => {
@@ -59,7 +59,7 @@ export default function ReadArticle({ route, navigation }) {
                             <Text style={styles.txt}>{article.content}</Text>
                         </View>
 
-                        {isLogged() ? (<BoutonApp text="Add" onPress={openAdd} />) : (<Text style={styles.txt}>Connectez-vous pour ajouter un commentaire !</Text>)}
+                        {isLog ? (<BoutonApp text="Add" onPress={openAdd} />) : (<Text style={styles.txt}>Connectez-vous pour ajouter un commentaire !</Text>)}
                         {isOpenAdd && <ModalAddComment close={openAdd} onPress={openAdd} id={articleId.articleId} />}
 
                         {article.comments.map(comment => (
