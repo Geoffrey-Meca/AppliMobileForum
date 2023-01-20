@@ -65,7 +65,6 @@ export default function IndexUsersScreen({ navigation }) {
                 ) : (
                     <Text>Loading...</Text>
                 )}
-            </ScrollView>
             <Pagination
                 fetchData={fetchData}
                 page={page}
@@ -73,6 +72,7 @@ export default function IndexUsersScreen({ navigation }) {
                 totalItems={totalItems}
                 maxItems={maxItems}
             />
+            </ScrollView>
             <Footer />
         </SafeAreaView>
     )

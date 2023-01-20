@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Text, StyleSheet, Image, View, ScrollView, Alert } from 'react-native'
+import { Text, StyleSheet, Image, View, ScrollView } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import BoutonApp from '../../Composants/Bouton'
@@ -13,7 +13,7 @@ import { useFonts, Iceland_400Regular } from '@expo-google-fonts/iceland';
 export default function LandingScreen({ navigation }) {
     const [isFormConnexionVisible, setIsFormConnexionVisible] = useState(false)
     const [isFormInscriptionVisible, setIsFormInscriptionVisible] = useState(false)
-
+    
     const _toggleFormConnexion = () => {
         setIsFormConnexionVisible(!isFormConnexionVisible)
     }
@@ -30,6 +30,7 @@ export default function LandingScreen({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
+            <ScrollView>
             <View style={styles.imgContainer}>
                 <Image
                     style={styles.img}
@@ -47,6 +48,7 @@ export default function LandingScreen({ navigation }) {
             {isFormConnexionVisible && <ModalConnexion onPress={_toggleFormConnexion} onClose={_toggleFormConnexion} nav={navigation} />}
             {isFormInscriptionVisible && <ModalInscription onPress={_toggleFormInscription} onClose={_toggleFormInscription} nav={navigation} />}
             <StatusBar style="light" />
+            </ScrollView>
         </SafeAreaView>
     )
 }
