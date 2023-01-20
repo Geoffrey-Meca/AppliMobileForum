@@ -3,11 +3,11 @@ import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
 import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
 
-import { isLogged } from '../../../lib'
-
+import { isLogged, isAdmin } from '../../../lib'
 
 export default function CustomDrawer(props) {
-
+    const Admin = isAdmin()
+    const isLog = isLogged()
     function logOut() {
         Alert.alert(
             "Vous êtes sur le point de vous déconnecter",
@@ -42,14 +42,14 @@ export default function CustomDrawer(props) {
                     <DrawerItem label={'Articles'} onPress={() => props.navigation.navigate('Articles')} />
                     <DrawerItem label={'Ajouter un article'} onPress={() => props.navigation.navigate('AddArticle')} />
                     <DrawerItem label={'Profil'} onPress={() => props.navigation.navigate('Profil')} />
-                    {!isLogged() && <DrawerItem label={'Connexion'} onPress={() => props.navigation.navigate('Connexion')} />}
-                    {!isLogged() && <DrawerItem label={'Inscription'} onPress={() => props.navigation.navigate('Inscription')} />}
-                    <DrawerItem label={'Admin'} onPress={() => props.navigation.navigate('AdminScreen')} />
+                    {!isLog && <DrawerItem label={'Connexion'} onPress={() => props.navigation.navigate('Connexion')} />}
+                    {!isLog && <DrawerItem label={'Inscription'} onPress={() => props.navigation.navigate('Inscription')} />}
+                    {Admin && < DrawerItem label={'Admin'} onPress={() => props.navigation.navigate('AdminScreen')} />}
                 </View>
 
             </DrawerContentScrollView >
             <TouchableOpacity style={styles.footer} onPress={logOut}>
-                <Text>Deconnexion</Text>
+                {isLog && <Text>Deconnexion</Text>}
             </TouchableOpacity>
         </View >
     )

@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Alert, View, StyleSheet, Text, TextInput } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import BoutonApp from '../../Composants/Bouton'
-import Footer from '../../Composants/Footer';
 import Header from '../../Composants/Header'
 
 
@@ -86,7 +85,6 @@ export default function InscriptionScreen({ navigation }) {
                     onPress={handleSubmit}
                 />
             </View>
-            <Footer />
         </SafeAreaView >
     )
 }

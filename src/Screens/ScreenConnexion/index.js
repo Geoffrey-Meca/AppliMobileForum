@@ -4,7 +4,6 @@ import { TextInput, StyleSheet, View, Text, Alert } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { login } from '../../../api';
 import BoutonApp from '../../Composants/Bouton'
-import Footer from '../../Composants/Footer';
 import Header from '../../Composants/Header'
 
 export default function ConnexionScreen({ navigation }) {
@@ -58,7 +57,6 @@ export default function ConnexionScreen({ navigation }) {
                     onPress={handleSubmit}
                 />
             </View>
-            <Footer />
         </SafeAreaView>
     )
 }
