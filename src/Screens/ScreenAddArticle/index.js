@@ -3,7 +3,6 @@ import { StyleSheet, Text, TextInput, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import BoutonApp from '../../Composants/Bouton'
-import Footer from '../../Composants/Footer'
 import Header from '../../Composants/Header'
 
 export default function AddArticleScreen({ navigation }) {
@@ -45,8 +44,7 @@ export default function AddArticleScreen({ navigation }) {
                 </View>
                 <BoutonApp text="Publiez" />
             </ScrollView>
-            <Footer />
-        </SafeAreaView >
+        </SafeAreaView>
     )
 }
 const styles = StyleSheet.create({

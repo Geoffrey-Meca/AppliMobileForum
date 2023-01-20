@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Text, SafeAreaView, StyleSheet, View, ScrollView, Alert } from 'react-native'
+import { Text, StyleSheet, View, ScrollView, Alert } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import { getArticles, deleteArticle } from '../../../api';
-import Footer from '../../Composants/Footer';
 import Header from '../../Composants/Header';
 import BoutonAdmin from '../../Composants/Bouton/indexAdmin';
 import { useRoute } from '@react-navigation/native';
@@ -9,7 +9,7 @@ import Pagination from '../../Composants/Pagination';
 
 
 
-export default function IndexArticlesScreen({navigation }) {
+export default function IndexArticlesScreen({ navigation }) {
 
     const [articles, setArticles] = useState('');
     const [page, setPage] = useState(1);
@@ -27,8 +27,8 @@ export default function IndexArticlesScreen({navigation }) {
 
     useEffect(() => {
         fetchData()
-        if({"refresh": true}) {fetchData()}
-    }, [page,route, refresh]);
+        if ({ "refresh": true }) { fetchData() }
+    }, [page, route, refresh]);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -36,34 +36,34 @@ export default function IndexArticlesScreen({navigation }) {
             <Text style={styles.title}>{"Liste des articles"}</Text>
             <ScrollView>
                 {articles ? (articles['hydra:member'].map((item, index) => (
-                        <View key={index}>
-                          <Text style={styles.linkArticle} >{item.title}</Text>
-                          <Text style={styles.btna}>
-                          <BoutonAdmin  text="Modifier" onPress={() => navigation.navigate('ArticleAdmin', {articleId: item.id})} />
-                          <BoutonAdmin  text="Supprimer" onPress={ () =>  
-                          Alert.alert(
-                            "Vous êtes sur le point de supprimer l'article",
-                            "Êtes-vous sur de vouloir procéder ?",
-                            [
-                              {
-                                  text: "Non",
-                              },
-                              {
-                                text: 'Oui',
-                                onPress: () => deleteArticle(item.id, (res) => {
-                                    console.log(res.data);
-                                    navigation.navigate('ArticlesAdmin', { refresh: true });
-                                }),
-                                },
-                              
-                            ],
-                          )}
-                             />
-                          </Text>
-                          <Text
-                          style={{borderBottomColor: 'black', borderBottomWidth: StyleSheet.hairlineWidth,}}>
-                          </Text>
-                        </View>
+                    <View key={index}>
+                        <Text style={styles.linkArticle} >{item.title}</Text>
+                        <Text style={styles.btna}>
+                            <BoutonAdmin text="Modifier" onPress={() => navigation.navigate('ArticleAdmin', { articleId: item.id })} />
+                            <BoutonAdmin text="Supprimer" onPress={() =>
+                                Alert.alert(
+                                    "Vous êtes sur le point de supprimer l'article",
+                                    "Êtes-vous sur de vouloir procéder ?",
+                                    [
+                                        {
+                                            text: "Non",
+                                        },
+                                        {
+                                            text: 'Oui',
+                                            onPress: () => deleteArticle(item.id, (res) => {
+                                                console.log(res.data);
+                                                navigation.navigate('ArticlesAdmin', { refresh: true });
+                                            }),
+                                        },
+
+                                    ],
+                                )}
+                            />
+                        </Text>
+                        <Text
+                            style={{ borderBottomColor: 'black', borderBottomWidth: StyleSheet.hairlineWidth, }}>
+                        </Text>
+                    </View>
                 ))
                 ) : (
                     <Text>Loading...</Text>
@@ -76,7 +76,6 @@ export default function IndexArticlesScreen({navigation }) {
                 totalItems={totalItems}
                 maxItems={maxItems}
             />
-            <Footer />
         </SafeAreaView>
     )
 }
@@ -102,7 +101,7 @@ const styles = StyleSheet.create({
     },
     btna: {
         flexDirection: "row",
-        justifyContent:"center",
+        justifyContent: "center",
 
-      }
+    }
 })

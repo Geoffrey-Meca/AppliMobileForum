@@ -5,7 +5,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import BoutonApp from '../../Composants/Bouton'
 import { getMe } from '../../../api';
 import Header from '../../Composants/Header'
-import Footer from '../../Composants/Footer';
 
 export default function ProfilScreen({ navigation }) {
 
@@ -41,7 +40,6 @@ export default function ProfilScreen({ navigation }) {
                 <BoutonApp text="Modifier" />
                 <BoutonApp text="Supprimer" />
             </ScrollView>
-            <Footer />
         </SafeAreaView>
     )
 }

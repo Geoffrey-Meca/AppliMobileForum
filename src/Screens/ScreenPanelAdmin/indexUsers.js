@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Text, SafeAreaView, StyleSheet, View, ScrollView, Alert } from 'react-native'
+import { Text, StyleSheet, View, ScrollView, Alert } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import { getUsers, deleteUser } from '../../../api';
-import Footer from '../../Composants/Footer';
 import Header from '../../Composants/Header';
 import BoutonAdmin from '../../Composants/Bouton/indexAdmin';
 import { useRoute } from '@react-navigation/native';
@@ -25,8 +25,8 @@ export default function IndexUsersScreen({ navigation }) {
     }
     useEffect(() => {
         fetchData();
-        if({"refresh": true}) {fetchData()}
-    }, [page,route, refresh]);
+        if ({ "refresh": true }) { fetchData() }
+    }, [page, route, refresh]);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -34,33 +34,33 @@ export default function IndexUsersScreen({ navigation }) {
             <Text style={styles.title}>{"Liste des utilisateurs"}</Text>
             <ScrollView>
                 {users ? (users['hydra:member'].map((item, index) => (
-                        <View key={index}>
-                          <Text style={styles.linkUser} >{item.firstname} {item.lastname}                    {item.email}</Text>
-                          <Text style={styles.btna} >
-                          <BoutonAdmin  text="Modifier" onPress={() => navigation.navigate('User', {userId: item.id})} />
-                          <BoutonAdmin  text="Supprimer" onPress={ () =>  
-                          Alert.alert(
-                            "Vous êtes sur le point de supprimer l'utilisateur",
-                            "Êtes-vous sur de vouloir procéder ?",
-                            [
-                              {
-                                  text: "Non",
-                              },
-                              {
-                                text: 'Oui',
-                                onPress: () => deleteUser(item.id, (res) => {
-                                    console.log(res.data);
-                                    navigation.navigate('Users', { refresh: true });
-                                }),
-                              },
-                            ],
-                          )}
-                             />
-                          </Text>
-                          <Text
-                          style={{borderBottomColor: 'black', borderBottomWidth: StyleSheet.hairlineWidth,}}>
-                          </Text>
-                        </View>
+                    <View key={index}>
+                        <Text style={styles.linkUser} >{item.firstname} {item.lastname}                    {item.email}</Text>
+                        <Text style={styles.btna} >
+                            <BoutonAdmin text="Modifier" onPress={() => navigation.navigate('User', { userId: item.id })} />
+                            <BoutonAdmin text="Supprimer" onPress={() =>
+                                Alert.alert(
+                                    "Vous êtes sur le point de supprimer l'utilisateur",
+                                    "Êtes-vous sur de vouloir procéder ?",
+                                    [
+                                        {
+                                            text: "Non",
+                                        },
+                                        {
+                                            text: 'Oui',
+                                            onPress: () => deleteUser(item.id, (res) => {
+                                                console.log(res.data);
+                                                navigation.navigate('Users', { refresh: true });
+                                            }),
+                                        },
+                                    ],
+                                )}
+                            />
+                        </Text>
+                        <Text
+                            style={{ borderBottomColor: 'black', borderBottomWidth: StyleSheet.hairlineWidth, }}>
+                        </Text>
+                    </View>
                 ))
                 ) : (
                     <Text>Loading...</Text>
@@ -73,7 +73,6 @@ export default function IndexUsersScreen({ navigation }) {
                 totalItems={totalItems}
                 maxItems={maxItems}
             />
-            <Footer />
         </SafeAreaView>
     )
 }
@@ -99,7 +98,7 @@ const styles = StyleSheet.create({
     },
     btna: {
         flexDirection: "row",
-        justifyContent:"center",
+        justifyContent: "center",
 
-      }
+    }
 })
