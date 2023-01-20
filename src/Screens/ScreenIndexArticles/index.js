@@ -1,6 +1,5 @@
-const debug = true
 import React, { useState, useEffect } from 'react'
-import { Text, StyleSheet, View, Pressable, TouchableOpacity,, ScrollView } from 'react-native'
+import { Text, StyleSheet, View, Pressable, TouchableOpacity, ScrollView } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 

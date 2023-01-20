@@ -14,7 +14,6 @@ export default function ReadArticle({ route, navigation }) {
     const articleId = route.params
     const [article, setArticle] = useState('')
     const [isOpenAdd, setIsOpenAdd] = useState(false);
-    const log = isLogged()
     let fetchData = async () => {
         getArticleById(articleId.articleId, (res) => {
             setArticle(res.data)
@@ -60,7 +59,7 @@ export default function ReadArticle({ route, navigation }) {
                             <Text style={styles.txt}>{article.content}</Text>
                         </View>
 
-                        {isLogged ? (<BoutonApp text="Add" onPress={openAdd} />) : (<Text style={styles.txt}>Connectez-vous pour ajouter un commentaire !</Text>)}
+                        {isLogged() ? (<BoutonApp text="Add" onPress={openAdd} />) : (<Text style={styles.txt}>Connectez-vous pour ajouter un commentaire !</Text>)}
                         {isOpenAdd && <ModalAddComment close={openAdd} onPress={openAdd} id={articleId.articleId} />}
 
                         {article.comments.map(comment => (

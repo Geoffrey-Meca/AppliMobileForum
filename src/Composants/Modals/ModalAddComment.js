@@ -21,13 +21,7 @@ export default function ModalAddComment(props) {
     // Controle size of comment 
     if (NewComment.length >= 10) {
 
-      postComment(targetId, NewComment, (res => {
-        if (res.status != 201) {
-
-        } else {
-
-        }
-      }))
+      postComment(targetId, NewComment, (res => { }))
       props.close()
     } else {
       alert("Comment too short !")

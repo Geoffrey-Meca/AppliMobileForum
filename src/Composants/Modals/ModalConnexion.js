@@ -28,8 +28,7 @@ export default function ModalConnexion(props) {
                     setNewEmail("")
                     setNewPassword("")
                     props.nav.navigate('Articles')
-                    console.log(props.onClose)
-                    props.onClose
+                    props.onClose()
                 }
             }));
         }

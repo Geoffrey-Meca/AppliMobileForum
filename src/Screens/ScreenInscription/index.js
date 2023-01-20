@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { View, StyleSheet, Text, TextInput, ScrollView } from 'react-native'
+import { Alert, View, StyleSheet, Text, TextInput } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import BoutonApp from '../../Composants/Bouton'
 import Footer from '../../Composants/Footer';
@@ -13,7 +13,6 @@ export default function InscriptionScreen({ navigation }) {
     const [newPassword, setNewPassword] = useState("");
     const [newFirstName, setNewFirstName] = useState("");
     const [newLastName, setNewLastName] = useState("");
-    const emailRegex = /^\S+@\S+\.\S+$/;
     const onChangeEmail = (val) => {
         setNewEmail(val)
     }
@@ -99,7 +98,6 @@ const styles = StyleSheet.create({
         backgroundColor: "#0077B6",
     },
     formContainer: {
-        // justifyContent: 'center',
         alignItems: 'center',
         width: "80%"
     },

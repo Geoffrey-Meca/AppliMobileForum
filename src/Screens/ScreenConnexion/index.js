@@ -11,7 +11,6 @@ export default function ConnexionScreen({ navigation }) {
     const emailRegex = /^\S+@\S+\.\S+$/;
     const [newEmail, setNewEmail] = useState("")
     const [newPassword, setNewPassword] = useState("")
-    const emailRegex = /^\S+@\S+\.\S+$/;
     const onChangeEmail = (val) => {
         setNewEmail(val)
     }
