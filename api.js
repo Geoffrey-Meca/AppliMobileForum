@@ -10,17 +10,23 @@ const getJwtToken = async () => {
 }
 const api = axios.create({
     baseURL: 'https://rany-alo.students-laplateforme.io/app-mobile-forum/public/api',
-    headers: {
-        'Content-type': 'application/json'
-    }
+    // headers: {
+    //     'Content-type': 'application/ld+json'
+    // }
 });
 
 const request = async (method, url, data, callback) => {
     await getJwtToken();
+    header = {'Content-type': 'application/json',}
+    if (method == "patch"){
+        header = {'Content-type': 'application/merge-patch+json'}
+    }
+    
     return api({
         method: method,
         url: url,
-        data: data
+        data: data,
+        headers: header
     }).then(res => {
             return callback(res);
         })
@@ -51,13 +57,13 @@ const getArticleById = (id, callback) => {
             return callback(res)
     });
 }
-const postArticle = (title, content, image, callback) => {
-    request("post", `/articles`, {title, content, image}, (res) => {
+const postArticle = (title, content, callback) => {
+    request("post", `/articles`, {title, content}, (res) => {
         return callback(res)
     });
 }
-const patchArticle = (id, title, content, image, callback) => {
-    request("patch", `/articles/${id}`, {title, content, image}, (res) => {
+const patchArticle = (id, title, content, callback) => {
+    request("patch", `/articleEdit/${id}`, {title, content}, (res) => {
         return callback(res)
     });
 }
@@ -87,7 +93,7 @@ const postUser = (email, firstname, lastname, password, callback) => {
     });
 }
 const patchUser = (id, email, firstname, lastname, password, callback) => {
-    request("patch", `/userProfileEdit${id}`, {email, firstname, lastname, password}, (res) => {
+    request("patch", `/userProfileEdit/${id}`, {email, firstname, lastname, password}, (res) => {
         return callback(res)
     });
 }
@@ -98,6 +104,11 @@ const deleteUser = (id, callback) => {
 }
 const getComments = (page, callback) => {
     request("get", `/comments?_page=${page}`, null, (res) => {
+        return callback(res)
+    });
+}
+const getCommentsByArticle = (articleId,page, callback) => {
+    request("get", `/comments/article/${articleId}?_page=${page}`, null, (res) => {
         return callback(res)
     });
 }
@@ -149,5 +160,6 @@ module.exports = {
     postComment,
     patchComment,
     deleteComment,
+    getCommentsByArticle,
     login,
 }
