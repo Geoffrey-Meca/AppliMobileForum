@@ -25,17 +25,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
         margin: 20,
         paddingHorizontal: "5%",
-
-        shadowColor: "red",
-        shadowOffset: {
-            width: 100,
-            height: 100,
-        },
-        shadowOpacity: 100,
-        shadowRadius: 0,
-        elevation: 24,
     },
     txt: {
-        fontSize: 20,
+        fontSize: 18,
+        fontFamily: 'Iceland_400Regular'
     }
 })

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TextInput, StyleSheet, View, Text, Pressable, Alert } from 'react-native'
+import { TextInput, StyleSheet, View, Text, Pressable, Alert, ScrollView } from 'react-native'
 import { login } from '../../../api';
 
 import BoutonApp from '../Bouton'
@@ -17,14 +17,14 @@ export default function ModalConnexion(props) {
         setNewPassword(val)
     }
     const handleSubmit = () => {
-        if(emailRegex.test(newEmail)){
-            login(newEmail, newPassword, (res =>  {
-                if(res.status != 200){
+        if (emailRegex.test(newEmail)) {
+            login(newEmail, newPassword, (res => {
+                if (res.status != 200) {
                     Alert.alert(`Erreur`, `${res.data.message}`, [{
                         style: 'cancel'
                     }])
                 }
-                else{
+                else {
                     setNewEmail("")
                     setNewPassword("")
                     props.nav.navigate('Articles')
@@ -33,35 +33,38 @@ export default function ModalConnexion(props) {
                 }
             }));
         }
-        else{
+        else {
             Alert.alert('E-mail invalide', 'Veuillez entrer un e-mail valide pour continuer')
         }
-      };
+    };
     return (
         <View style={styles.container}>
-            <Pressable onPress={props.onPress}>
+            <Pressable style={{ alignItems: "flex-end", width: "100%" }} onPress={props.onPress}>
                 <Text style={styles.closeBtn}>X</Text>
             </Pressable>
-            <View style={styles.formContainer}>
-                <Text style={styles.title}>Identifiez-vous</Text>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={onChangeEmail}
-                    value={newEmail}
-                    placeholder='Email'
-                    keyboardType='email-address'
-                />
-                <TextInput
-                    style={styles.input}
-                    onChangeText={onChangePassword}
-                    value={newPassword}
-                    placeholder='Password'
-                    secureTextEntry={true}
-                />
-                <BoutonApp text="Connexion" 
-                    onPress={handleSubmit}
-                />
-            </View>
+            <ScrollView>
+
+                <View style={styles.formContainer}>
+                    <Text style={styles.title}>Identifiez-vous</Text>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={onChangeEmail}
+                        value={newEmail}
+                        placeholder='Email'
+                        keyboardType='email-address'
+                    />
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={onChangePassword}
+                        value={newPassword}
+                        placeholder='Password'
+                        secureTextEntry={true}
+                    />
+                    <BoutonApp text="Connexion"
+                        onPress={handleSubmit}
+                    />
+                </View>
+            </ScrollView>
         </View>
     )
 }
@@ -70,17 +73,14 @@ const styles = StyleSheet.create({
         position: "absolute",
         backgroundColor: "#023E8A",
         width: "100%",
-        height: 600,
-        top: "50%"
+        height: 400,
+        top: "40%"
     },
     closeBtn: {
         backgroundColor: "grey",
         textAlign: "center",
-        fontSize: 25,
+        fontSize: 26,
         width: 30,
-        height: 30,
-        top: 0,
-        left: "92%"
     },
     formContainer: {
         justifyContent: 'center',
@@ -89,7 +89,8 @@ const styles = StyleSheet.create({
     title: {
         color: '#fff',
         fontSize: 30,
-        marginBottom: 20
+        marginBottom: 20,
+        fontFamily: 'Iceland_400Regular'
     },
     input: {
         backgroundColor: "#F0F0F0",

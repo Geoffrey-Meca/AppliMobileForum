@@ -32,11 +32,12 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "#0096C7",
         paddingHorizontal: "3%",
-        marginTop: "13%",
         zIndex: 1
     },
     txt: {
-        color: "#fff"
+        color: "#fff",
+        fontFamily: 'Iceland_400Regular',
+        fontSize: 17
     },
     img: {
         width: "20%",

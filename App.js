@@ -17,6 +17,8 @@ import ArticleEditScreen from './src/Screens/ScreenPanelAdmin/indexArticle';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomDrawer from './src/Composants/Burger/CustomDrawer';
+// Importation de la Police
+// import { useFonts, Inter_900Black } from '@expo-google-fonts/inter'
 
 const Drawer = createDrawerNavigator();
 
@@ -43,10 +45,14 @@ const DrawerNavigator = () => {
 }
 
 export default function App() {
-
   return (
     <NavigationContainer>
       <DrawerNavigator />
     </NavigationContainer>
   )
 }
+
+
+// Texte article, champs input, commentaire => font-family: 'Inter', sans-serif;
+// Titre h1, h2, h3 + texte des buttons 
+// font-family: 'Iceland', cursive;

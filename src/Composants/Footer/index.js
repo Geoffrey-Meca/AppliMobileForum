@@ -1,9 +1,6 @@
 import React from 'react'
 import { Text, StyleSheet, View } from 'react-native';
 
-const today = new Date();
-const year = today.getFullYear();
-
 export default function Footer() {
     const today = new Date();
     const year = today.getFullYear();
@@ -24,14 +21,14 @@ const styles = StyleSheet.create({
         position: "absolute",
         flex: 1,
         bottom: "0%",
-        justifyContent: "center",
-        height: "5%",
-
+        height: "7%",
         width: "100%",
+        justifyContent: "center",
         backgroundColor: "#0096C7",
     },
     text: {
         textAlign: "center",
-        color: "#FFFFFF"
+        color: "#FFFFFF",
+        fontFamily: 'Iceland_400Regular'
     }
 })

@@ -1,12 +1,13 @@
-const debug = true
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
+
 import { Text, StyleSheet, Image, View, ScrollView, Alert } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import BoutonApp from '../../Composants/Bouton'
 import ModalConnexion from '../../Composants/Modals/ModalConnexion';
 import ModalInscription from '../../Composants/Modals/ModalInscription';
-import { isLogged } from '../../../lib'
+
+import { useFonts, Iceland_400Regular } from '@expo-google-fonts/iceland';
 
 
 export default function LandingScreen({ navigation }) {
@@ -19,33 +20,33 @@ export default function LandingScreen({ navigation }) {
     const _toggleFormInscription = () => {
         setIsFormInscriptionVisible(!isFormInscriptionVisible)
     }
+
+    let [fontsLoaded] = useFonts({
+        Iceland_400Regular,
+    });
+    if (!fontsLoaded) {
+        return null;
+    }
+
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView>
-                <View style={styles.imgContainer}>
-                    <Image
-                        style={styles.img}
-                        source={require('../../../assets/Logo/LogoAlternative45.webp')}
-                    />
-                </View>
-                <Text style={styles.txt}>Bienvenue sur CODEHUB, il est temps de se mettre au boulot !</Text>
-                <BoutonApp text="Visiter le Forum" onPress={() => navigation.navigate('Articles')} />
+            <View style={styles.imgContainer}>
+                <Image
+                    style={styles.img}
+                    source={require('../../../assets/Logo/LogoAlternative45.webp')}
+                />
+            </View>
+            <View style={styles.textContainer}>
+                <Text style={styles.txt}>CODEHUB</Text>
+            </View>
+            <BoutonApp text="Entrer" onPress={() => navigation.navigate('Articles')} />
 
-                {isLogged() ? (
-                    <Fragment>
-                        <BoutonApp text="Profile" onPress={() => navigation.navigate('Profil')} />
-                        <BoutonApp text="Déconnexion" onPress={logOut} />
-                    </Fragment>
-                ) : (
-                    <Fragment>
-                        <BoutonApp text="Connexion" onPress={_toggleFormConnexion} onClose={_toggleFormConnexion} />
-                        <BoutonApp text="Inscription" onPress={_toggleFormInscription} onClose={_toggleFormInscription} />
-                    </Fragment>
-                )}
-                {isFormConnexionVisible && <ModalConnexion onPress={_toggleFormConnexion} onClose={_toggleFormConnexion} nav={navigation} />}
-                {isFormInscriptionVisible && <ModalInscription onPress={_toggleFormInscription} onClose={_toggleFormInscription} nav={navigation} />}
-                <StatusBar style="light" />
-            </ScrollView>
+            <BoutonApp text="Connexion" onPress={_toggleFormConnexion} />
+            <BoutonApp text="Inscription" onPress={_toggleFormInscription} />
+
+            {isFormConnexionVisible && <ModalConnexion onPress={_toggleFormConnexion} nav={navigation} />}
+            {isFormInscriptionVisible && <ModalInscription onPress={_toggleFormInscription} nav={navigation} />}
+            <StatusBar style="light" />
         </SafeAreaView>
     )
 }
@@ -57,14 +58,16 @@ const styles = StyleSheet.create({
     imgContainer: {
         alignItems: "center"
     },
-    txt: {
-        fontSize: 30,
+    textContainer: {
         backgroundColor: "#ADE8F4",
-        width: "100%",
         height: 150,
-        textAlign: 'center',
         marginTop: 10,
-
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    txt: {
+        fontSize: 55,
+        fontFamily: 'Iceland_400Regular'
     },
     img: {
         width: "90%",

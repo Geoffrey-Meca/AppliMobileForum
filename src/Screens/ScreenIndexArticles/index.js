@@ -1,7 +1,8 @@
 const debug = true
 import React, { useState, useEffect } from 'react'
-import { Text, SafeAreaView, StyleSheet, View, Pressable,  TouchableOpacity, } from 'react-native'
-import { AntDesign } from '@expo/vector-icons'; 
+import { Text, StyleSheet, View, Pressable, TouchableOpacity,, ScrollView } from 'react-native'
+import { AntDesign } from '@expo/vector-icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { getArticles } from '../../../api';
 import Footer from '../../Composants/Footer';
@@ -50,16 +51,18 @@ export default function IndexArticleScreen({ navigation }) {
         <SafeAreaView style={styles.container}>
             <Header nav={navigation} />
             <Text style={styles.title}>{"Post du forum"}</Text>
-            <View>
-                {articles ? (articles['hydra:member'].map((item, index) => (
-                    <Pressable style={styles.linkArticle} key={index} onPress={() => goToArticle(item['@id'].replace(/[^0-9]/g, ''))}>
-                        <Text style={styles.linkArticle} key={index}>{item.title}</Text>
-                    </Pressable>
-                ))
-                ) : (
-                    <Text>Loading...</Text>
-                )}
-            </View>
+            <ScrollView>
+                <View style={styles.ArticlesContainer}>
+                    {articles ? (articles['hydra:member'].map((item, index) => (
+                        <Pressable key={index} onPress={() => goToArticle(item['@id'].replace(/[^0-9]/g, ''))}>
+                            <Text style={styles.linkArticle} key={index}>{item.title}</Text>
+                        </Pressable>
+                    ))
+                    ) : (
+                        <Text>Loading...</Text>
+                    )}
+                </View>
+            </ScrollView>
             <View style={styles.pagination}>
 
                 <TouchableOpacity
@@ -67,7 +70,7 @@ export default function IndexArticleScreen({ navigation }) {
                     onPress={() => {
                         setPage(1);
                     }
-                }
+                    }
                     disabled={previous}
                 ><Text><AntDesign name="banckward" size={24} color="black" /></Text></TouchableOpacity>
                 <TouchableOpacity
@@ -75,7 +78,7 @@ export default function IndexArticleScreen({ navigation }) {
                     onPress={() => {
                         setPage(page - 1);
                     }
-                }
+                    }
                     title="<"
                     disabled={previous}
                 ><Text><AntDesign name="caretleft" size={24} color="black" /></Text></TouchableOpacity>
@@ -85,7 +88,7 @@ export default function IndexArticleScreen({ navigation }) {
                     onPress={() => {
                         setPage(page + 1);
                     }
-                }
+                    }
                     disabled={next}
                 ><Text><AntDesign name="caretright" size={24} color="black" /></Text></TouchableOpacity>
                 <TouchableOpacity
@@ -93,7 +96,7 @@ export default function IndexArticleScreen({ navigation }) {
                     onPress={() => {
                         setPage(pagesNom);
                     }
-                }  
+                    }
                     disabled={next}
                 ><Text><AntDesign name="forward" size={24} color="black" /></Text></TouchableOpacity>
             </View>
@@ -114,7 +117,7 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         borderRadius: 3,
         borderColor: "black"
-    
+
     },
     container: {
         flex: 1,
@@ -123,19 +126,19 @@ const styles = StyleSheet.create({
     },
     title: {
         color: "#FFFFFF",
-        fontSize: 40,
-        margin: 50,
+        fontSize: 45,
+        margin: 30,
+        fontFamily: 'Iceland_400Regular'
     },
-    txt: {
-        color: "#FFFFFF",
-        fontSize: 20,
-        width: "70%",
-        marginTop: 20
+    ArticlesContainer: {
+        alignItems: "center",
+        paddingHorizontal: 5,
+        paddingTop: 15
     },
     linkArticle: {
         color: "#FFFFFF",
-        fontSize: 19,
-        marginBottom: 10
+        fontSize: 20,
+        marginBottom: 20,
     },
     pagination: {
         flexDirection: "row",
