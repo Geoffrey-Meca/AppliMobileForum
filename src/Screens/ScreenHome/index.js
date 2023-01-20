@@ -41,11 +41,11 @@ export default function LandingScreen({ navigation }) {
             </View>
             <BoutonApp text="Entrer" onPress={() => navigation.navigate('Articles')} />
 
-            <BoutonApp text="Connexion" onPress={_toggleFormConnexion} />
-            <BoutonApp text="Inscription" onPress={_toggleFormInscription} />
+            <BoutonApp text="Connexion" onPress={_toggleFormConnexion} onClose={_toggleFormConnexion} />
+            <BoutonApp text="Inscription" onPress={_toggleFormInscription} onClose={_toggleFormInscription} />
 
-            {isFormConnexionVisible && <ModalConnexion onPress={_toggleFormConnexion} nav={navigation} />}
-            {isFormInscriptionVisible && <ModalInscription onPress={_toggleFormInscription} nav={navigation} />}
+            {isFormConnexionVisible && <ModalConnexion onPress={_toggleFormConnexion} onClose={_toggleFormConnexion} nav={navigation} />}
+            {isFormInscriptionVisible && <ModalInscription onPress={_toggleFormInscription} onClose={_toggleFormInscription} nav={navigation} />}
             <StatusBar style="light" />
         </SafeAreaView>
     )

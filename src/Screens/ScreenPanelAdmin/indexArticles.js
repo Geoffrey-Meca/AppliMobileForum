@@ -1,46 +1,34 @@
 import React, { useState, useEffect } from 'react'
-import { Text, SafeAreaView, StyleSheet, View, Button, ScrollView, Alert } from 'react-native'
-import { getArticles } from '../../../api';
-import { deleteArticle } from '../../../api';
+import { Text, SafeAreaView, StyleSheet, View, ScrollView, Alert } from 'react-native'
+import { getArticles, deleteArticle } from '../../../api';
 import Footer from '../../Composants/Footer';
 import Header from '../../Composants/Header';
 import BoutonAdmin from '../../Composants/Bouton/indexAdmin';
 import { useRoute } from '@react-navigation/native';
+import Pagination from '../../Composants/Pagination';
 
 
 
 export default function IndexArticlesScreen({navigation }) {
 
     const [articles, setArticles] = useState('');
-    const [next, setNext] = useState(false)
     const [page, setPage] = useState(1);
-    const [previous, setPrevious] = useState(true)
-    const pagesNom = Math.ceil(articles['hydra:totalItems'] / 5);
+    const [totalItems, setTotalItems] = useState(0);
+    const maxItems = 5;
     const route = useRoute();
     const refresh = route.params;
 
+    const fetchData = () => {
+        getArticles(page, (res) => {
+            setArticles(res.data);
+            setTotalItems(res.data['hydra:totalItems']);
+        });
+    }
+
     useEffect(() => {
-        setNext(false)
-        setPrevious(false)
-        pageCheck(page)
-        const fetchData = () => {
-            getArticles(page, (res) => {
-                setArticles(res.data);
-            });
-        }
         fetchData()
         if({"refresh": true}) {fetchData()}
     }, [page,route, refresh]);
-
-    const pageCheck = (page) => {
-        if (page == pagesNom) {
-            setPage(pagesNom)
-            setNext(true)
-        }
-        else if (page == 1) {
-            setPrevious(true)
-        }
-    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -81,40 +69,13 @@ export default function IndexArticlesScreen({navigation }) {
                     <Text>Loading...</Text>
                 )}
             </ScrollView>
-            <View style={styles.pagination}>
-                <Button
-                    style={styles.btn}
-                    onPress={() => {
-                        setPage(1);
-                    }}
-                    title="<<"
-                    disabled={previous}
-                />
-                <Button
-                    style={styles.btn}
-                    onPress={() => {
-                        setPage(page - 1);
-                    }}
-                    title="<"
-                    disabled={previous}
-                />
-                <Button
-                    style={styles.btn}
-                    onPress={() => {
-                        setPage(page + 1);
-                    }}
-                    title=">"
-                    disabled={next}
-                />
-                <Button
-                    style={styles.btn}
-                    onPress={() => {
-                        setPage(pagesNom);
-                    }}
-                    title=">>"
-                    disabled={next}
-                />
-            </View>
+            <Pagination
+                fetchData={fetchData}
+                page={page}
+                setPage={setPage}
+                totalItems={totalItems}
+                maxItems={maxItems}
+            />
             <Footer />
         </SafeAreaView>
     )
