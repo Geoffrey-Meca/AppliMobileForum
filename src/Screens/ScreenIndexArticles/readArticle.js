@@ -25,7 +25,7 @@ export default function ReadArticle({ route, navigation }) {
 
    async function openAdd() {
         // Permet de forcé le refresh des commentaires.
-        if(!isOpenAdd) {
+        if(isOpenAdd) {
             await fetchData();
         }
         setIsOpenAdd(!isOpenAdd)
