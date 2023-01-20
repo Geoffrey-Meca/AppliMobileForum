@@ -19,7 +19,7 @@ export default function AddArticleScreen({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Header />
+            <Header nav={navigation} />
             <ScrollView>
                 <Text style={styles.title}>Ajouter un article</Text>
                 <View style={styles.titleInput}>
