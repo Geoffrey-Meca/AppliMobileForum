@@ -3,7 +3,7 @@ import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
 import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
 
-import { isLogged } from '../../../useAuth'
+import { isLogged } from '../../../lib'
 
 
 export default function CustomDrawer(props) {
