@@ -56,14 +56,13 @@ export default function ArticleEditScreen ( {navigation} ) {
       const [comment, setComment] = useState('');
       const editComment = async (commentId) => {
         patchComment(commentId, comment.content, (res => { 
-            fetchData();
             Alert.alert(
                 'Le comment a été mis à jour avec succès.',
                 '',
                 [
                   {
                     text: 'Oui',
-                    onPress: () => {navigation.navigate('ArticleAdmin', { refresh: true, articleId: comment.article.id})}
+                    onPress: () => {fetchData()}
                   },
                 ],
               );
@@ -145,14 +144,14 @@ export default function ArticleEditScreen ( {navigation} ) {
                 ) : (
                     <Text>Loading comments...</Text>
                 )}
-                </ScrollView>
-                <Pagination 
+              <Pagination 
                 fetchData={fetchData}
                 page={page}
                 setPage={setPage}
                 totalItems={totalItems}
                 maxItems={maxItems}
-                />
+              />
+                </ScrollView>
         <Footer/>
         </SafeAreaView>
       )

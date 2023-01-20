@@ -68,7 +68,6 @@ export default function IndexArticlesScreen({navigation }) {
                 ) : (
                     <Text>Loading...</Text>
                 )}
-            </ScrollView>
             <Pagination
                 fetchData={fetchData}
                 page={page}
@@ -76,6 +75,7 @@ export default function IndexArticlesScreen({navigation }) {
                 totalItems={totalItems}
                 maxItems={maxItems}
             />
+            </ScrollView>
             <Footer />
         </SafeAreaView>
     )
