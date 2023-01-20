@@ -39,7 +39,7 @@ export default function LandingScreen({ navigation }) {
             <View style={styles.textContainer}>
                 <Text style={styles.txt}>CODEHUB</Text>
             </View>
-            <BoutonApp text="Entrer" onPress={() => navigation.navigate('AdminScreen')} />
+            <BoutonApp text="Entrer" onPress={() => navigation.navigate('Articles')} />
 
             <BoutonApp text="Connexion" onPress={_toggleFormConnexion} onClose={_toggleFormConnexion} />
             <BoutonApp text="Inscription" onPress={_toggleFormInscription} onClose={_toggleFormInscription} />
