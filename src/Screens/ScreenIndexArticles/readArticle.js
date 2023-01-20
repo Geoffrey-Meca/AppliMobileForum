@@ -5,7 +5,7 @@ import Footer from '../../Composants/Footer';
 import Header from '../../Composants/Header';
 import BoutonApp from '../../Composants/Bouton';
 import ModalAddComment from '../../Composants/Modals/ModalAddComment';
-import { isLogged } from '../../../useAuth';
+import { isLogged } from '../../../lib';
 
 
 export default function ReadArticle({ route, navigation }) {
