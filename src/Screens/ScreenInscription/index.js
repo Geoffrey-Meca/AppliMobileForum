@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { View, StyleSheet, Text, TextInput } from 'react-native'
+import { View, StyleSheet, Text, TextInput, Alert } from 'react-native'
 import BoutonApp from '../../Composants/Bouton'
 import Footer from '../../Composants/Footer';
 import Header from '../../Composants/Header'
@@ -11,6 +11,7 @@ export default function InscriptionScreen({ navigation }) {
     const [newPassword, setNewPassword] = useState("");
     const [newFirstName, setNewFirstName] = useState("");
     const [newLastName, setNewLastName] = useState("");
+    const emailRegex = /^\S+@\S+\.\S+$/;
     const onChangeEmail = (val) => {
         setNewEmail(val)
     }
@@ -34,7 +35,7 @@ export default function InscriptionScreen({ navigation }) {
                 else{
                     login(newEmail, newPassword, (res => {
                         if(res.status != 200){
-                            Alert.alert(`Connexion automatique échoué, veuillez vous connecter`, `${res.data.violations[0].message}`, [{
+                            Alert.alert(`Connexion automatique échoué, veuillez vous connecter`, `${res.data.message}`, [{
                                 style: 'cancel'
                             }])
                         }

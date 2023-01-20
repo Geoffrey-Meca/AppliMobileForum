@@ -1,6 +1,6 @@
 //import React, { useState } from 'react'
 import React from 'react';
-import { useState} from 'react';
+import { useState } from 'react';
 import { TextInput, StyleSheet, View, Text, Pressable, Alert } from 'react-native'
 import { postUser, login } from '../../../api';
 
@@ -37,11 +37,16 @@ export default function ModalInscription(props) {
                 else{
                     login(newEmail, newPassword, (res => {
                         if(res.status != 200){
-                            Alert.alert(`Connexion automatique échoué, veuillez vous connecter`, `${res.data.violations[0].message}`, [{
+                            Alert.alert(`Connexion automatique échoué, veuillez vous connecter`, `${res.data.message}`, [{
                                 style: 'cancel'
                             }])
                         }
                         else{
+                            props.onClose
+                            setNewEmail("")
+                            setNewPassword("")
+                            setNewLastName("")
+                            setNewFirstName("")
                             props.nav.navigate('Articles')
                         }
                     }))

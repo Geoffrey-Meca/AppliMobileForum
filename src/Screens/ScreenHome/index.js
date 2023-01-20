@@ -1,14 +1,12 @@
 const debug = true
 import React, { Fragment, useState } from 'react'
-
 import { Text, StyleSheet, Image, View, ScrollView, Alert } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import BoutonApp from '../../Composants/Bouton'
 import ModalConnexion from '../../Composants/Modals/ModalConnexion';
 import ModalInscription from '../../Composants/Modals/ModalInscription';
-import isLogged from '../../../useAuth'
-import * as SecureStore from 'expo-secure-store'
+import { isLogged } from '../../../lib'
 
 
 export default function LandingScreen({ navigation }) {
@@ -21,33 +19,6 @@ export default function LandingScreen({ navigation }) {
     const _toggleFormInscription = () => {
         setIsFormInscriptionVisible(!isFormInscriptionVisible)
     }
-
-    function logout() {
-        Alert.alert(
-            "Vous êtes sur le point de vous déconnecter",
-            "Êtes-vous sur de vouloir procéder ?",
-            [
-                {
-                    text: "Non",
-                },
-                {
-                    text: "Oui", onPress: () => {
-                        SecureStore.deleteItemAsync('jwt').then(
-                            navigation.navigate('Articles')
-
-                        )
-
-                    }
-                }
-            ]
-        );
-        if(debug) {
-            console.log(SecureStore.getItemAsync('jwt'))
-        }
-        
-
-    }
-
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
@@ -63,16 +34,16 @@ export default function LandingScreen({ navigation }) {
                 {isLogged() ? (
                     <Fragment>
                         <BoutonApp text="Profile" onPress={() => navigation.navigate('Profil')} />
-                        <BoutonApp text="Déconnexion" onPress={logout} />
+                        <BoutonApp text="Déconnexion" onPress={logOut} />
                     </Fragment>
                 ) : (
                     <Fragment>
-                        <BoutonApp text="Connexion" onPress={_toggleFormConnexion} />
-                        <BoutonApp text="Inscription" onPress={_toggleFormInscription} />
+                        <BoutonApp text="Connexion" onPress={_toggleFormConnexion} onClose={_toggleFormConnexion} />
+                        <BoutonApp text="Inscription" onPress={_toggleFormInscription} onClose={_toggleFormInscription} />
                     </Fragment>
                 )}
-                {isFormConnexionVisible && <ModalConnexion onPress={_toggleFormConnexion} nav={navigation} />}
-                {isFormInscriptionVisible && <ModalInscription onPress={_toggleFormInscription} nav={navigation} />}
+                {isFormConnexionVisible && <ModalConnexion onPress={_toggleFormConnexion} onClose={_toggleFormConnexion} nav={navigation} />}
+                {isFormInscriptionVisible && <ModalInscription onPress={_toggleFormInscription} onClose={_toggleFormInscription} nav={navigation} />}
                 <StatusBar style="light" />
             </ScrollView>
         </SafeAreaView>
