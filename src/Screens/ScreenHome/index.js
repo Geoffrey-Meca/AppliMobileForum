@@ -6,7 +6,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import BoutonApp from '../../Composants/Bouton'
 import ModalConnexion from '../../Composants/Modals/ModalConnexion';
 import ModalInscription from '../../Composants/Modals/ModalInscription';
-import { isAdmin } from '../../../lib'
 
 import { useFonts, Iceland_400Regular } from '@expo-google-fonts/iceland';
 
@@ -14,7 +13,6 @@ import { useFonts, Iceland_400Regular } from '@expo-google-fonts/iceland';
 export default function LandingScreen({ navigation }) {
     const [isFormConnexionVisible, setIsFormConnexionVisible] = useState(false)
     const [isFormInscriptionVisible, setIsFormInscriptionVisible] = useState(false)
-    let role = isAdmin()
     
     const _toggleFormConnexion = () => {
         setIsFormConnexionVisible(!isFormConnexionVisible)
@@ -43,7 +41,6 @@ export default function LandingScreen({ navigation }) {
                 <Text style={styles.txt}>CODEHUB</Text>
             </View>
             <BoutonApp text="Entrer" onPress={() => navigation.navigate('Articles')} />
-            {role && <BoutonApp text="Panel Admin" onPress={() => navigation.navigate('Admin')} />}
 
             <BoutonApp text="Connexion" onPress={_toggleFormConnexion} onClose={_toggleFormConnexion} />
             <BoutonApp text="Inscription" onPress={_toggleFormInscription} onClose={_toggleFormInscription} />
