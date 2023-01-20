@@ -50,26 +50,21 @@ export default function ArticleEditScreen({ navigation }) {
         ],
       );
     }))
-
-
-  }
-  const [comment, setComment] = useState('');
-  const editComment = async (commentId) => {
-    patchComment(commentId, comment.content, (res => {
-      fetchData();
-      Alert.alert(
-        'Le comment a été mis à jour avec succès.',
-        '',
-        [
-          {
-            text: 'Oui',
-            onPress: () => { navigation.navigate('ArticleAdmin', { refresh: true, articleId: comment.article.id }) }
-          },
-        ],
-      );
-    }))
-
-
+      }
+      const [comment, setComment] = useState('');
+      const editComment = async (commentId) => {
+        patchComment(commentId, comment.content, (res => { 
+            Alert.alert(
+                'Le comment a été mis à jour avec succès.',
+                '',
+                [
+                  {
+                    text: 'Oui',
+                    onPress: () => {fetchData()}
+                  },
+                ],
+              );
+        }))
   }
 
 
@@ -145,47 +140,47 @@ export default function ArticleEditScreen({ navigation }) {
         ) : (
           <Text>Loading comments...</Text>
         )}
-      </ScrollView>
-      <Pagination
-        fetchData={fetchData}
-        page={page}
-        setPage={setPage}
-        totalItems={totalItems}
-        maxItems={maxItems}
-      />
-    </SafeAreaView>
-  )
-}
-
-const styles = StyleSheet.create({
-  container: {
-    position: "relative",
-    backgroundColor: "#0077B6",
-    width: "100%",
-    height: "100%",
-  },
-  formContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    color: '#FFFFFF',
-    fontSize: 30,
-    textAlign: 'center'
-  },
-  comments: {
-    color: '#FFFFFF',
-    fontSize: 20,
-    textAlign: 'center'
-  },
-  input: {
-    backgroundColor: "#F0F0F0",
-    borderColor: 'black',
-    borderWidth: 1,
-    borderRadius: 3,
-    width: '80 %',
-    height: 42,
-    margin: '5%',
-    padding: 5
-  }
-})
+              <Pagination 
+                fetchData={fetchData}
+                page={page}
+                setPage={setPage}
+                totalItems={totalItems}
+                maxItems={maxItems}
+              />
+                </ScrollView>
+        </SafeAreaView>
+      )
+    }
+    
+    const styles = StyleSheet.create({
+        container: {
+            position: "relative",
+            backgroundColor: "#0077B6",
+            width: "100%",
+            height: "100%",
+        },
+        formContainer: {
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        title: {
+            color: '#FFFFFF',
+            fontSize: 30,
+            textAlign: 'center'
+        },
+        comments: {
+          color: '#FFFFFF',
+          fontSize: 20,
+          textAlign: 'center'
+        },
+        input: {
+            backgroundColor: "#F0F0F0",
+            borderColor: 'black',
+            borderWidth: 1,
+            borderRadius: 3,
+            width: '80 %',
+            height: 42,
+            margin: '5%',
+            padding: 5
+        }
+    })
