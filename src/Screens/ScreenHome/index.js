@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import BoutonApp from '../../Composants/Bouton'
 import ModalConnexion from '../../Composants/Modals/ModalConnexion';
 import ModalInscription from '../../Composants/Modals/ModalInscription';
-import { isLogged, logOut } from '../../../lib'
+import { isLogged } from '../../../lib'
 
 export default function LandingScreen({ navigation }) {
     const [isFormConnexionVisible, setIsFormConnexionVisible] = useState(false)
