@@ -1,4 +1,4 @@
-const debug = true
+const debug = false
 import React, { useState } from 'react'
 import { View, StyleSheet, Pressable, Text } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
@@ -31,7 +31,7 @@ export default function ModalAddComment(props) {
       }))
       props.close()
     } else {
-      alert("Comment to short !")
+      alert("Comment too short !")
     }
   }
 

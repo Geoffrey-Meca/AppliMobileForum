@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { TextInput, StyleSheet, View, Text } from 'react-native'
+import { TextInput, StyleSheet, View, Text, Alert } from 'react-native'
 import { login } from '../../../api';
 import BoutonApp from '../../Composants/Bouton'
 import Footer from '../../Composants/Footer';
@@ -9,6 +9,7 @@ import Header from '../../Composants/Header'
 export default function ConnexionScreen({ navigation }) {
     const [newEmail, setNewEmail] = useState("")
     const [newPassword, setNewPassword] = useState("")
+    const emailRegex = /^\S+@\S+\.\S+$/;
     const onChangeEmail = (val) => {
         setNewEmail(val)
     }
