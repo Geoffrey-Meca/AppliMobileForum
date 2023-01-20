@@ -8,6 +8,7 @@ import ModalConnexion from '../../Composants/Modals/ModalConnexion';
 import ModalInscription from '../../Composants/Modals/ModalInscription';
 
 import { useFonts, Iceland_400Regular } from '@expo-google-fonts/iceland';
+import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 
 
 export default function LandingScreen({ navigation }) {
@@ -42,8 +43,15 @@ export default function LandingScreen({ navigation }) {
             </View>
             <BoutonApp text="Entrer" onPress={() => navigation.navigate('Articles')} />
 
-            <BoutonApp text="Connexion" onPress={_toggleFormConnexion} onClose={_toggleFormConnexion} />
-            <BoutonApp text="Inscription" onPress={_toggleFormInscription} onClose={_toggleFormInscription} />
+            <BoutonApp text="Connexion" onPress={_toggleFormConnexion} />
+            <BoutonApp text="Inscription" onPress={_toggleFormInscription} />
+            <ButtonComponent 
+            contButon={styles.contenerButton}
+            button={styles.butonStyle}
+            txtButton={styles.textButon}
+            text={"Test cONNEXION"}
+            onPress={_toggleFormConnexion}
+            />
 
             {isFormConnexionVisible && <ModalConnexion onPress={_toggleFormConnexion} onClose={_toggleFormConnexion} nav={navigation} />}
             {isFormInscriptionVisible && <ModalInscription onPress={_toggleFormInscription} onClose={_toggleFormInscription} nav={navigation} />}
@@ -76,4 +84,24 @@ const styles = StyleSheet.create({
         height: 300,
         borderRadius: 30,
     },
+    contenerButton: {
+        alignItems: "center",
+        margin:10
+    },
+    butonStyle: {
+        width: '50%',
+        height: 42,
+        borderWidth: 2,
+        borderRadius: 10,
+        backgroundColor: "#CAF0F8",
+        justifyContent: "center",
+        alignItems: "center",
+        margin: 20,
+        paddingHorizontal: "5%",
+    },
+    textButon: {
+        fontSize: 18,
+        fontFamily: 'Iceland_400Regular'
+    }
+
 })

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+
+import React, { useState, useEffect, Fragment } from 'react'
 import { Text, StyleSheet, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getArticleById } from '../../../api';
@@ -42,6 +43,8 @@ export default function ReadArticle({ route, navigation }) {
             return dmy
         }
     }
+    console.log(isLogged())
+    const log = isLogged()
 
 
     return (
@@ -57,11 +60,12 @@ export default function ReadArticle({ route, navigation }) {
                         </View>
                         <View style={styles.articleContainer}>
                             <Text style={styles.txt}>{article.content}</Text>
-                        </View>
-
-                        {isLog ? (<BoutonApp text="Add" onPress={openAdd} />) : (<Text style={styles.txt}>Connectez-vous pour ajouter un commentaire !</Text>)}
+               </View>
+                            
+                        {log ? (<Fragment><Text style={styles.date}>Commentaires</Text><BoutonApp style={styles.btn} text="Add"  onPress={openAdd} /></Fragment>) : (<Text style={styles.carreful}>Connectez-vous pour ajouter un commentaire !</Text>)}
+                
                         {isOpenAdd && <ModalAddComment close={openAdd} onPress={openAdd} id={articleId.articleId} />}
-
+                       
                         {article.comments.map(comment => (
                             <View style={styles.commentsContainer} key={comment['@id'].replace(/[^0-9]/g, '')}>
                                 <View style={styles.OneComments}>
@@ -102,13 +106,13 @@ const styles = StyleSheet.create({
         marginTop: "5%",
     },
     articleContainer: {
-        backgroundColor: "#ffff",
         marginVertical: "7%",
         height: "auto",
         paddingVertical: "10%",
         paddingHorizontal: "3%"
     },
     txt: {
+        color: "#FFFFFF",
         fontSize: 20,
         textAlign: "justify"
     },
@@ -122,4 +126,15 @@ const styles = StyleSheet.create({
         padding: "2%",
         borderRadius: 5
     },
+    carreful: {
+        fontSize: 15,
+        alignItems: "center",
+        alignContent: "center",
+        textAlign: "center",
+        padding: 10,
+        backgroundColor: "#48CAE4",
+        marginVertical: "7%",
+        height: "auto",
+
+    }
 })
