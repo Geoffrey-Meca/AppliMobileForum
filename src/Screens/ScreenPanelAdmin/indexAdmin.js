@@ -12,9 +12,9 @@ export default function AdminScreen({ navigation }) {
             <Text style={styles.txt}>Bienvenue sur le panel admin !</Text>
             <ScrollView>
                 <BoutonApp text="La liste des utilisateurs" onPress={() => navigation.navigate('Users')} />
-                <BoutonApp text="La liste des articles" onPress={() => navigation.navigate('ArticlesAdmin')} />   
+                <BoutonApp text="La liste des articles" onPress={() => navigation.navigate('ArticlesAdmin')} />
             </ScrollView>
-            <Footer/>
+            <Footer />
         </SafeAreaView>
     )
 }

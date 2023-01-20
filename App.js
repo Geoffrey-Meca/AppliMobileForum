@@ -13,6 +13,7 @@ import IndexUsersScreen from './src/Screens/ScreenPanelAdmin/indexUsers';
 import UserProfileEditScreen from './src/Screens/ScreenPanelAdmin/indexUser';
 import IndexArticlesScreen from './src/Screens/ScreenPanelAdmin/indexArticles';
 import ArticleEditScreen from './src/Screens/ScreenPanelAdmin/indexArticle';
+import AddArticleScreen from './src/Screens/ScreenAddArticle';
 // Importation pour la navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -32,6 +33,7 @@ const DrawerNavigator = () => {
       <Drawer.Screen name="Home" component={LandingScreen} />
       <Drawer.Screen name="Articles" component={IndexArticleScreen} />
       <Drawer.Screen name="ReadArticle" component={ReadArticle} />
+      <Drawer.Screen name="AddArticle" component={AddArticleScreen} />
       <Drawer.Screen name="Profil" component={ProfilScreen} />
       <Drawer.Screen name="Connexion" component={ConnexionScreen} />
       <Drawer.Screen name="Inscription" component={InscriptionScreen} />
@@ -51,8 +53,3 @@ export default function App() {
     </NavigationContainer>
   )
 }
-
-
-// Texte article, champs input, commentaire => font-family: 'Inter', sans-serif;
-// Titre h1, h2, h3 + texte des buttons 
-// font-family: 'Iceland', cursive;
