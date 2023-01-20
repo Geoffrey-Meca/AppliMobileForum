@@ -1,7 +1,7 @@
-// Debug on => true debug off = false
-const debug = false;
+const debug = true
 import React, { useState, useEffect } from 'react'
-import { Text, SafeAreaView, StyleSheet, View, Pressable, Button } from 'react-native'
+import { Text, SafeAreaView, StyleSheet, View, Pressable,  TouchableOpacity, } from 'react-native'
+import { AntDesign } from '@expo/vector-icons'; 
 
 import { getArticles } from '../../../api';
 import Footer from '../../Composants/Footer';
@@ -27,6 +27,7 @@ export default function IndexArticleScreen({ navigation }) {
             });
         }
         fetchData()
+
     }, [page]);
 
     const pageCheck = (page) => {
@@ -60,38 +61,41 @@ export default function IndexArticleScreen({ navigation }) {
                 )}
             </View>
             <View style={styles.pagination}>
-                <Button
+
+                <TouchableOpacity
                     style={styles.btn}
                     onPress={() => {
                         setPage(1);
-                    }}
-                    title="<<"
+                    }
+                }
                     disabled={previous}
-                />
-                <Button
+                ><Text><AntDesign name="banckward" size={24} color="black" /></Text></TouchableOpacity>
+                <TouchableOpacity
                     style={styles.btn}
                     onPress={() => {
                         setPage(page - 1);
-                    }}
+                    }
+                }
                     title="<"
                     disabled={previous}
-                />
-                <Button
+                ><Text><AntDesign name="caretleft" size={24} color="black" /></Text></TouchableOpacity>
+
+                <TouchableOpacity
                     style={styles.btn}
                     onPress={() => {
                         setPage(page + 1);
-                    }}
-                    title=">"
+                    }
+                }
                     disabled={next}
-                />
-                <Button
+                ><Text><AntDesign name="caretright" size={24} color="black" /></Text></TouchableOpacity>
+                <TouchableOpacity
                     style={styles.btn}
                     onPress={() => {
                         setPage(pagesNom);
-                    }}
-                    title=">>"
+                    }
+                }  
                     disabled={next}
-                />
+                ><Text><AntDesign name="forward" size={24} color="black" /></Text></TouchableOpacity>
             </View>
             <Footer />
         </SafeAreaView>
@@ -99,6 +103,19 @@ export default function IndexArticleScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+    btn: {
+        alignItems: 'center',
+        textAlign: "center",
+        backgroundColor: '#CAF0F8',
+        height: "auto",
+        flex: 1,
+        padding: 5,
+        marginRight: 5,
+        marginLeft: 5,
+        borderRadius: 3,
+        borderColor: "black"
+    
+    },
     container: {
         flex: 1,
         alignItems: "center",

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 import { Text, StyleSheet, ScrollView, View } from 'react-native';
 import { getArticleById } from '../../../api';
@@ -24,7 +25,10 @@ export default function ReadArticle({ route, navigation }) {
 
    async function openAdd() {
         // Permet de forcé le refresh des commentaires.
-        await fetchData();
+
+        if(isOpenAdd) {
+            await fetchData();
+        }
         setIsOpenAdd(!isOpenAdd)
     }
     function brassageDate(date) {

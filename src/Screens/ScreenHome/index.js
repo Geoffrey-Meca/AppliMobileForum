@@ -1,3 +1,4 @@
+const debug = true
 import React, { Fragment, useState } from 'react'
 import { Text, StyleSheet, Image, View, ScrollView, Alert } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
@@ -6,6 +7,7 @@ import BoutonApp from '../../Composants/Bouton'
 import ModalConnexion from '../../Composants/Modals/ModalConnexion';
 import ModalInscription from '../../Composants/Modals/ModalInscription';
 import { isLogged } from '../../../lib'
+
 
 export default function LandingScreen({ navigation }) {
     const [isFormConnexionVisible, setIsFormConnexionVisible] = useState(false)
@@ -17,7 +19,6 @@ export default function LandingScreen({ navigation }) {
     const _toggleFormInscription = () => {
         setIsFormInscriptionVisible(!isFormInscriptionVisible)
     }
-
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
