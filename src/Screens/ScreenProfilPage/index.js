@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, StyleSheet, ScrollView } from 'react-native'
+import { Text, View, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import styles from '../../Composants/styles/styles';
+import styles from '../../../assets/styles/styles';
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 import BoutonApp from '../../Composants/Bouton'
 import { getMe } from '../../../api';
@@ -22,11 +22,11 @@ export default function ProfilScreen({ navigation }) {
         };
         fetchData();
     }, []);
-
+    console.log(user.role)
     return (
         <SafeAreaView style={styles.container}>
             <Header nav={navigation} />
-            <ScrollView style={{ marginBottom: "15%", width: "90%" }}>
+            <ScrollView style={{ marginBottom: "15%", width: "100%" }}>
                 <Text style={styles.title}>Profile</Text>
                 <View style={styles.contenerLeft}>
                     <Text style={styles.txt}>Email: {user.email}
@@ -38,7 +38,7 @@ export default function ProfilScreen({ navigation }) {
                         LastName: {user.lastname}
                     </Text>
                     <Text style={styles.txt}>
-                        Rôle: 
+                        Rôle:
                     </Text>
                 </View>
                 <Text style={styles.titleH2}>Modifier votre profile</Text>
@@ -51,6 +51,6 @@ export default function ProfilScreen({ navigation }) {
                 <BoutonApp text="Modifier" />
                 <BoutonApp text="Supprimer" />
             </ScrollView>
-        </SafeAreaView>
+        </SafeAreaView >
     )
 }

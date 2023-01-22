@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Text, StyleSheet, View, ScrollView, Alert } from 'react-native'
+import { Text, View, ScrollView, Alert } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { getArticles, deleteArticle } from '../../../api';
 import Header from '../../Composants/Header';
 import BoutonAdmin from '../../Composants/Bouton/indexAdmin';
 import { useRoute } from '@react-navigation/native';
 import Pagination from '../../Composants/Pagination';
+import styles from '../../../assets/styles/styles'
 
 
 
@@ -37,8 +38,12 @@ export default function IndexArticlesScreen({ navigation }) {
             <ScrollView>
                 {articles ? (articles['hydra:member'].map((item, index) => (
                     <View key={index}>
-                        <Text style={styles.linkArticle} >{item.title}</Text>
-                        <Text style={styles.btna}>
+                        <Text style={{ color: "#fff", fontSize: 25, paddingBottom: "5%", fontFamily: 'Iceland_400Regular' }} >Article n° {item.id} :</Text>
+                        <Text style={{ color: "#fff", fontSize: 25, paddingBottom: "5%", fontFamily: 'Iceland_400Regular', textAlign: "center" }} >{item.title}</Text>
+                        <View style={styles.infoArticle}>
+                            <Text style={styles.articleAdmin} >{item.content}</Text>
+                        </View>
+                        <View style={styles.btna}>
                             <BoutonAdmin text="Modifier" onPress={() => navigation.navigate('ArticleAdmin', { articleId: item.id })} />
                             <BoutonAdmin text="Supprimer" onPress={() =>
                                 Alert.alert(
@@ -59,49 +64,20 @@ export default function IndexArticlesScreen({ navigation }) {
                                     ],
                                 )}
                             />
-                        </Text>
-                        <Text
-                            style={{ borderBottomColor: 'black', borderBottomWidth: StyleSheet.hairlineWidth, }}>
-                        </Text>
+                        </View>
                     </View>
                 ))
                 ) : (
                     <Text>Loading...</Text>
                 )}
-            <Pagination
-                fetchData={fetchData}
-                page={page}
-                setPage={setPage}
-                totalItems={totalItems}
-                maxItems={maxItems}
-            />
+                <Pagination
+                    fetchData={fetchData}
+                    page={page}
+                    setPage={setPage}
+                    totalItems={totalItems}
+                    maxItems={maxItems}
+                />
             </ScrollView>
         </SafeAreaView>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        backgroundColor: "#0077B6",
-    },
-    title: {
-        color: "#FFFFFF",
-        fontSize: 20,
-        margin: 30,
-    },
-    linkArticle: {
-        color: "#FFFFFF",
-        fontSize: 15,
-    },
-    pagination: {
-        flexDirection: "row",
-        margin: 50,
-    },
-    btna: {
-        flexDirection: "row",
-        justifyContent: "center",
-
-    }
-})
