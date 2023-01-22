@@ -50,40 +50,44 @@ export default function ArticleEditScreen({ navigation }) {
         ],
       );
     }))
-      }
-      const [comment, setComment] = useState('');
-      const editComment = async (commentId) => {
-        patchComment(commentId, comment.content, (res => { 
-            Alert.alert(
-                'Le comment a été mis à jour avec succès.',
-                '',
-                [
-                  {
-                    text: 'Oui',
-                    onPress: () => {fetchData()}
-                  },
-                ],
-              );
-        }))
+  }
+  const [comment, setComment] = useState('');
+  const editComment = async (commentId) => {
+    patchComment(commentId, comment.content, (res => {
+      Alert.alert(
+        'Le comment a été mis à jour avec succès.',
+        '',
+        [
+          {
+            text: 'Oui',
+            onPress: () => { fetchData() }
+          },
+        ],
+      );
+    }))
   }
 
 
   return (
     <SafeAreaView style={styles.container}>
       <Header nav={navigation} />
-      <ScrollView>
-        <Text style={styles.title}>Modifier</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(txt) => setArticle({ ...article, title: txt })}
-          value={article ? article.title : ""}
-        />
-        <TextInput
-          multiline
-          style={styles.input}
-          onChangeText={(txt) => setArticle({ ...article, content: txt })}
-          value={article ? article.content : ""}
-        />
+      <ScrollView style={{ width: "100%" }}>
+        <Text style={styles.title}>Modification de l'article n° {articleId}</Text>
+        <View style={styles.formArticle}>
+          <Text style={styles.txt}>Titre de l'article :</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={(txt) => setArticle({ ...article, title: txt })}
+            value={article ? article.title : ""}
+          />
+          <Text style={styles.txt}>Contenue de l'article :</Text>
+          <TextInput
+            multiline
+            style={styles.inputContentArticle}
+            onChangeText={(txt) => setArticle({ ...article, content: txt })}
+            value={article ? article.content : ""}
+          />
+        </View>
         <View style={styles.btn}>
           <BoutonAdmin text="Modifier"
             onPress={() => editArticle()}
@@ -93,9 +97,10 @@ export default function ArticleEditScreen({ navigation }) {
           />
         </View>
 
-        <Text style={styles.comments}>Comments</Text>
+        <Text style={styles.titleH2}>Commentaires</Text>
         {comments ? (comments['hydra:member'].map((item, index) => (
-          <View key={item.id}>
+          <View style={styles.formComments} key={item.id}>
+            <Text style={styles.txt}>N° {item.id} </Text>
             <TextInput
               value={item.content}
               onChangeText={txt => {
@@ -110,7 +115,7 @@ export default function ArticleEditScreen({ navigation }) {
               }}
               style={styles.input}
             />
-            <Text style={styles.btn}>
+            <View style={styles.btn}>
               <BoutonAdmin text="Modifier" onPress={() => editComment(item.id)} />
               <BoutonAdmin text="Supprimer" onPress={() =>
                 Alert.alert(
@@ -131,56 +136,74 @@ export default function ArticleEditScreen({ navigation }) {
                   ],
                 )}
               />
-            </Text>
-            <Text
-              style={{ borderBottomColor: 'black', borderBottomWidth: StyleSheet.hairlineWidth, }}>
-            </Text>
+            </View>
           </View>
         ))
         ) : (
           <Text>Loading comments...</Text>
         )}
-              <Pagination 
-                fetchData={fetchData}
-                page={page}
-                setPage={setPage}
-                totalItems={totalItems}
-                maxItems={maxItems}
-              />
-                </ScrollView>
-        </SafeAreaView>
-      )
-    }
-    
-    const styles = StyleSheet.create({
-        container: {
-            position: "relative",
-            backgroundColor: "#0077B6",
-            width: "100%",
-            height: "100%",
-        },
-        formContainer: {
-            justifyContent: 'center',
-            alignItems: 'center',
-        },
-        title: {
-            color: '#FFFFFF',
-            fontSize: 30,
-            textAlign: 'center'
-        },
-        comments: {
-          color: '#FFFFFF',
-          fontSize: 20,
-          textAlign: 'center'
-        },
-        input: {
-            backgroundColor: "#F0F0F0",
-            borderColor: 'black',
-            borderWidth: 1,
-            borderRadius: 3,
-            width: '80 %',
-            height: 42,
-            margin: '5%',
-            padding: 5
-        }
-    })
+        <Pagination
+          fetchData={fetchData}
+          page={page}
+          setPage={setPage}
+          totalItems={totalItems}
+          maxItems={maxItems}
+        />
+      </ScrollView>
+    </SafeAreaView>
+  )
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: "#0077B6",
+  },
+  title: {
+    color: "#FFFFFF",
+    fontSize: 30,
+    margin: 30,
+    fontFamily: 'Iceland_400Regular',
+    textAlign: "center"
+  },
+  formArticle: {
+    alignItems: "center"
+  },
+  titleH2: {
+    color: '#FFFFFF',
+    fontSize: 20,
+    textAlign: "center",
+    marginBottom: "5%"
+  },
+  formComments: {
+    alignItems: "center"
+  },
+  txt: {
+    color: '#FFFFFF',
+    fontSize: 20,
+  },
+  input: {
+    backgroundColor: "#F0F0F0",
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 3,
+    width: '90 %',
+    height: 42,
+    margin: '5%',
+    paddingLeft: 15
+  },
+  inputContentArticle: {
+    width: "98%",
+    marginTop: "5%",
+    paddingHorizontal: "5%",
+    paddingVertical: "5%",
+    borderWidth: 1,
+    backgroundColor: "#00B4D8"
+  },
+  btn: {
+    flexDirection: "row",
+    justifyContent: "center",
+    margin: "5%"
+  }
+})

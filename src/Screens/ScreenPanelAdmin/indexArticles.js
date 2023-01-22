@@ -36,9 +36,13 @@ export default function IndexArticlesScreen({ navigation }) {
             <Text style={styles.title}>{"Liste des articles"}</Text>
             <ScrollView>
                 {articles ? (articles['hydra:member'].map((item, index) => (
-                    <View key={index}>
-                        <Text style={styles.linkArticle} >{item.title}</Text>
-                        <Text style={styles.btna}>
+                    <View style={styles.pageContainer} key={index}>
+                        <Text style={{ color: "#fff", fontSize: 25, paddingBottom: "5%", fontFamily: 'Iceland_400Regular' }} >Article n° {item.id} :</Text>
+                        <Text style={{ color: "#fff", fontSize: 25, paddingBottom: "5%", fontFamily: 'Iceland_400Regular', textAlign: "center" }} >{item.title}</Text>
+                        <View style={styles.infoArticle}>
+                            <Text style={styles.linkArticle} >{item.content}</Text>
+                        </View>
+                        <View style={styles.btna}>
                             <BoutonAdmin text="Modifier" onPress={() => navigation.navigate('ArticleAdmin', { articleId: item.id })} />
                             <BoutonAdmin text="Supprimer" onPress={() =>
                                 Alert.alert(
@@ -59,22 +63,19 @@ export default function IndexArticlesScreen({ navigation }) {
                                     ],
                                 )}
                             />
-                        </Text>
-                        <Text
-                            style={{ borderBottomColor: 'black', borderBottomWidth: StyleSheet.hairlineWidth, }}>
-                        </Text>
+                        </View>
                     </View>
                 ))
                 ) : (
                     <Text>Loading...</Text>
                 )}
-            <Pagination
-                fetchData={fetchData}
-                page={page}
-                setPage={setPage}
-                totalItems={totalItems}
-                maxItems={maxItems}
-            />
+                <Pagination
+                    fetchData={fetchData}
+                    page={page}
+                    setPage={setPage}
+                    totalItems={totalItems}
+                    maxItems={maxItems}
+                />
             </ScrollView>
         </SafeAreaView>
     )
@@ -88,8 +89,18 @@ const styles = StyleSheet.create({
     },
     title: {
         color: "#FFFFFF",
-        fontSize: 20,
+        fontSize: 30,
         margin: 30,
+        fontFamily: 'Iceland_400Regular'
+    },
+    pageContainer: {
+        justifyContent: "space-around"
+    },
+    infoArticle: {
+        flexDirection: "row",
+        padding: "5%",
+        borderWidth: 1,
+        backgroundColor: "#00B4D8"
     },
     linkArticle: {
         color: "#FFFFFF",
@@ -102,6 +113,6 @@ const styles = StyleSheet.create({
     btna: {
         flexDirection: "row",
         justifyContent: "center",
-
+        margin: "5%"
     }
 })

@@ -22,12 +22,13 @@ export default function ProfilScreen({ navigation }) {
         };
         fetchData();
     }, []);
-
+    console.log(user.role)
     return (
         <SafeAreaView style={styles.container}>
             <Header nav={navigation} />
             <ScrollView style={{ marginBottom: "15%", width: "90%" }}>
                 <Text style={styles.title}>Profile</Text>
+<<<<<<< HEAD
                 <View style={styles.contenerLeft}>
                     <Text style={styles.txt}>Email: {user.email}
                     </Text>
@@ -40,6 +41,13 @@ export default function ProfilScreen({ navigation }) {
                     <Text style={styles.txt}>
                         Rôle: 
                     </Text>
+=======
+                <View style={styles.inputContainer}>
+                    <Text style={styles.txt}>Email: {user.email}</Text>
+                    <Text style={styles.txt}>FirstName: {user.firstname}</Text>
+                    <Text style={styles.txt}>LastName: {user.lastname}</Text>
+                    <Text style={styles.txt}>Rôle: {user.roles}</Text>
+>>>>>>> 53bb877 (StylePanelAdmin)
                 </View>
                 <Text style={styles.titleH2}>Modifier votre profile</Text>
                 <View style={styles.contenerLeft}>

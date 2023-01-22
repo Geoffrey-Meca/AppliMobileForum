@@ -1,4 +1,4 @@
-import { Text, StyleSheet, ScrollView } from 'react-native'
+import { Text, StyleSheet, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import BoutonApp from '../../Composants/Bouton'
 import Header from '../../Composants/Header';
@@ -9,10 +9,10 @@ export default function AdminScreen({ navigation }) {
         <SafeAreaView style={styles.container}>
             <Header nav={navigation} />
             <Text style={styles.txt}>Bienvenue sur le panel admin !</Text>
-            <ScrollView>
+            <View style={{ width: "100%", marginTop: "25%" }}>
                 <BoutonApp text="La liste des utilisateurs" onPress={() => navigation.navigate('Users')} />
                 <BoutonApp text="La liste des articles" onPress={() => navigation.navigate('ArticlesAdmin')} />
-            </ScrollView>
+            </View>
         </SafeAreaView>
     )
 }

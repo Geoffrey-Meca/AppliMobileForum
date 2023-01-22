@@ -32,11 +32,15 @@ export default function IndexUsersScreen({ navigation }) {
         <SafeAreaView style={styles.container}>
             <Header nav={navigation} />
             <Text style={styles.title}>{"Liste des utilisateurs"}</Text>
-            <ScrollView>
+            <ScrollView style={{ width: "100%" }}>
                 {users ? (users['hydra:member'].map((item, index) => (
-                    <View key={index}>
-                        <Text style={styles.linkUser} >{item.firstname} {item.lastname}                    {item.email}</Text>
-                        <Text style={styles.btna} >
+                    <View style={styles.pageContainer} key={index}>
+                        <Text style={{ color: "#fff", fontSize: 25, paddingBottom: "5%", fontFamily: 'Iceland_400Regular' }} >User: {item.id}</Text>
+                        <View style={styles.infoUser}>
+                            <Text style={styles.linkUser} >{item.firstname} {item.lastname} : </Text>
+                            <Text style={styles.linkUser} >{item.email}</Text>
+                        </View>
+                        <View style={styles.btna} >
                             <BoutonAdmin text="Modifier" onPress={() => navigation.navigate('User', { userId: item.id })} />
                             <BoutonAdmin text="Supprimer" onPress={() =>
                                 Alert.alert(
@@ -56,22 +60,19 @@ export default function IndexUsersScreen({ navigation }) {
                                     ],
                                 )}
                             />
-                        </Text>
-                        <Text
-                            style={{ borderBottomColor: 'black', borderBottomWidth: StyleSheet.hairlineWidth, }}>
-                        </Text>
+                        </View>
                     </View>
                 ))
                 ) : (
                     <Text>Loading...</Text>
                 )}
-            <Pagination
-                fetchData={fetchData}
-                page={page}
-                setPage={setPage}
-                totalItems={totalItems}
-                maxItems={maxItems}
-            />
+                <Pagination
+                    fetchData={fetchData}
+                    page={page}
+                    setPage={setPage}
+                    totalItems={totalItems}
+                    maxItems={maxItems}
+                />
             </ScrollView>
         </SafeAreaView>
     )
@@ -85,8 +86,16 @@ const styles = StyleSheet.create({
     },
     title: {
         color: "#FFFFFF",
-        fontSize: 20,
+        fontSize: 30,
         margin: 30,
+        fontFamily: 'Iceland_400Regular'
+    },
+    pageContainer: {
+        justifyContent: "space-around"
+    },
+    infoUser: {
+        flexDirection: "row",
+        justifyContent: "space-around"
     },
     linkUser: {
         color: "#FFFFFF",
@@ -99,6 +108,9 @@ const styles = StyleSheet.create({
     btna: {
         flexDirection: "row",
         justifyContent: "center",
+        borderBottomWidth: 1,
+        marginBottom: "5%",
+        paddingVertical: "5%"
 
     }
 })
