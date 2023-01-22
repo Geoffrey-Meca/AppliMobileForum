@@ -1,17 +1,16 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { Text, StyleSheet, ScrollView, View } from 'react-native';
+import { Text, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getArticleById } from '../../../api';
 import Header from '../../Composants/Header';
-import BoutonApp from '../../Composants/Bouton';
 import ModalAddComment from '../../Composants/Modals/ModalAddComment';
 import { isLogged } from '../../../lib';
-import styles from '../../Composants/styles/styles';
+import styles from '../../../assets/styles/styles';
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 
 export default function ReadArticle({ route, navigation }) {
+    const log = isLogged()
     const articleId = route.params
-    let isLog = isLogged();
     const [article, setArticle] = useState('')
     const [isOpenAdd, setIsOpenAdd] = useState(false);
     let fetchData = async () => {
@@ -42,9 +41,6 @@ export default function ReadArticle({ route, navigation }) {
             return dmy
         }
     }
-    console.log(isLogged())
-    const log = isLogged()
-
 
     return (
         <SafeAreaView style={styles.container}>
@@ -59,23 +55,23 @@ export default function ReadArticle({ route, navigation }) {
                         </View>
                         <View style={styles.articleContainer}>
                             <Text style={styles.txt}>{article.content}</Text>
-               </View>
-                            
-                        {log ? (<Fragment>
-                        <View style={styles.OneLine}>
-                        <Text style={styles.date}>Commentaires</Text>
-                        <ButtonComponent 
-                            contButon={styles.date}
-                            button={styles.butonStyleLitte}
-                            txtButton={styles.textButon}
-                            text={"Add"}
-                            onPress={openAdd}
-                        />
                         </View>
+
+                        {log ? (<Fragment>
+                            <View style={styles.OneLine}>
+                                <Text style={styles.date}>Commentaires</Text>
+                                <ButtonComponent
+                                    contButon={styles.date}
+                                    button={styles.butonStyleLitte}
+                                    txtButton={styles.textButon}
+                                    text={"Add"}
+                                    onPress={openAdd}
+                                />
+                            </View>
                         </Fragment>) : (<Text style={styles.carreful}>Connectez-vous pour ajouter un commentaire !</Text>)}
-                
+
                         {isOpenAdd && <ModalAddComment close={openAdd} onPress={openAdd} id={articleId.articleId} />}
-                       
+
                         {article.comments.map(comment => (
                             <View style={styles.commentsContainer} key={comment['@id'].replace(/[^0-9]/g, '')}>
                                 <View style={styles.OneComments}>

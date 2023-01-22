@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Text, StyleSheet, View, ScrollView, Alert } from 'react-native'
+import { Text, View, ScrollView, Alert } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { getUsers, deleteUser } from '../../../api';
 import Header from '../../Composants/Header';
 import BoutonAdmin from '../../Composants/Bouton/indexAdmin';
 import { useRoute } from '@react-navigation/native';
 import Pagination from '../../Composants/Pagination';
+import styles from '../../../assets/styles/styles'
 
 
 export default function IndexUsersScreen({ navigation }) {
@@ -32,11 +33,15 @@ export default function IndexUsersScreen({ navigation }) {
         <SafeAreaView style={styles.container}>
             <Header nav={navigation} />
             <Text style={styles.title}>{"Liste des utilisateurs"}</Text>
-            <ScrollView>
+            <ScrollView style={{ width: "100%" }}>
                 {users ? (users['hydra:member'].map((item, index) => (
-                    <View key={index}>
-                        <Text style={styles.linkUser} >{item.firstname} {item.lastname}                    {item.email}</Text>
-                        <Text style={styles.btna} >
+                    <View style={styles.pageContainerAdmin} key={index}>
+                        <Text style={{ color: "#fff", fontSize: 25, paddingBottom: "5%", fontFamily: 'Iceland_400Regular' }} >User: {item.id}</Text>
+                        <View style={styles.infoUserAdmin}>
+                            <Text style={styles.linkUserAdmin} >{item.firstname} {item.lastname} : </Text>
+                            <Text style={styles.linkUserAdmin} >{item.email}</Text>
+                        </View>
+                        <View style={styles.btna} >
                             <BoutonAdmin text="Modifier" onPress={() => navigation.navigate('User', { userId: item.id })} />
                             <BoutonAdmin text="Supprimer" onPress={() =>
                                 Alert.alert(
@@ -56,49 +61,20 @@ export default function IndexUsersScreen({ navigation }) {
                                     ],
                                 )}
                             />
-                        </Text>
-                        <Text
-                            style={{ borderBottomColor: 'black', borderBottomWidth: StyleSheet.hairlineWidth, }}>
-                        </Text>
+                        </View>
                     </View>
                 ))
                 ) : (
                     <Text>Loading...</Text>
                 )}
-            <Pagination
-                fetchData={fetchData}
-                page={page}
-                setPage={setPage}
-                totalItems={totalItems}
-                maxItems={maxItems}
-            />
+                <Pagination
+                    fetchData={fetchData}
+                    page={page}
+                    setPage={setPage}
+                    totalItems={totalItems}
+                    maxItems={maxItems}
+                />
             </ScrollView>
         </SafeAreaView>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        backgroundColor: "#0077B6",
-    },
-    title: {
-        color: "#FFFFFF",
-        fontSize: 20,
-        margin: 30,
-    },
-    linkUser: {
-        color: "#FFFFFF",
-        fontSize: 15,
-    },
-    pagination: {
-        flexDirection: "row",
-        margin: 50,
-    },
-    btna: {
-        flexDirection: "row",
-        justifyContent: "center",
-
-    }
-})

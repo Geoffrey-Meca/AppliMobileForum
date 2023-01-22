@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { TouchableOpacity , View, StyleSheet, Text } from 'react-native';
+import { TouchableOpacity, View, Text } from 'react-native';
+import styles from '../../../assets/styles/styles';
 import { AntDesign } from '@expo/vector-icons';
 
 export default function Pagination({ fetchData, page, setPage, totalItems, maxItems }) {
@@ -25,9 +26,9 @@ export default function Pagination({ fetchData, page, setPage, totalItems, maxIt
     }
 
     return (
-        <View style={styles.pagination}>
+        <View style={styles.paginationContainer}>
             <TouchableOpacity
-                style={styles.btn}
+                style={styles.btnPagination}
                 onPress={() => {
                     setPage(1);
                 }
@@ -35,7 +36,7 @@ export default function Pagination({ fetchData, page, setPage, totalItems, maxIt
                 disabled={previous}
             ><Text><AntDesign name="banckward" size={24} color="black" /></Text></TouchableOpacity>
             <TouchableOpacity
-                style={styles.btn}
+                style={styles.btnPagination}
                 onPress={() => {
                     setPage(page - 1);
                 }
@@ -45,7 +46,7 @@ export default function Pagination({ fetchData, page, setPage, totalItems, maxIt
             ><Text><AntDesign name="caretleft" size={24} color="black" /></Text></TouchableOpacity>
 
             <TouchableOpacity
-                style={styles.btn}
+                style={styles.btnPagination}
                 onPress={() => {
                     setPage(page + 1);
                 }
@@ -53,7 +54,7 @@ export default function Pagination({ fetchData, page, setPage, totalItems, maxIt
                 disabled={next}
             ><Text><AntDesign name="caretright" size={24} color="black" /></Text></TouchableOpacity>
             <TouchableOpacity
-                style={styles.btn}
+                style={styles.btnPagination}
                 onPress={() => {
                     setPage(pagesNom);
                 }
@@ -63,22 +64,3 @@ export default function Pagination({ fetchData, page, setPage, totalItems, maxIt
         </View>
     )
 }
-const styles = StyleSheet.create({
-    btn: {
-        alignItems: 'center',
-        textAlign: "center",
-        backgroundColor: '#CAF0F8',
-        height: "auto",
-        flex: 1,
-        padding: 5,
-        marginRight: 5,
-        marginLeft: 5,
-        borderRadius: 3,
-        borderColor: "black"
-
-    },
-    pagination: {
-        flexDirection: "row",
-        margin: 50,
-    }
-}) 
