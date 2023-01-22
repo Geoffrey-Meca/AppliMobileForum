@@ -2,10 +2,9 @@ import React from 'react'
 import { useState } from 'react';
 import { Alert, View, StyleSheet, Text, TextInput } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import BoutonApp from '../../Composants/Bouton'
-import Footer from '../../Composants/Footer';
 import Header from '../../Composants/Header'
-
+import styles from '../../Composants/styles/styles';
+import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 
 export default function InscriptionScreen({ navigation }) {
     const emailRegex = /^\S+@\S+\.\S+$/;
@@ -55,7 +54,7 @@ export default function InscriptionScreen({ navigation }) {
         <SafeAreaView style={styles.container}>
             <Header nav={navigation} />
             <Text style={styles.title}>Inscription</Text>
-            <View style={styles.formContainer}>
+            <View style={styles.contenerCenter}>
                 <TextInput
                     style={styles.input}
                     onChangeText={onChangeEmail}
@@ -82,40 +81,16 @@ export default function InscriptionScreen({ navigation }) {
                     value={newLastName}
                     placeholder='LastName'
                 />
-                <BoutonApp text="Inscription"
-                    onPress={handleSubmit}
-                />
+    
+            <ButtonComponent 
+                contButon={styles.contenerCenter}
+                button={styles.butonStyle}
+                txtButton={styles.textButon}
+                text={"Inscription"}
+                onPress={handleSubmit}
+            />
             </View>
-            <Footer />
         </SafeAreaView >
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        backgroundColor: "#0077B6",
-    },
-    formContainer: {
-        alignItems: 'center',
-        width: "80%"
-    },
-    title: {
-        color: '#FFFFFF',
-        fontSize: 40,
-        margin: 30,
-        textAlign: 'center',
-        fontFamily: 'Iceland_400Regular'
-    },
-    input: {
-        backgroundColor: "#F0F0F0",
-        borderColor: 'black',
-        borderWidth: 1,
-        borderRadius: 3,
-        width: '80 %',
-        height: "9%",
-        margin: '5%',
-        paddingLeft: 15,
-    },
-})

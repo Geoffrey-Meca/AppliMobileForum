@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Text, StyleSheet, View, Pressable, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Pagination from '../../Composants/Pagination';
-
+import styles from '../../Composants/styles/styles';
 import { getArticles } from '../../../api';
 import Footer from '../../Composants/Footer';
 import Header from '../../Composants/Header'
@@ -36,7 +36,7 @@ export default function IndexArticleScreen({ navigation }) {
             <Header nav={navigation} />
             <Text style={styles.title}>{"Post du forum"}</Text>
             <ScrollView>
-                <View style={styles.ArticlesContainer}>
+                <View style={styles.contenerCenter}>
                     {articles ? (articles['hydra:member'].map((item, index) => (
                         <Pressable key={index} onPress={() => goToArticle(item['@id'].replace(/[^0-9]/g, ''))}>
                             <Text style={styles.linkArticle} key={index}>{item.title}</Text>
@@ -58,27 +58,3 @@ export default function IndexArticleScreen({ navigation }) {
         </SafeAreaView>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        backgroundColor: "#0077B6",
-    },
-    title: {
-        color: "#FFFFFF",
-        fontSize: 45,
-        margin: 30,
-        fontFamily: 'Iceland_400Regular'
-    },
-    ArticlesContainer: {
-        alignItems: "center",
-        paddingHorizontal: 5,
-        paddingTop: 15
-    },
-    linkArticle: {
-        color: "#FFFFFF",
-        fontSize: 20,
-        marginBottom: 20,
-    }
-})

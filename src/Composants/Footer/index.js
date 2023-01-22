@@ -18,10 +18,10 @@ export default function Footer() {
 }
 const styles = StyleSheet.create({
     container: {
-        position: "absolute",
+        position: "relative",
         flex: 1,
         bottom: "0%",
-        height: "7%",
+        height: "14%",
         width: "100%",
         justifyContent: "center",
         backgroundColor: "#0096C7",
