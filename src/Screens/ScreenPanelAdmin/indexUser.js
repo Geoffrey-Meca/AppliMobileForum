@@ -6,7 +6,7 @@ import { useRoute } from '@react-navigation/native';
 import BoutonAdmin from '../../Composants/Bouton/indexAdmin';
 import Header from '../../Composants/Header';
 import { ScrollView } from 'react-native-gesture-handler';
-
+import styles from '../../../assets/styles/styles'
 
 
 export default function UserProfileEditScreen({ navigation }) {
@@ -47,11 +47,11 @@ export default function UserProfileEditScreen({ navigation }) {
       <Header nav={navigation} />
       <ScrollView style={{ width: "100%" }}>
         <Text style={styles.title}>Modifier l'utilisateur n° {userId}</Text>
-        <View style={styles.formContainer}>
+        <View>
 
           <Text style={styles.label}>Prénom :</Text>
           <TextInput
-            style={styles.input}
+            style={styles.inputAdmin}
             onChangeText={(txt) => setUser({ ...user, firstname: txt })}
             value={user ? user.firstname : ""}
             placeholder="Prénom"
@@ -59,7 +59,7 @@ export default function UserProfileEditScreen({ navigation }) {
 
           <Text style={styles.label}>Nom :</Text>
           <TextInput
-            style={styles.input}
+            style={styles.inputAdmin}
             onChangeText={(txt) => setUser({ ...user, lastname: txt })}
             value={user ? user.lastname : ""}
             placeholder="Nom"
@@ -67,7 +67,7 @@ export default function UserProfileEditScreen({ navigation }) {
 
           <Text style={styles.label}>Email :</Text>
           <TextInput
-            style={styles.input}
+            style={styles.inputAdmin}
             onChangeText={(txt) => setUser({ ...user, email: txt })}
             value={user ? user.email : ""}
             placeholder="Email"
@@ -75,13 +75,13 @@ export default function UserProfileEditScreen({ navigation }) {
 
           <Text style={styles.label}>Password :</Text>
           <TextInput
-            style={styles.input}
+            style={styles.inputAdmin}
             onChangeText={(txt) => setUser({ ...user, password: txt })}
             value={user ? user.password : ""}
             placeholder="Modifiez votre mot de passe"
           />
 
-          <View style={styles.btn}>
+          <View style={styles.btna}>
             <BoutonAdmin text="Modifier"
               onPress={() => user.password ? editUser() :
                 Alert.alert(
@@ -96,40 +96,3 @@ export default function UserProfileEditScreen({ navigation }) {
     </SafeAreaView >
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    backgroundColor: "#0077B6",
-  },
-  formContainer: {
-    width: "100%",
-    alignItems: "center"
-  },
-  title: {
-    color: "#FFFFFF",
-    fontSize: 40,
-    margin: 30,
-    fontFamily: 'Iceland_400Regular',
-    textAlign: "center"
-  },
-  label: {
-    color: "#fff",
-    fontSize: 18,
-  },
-  input: {
-    backgroundColor: "#F0F0F0",
-    borderColor: 'black',
-    borderWidth: 1,
-    borderRadius: 3,
-    width: '80 %',
-    height: "8%",
-    margin: '5%',
-    paddingLeft: 15
-  },
-  btn: {
-    flexDirection: "row",
-    marginBottom: "25%"
-  }
-})

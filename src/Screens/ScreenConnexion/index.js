@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../../Composants/styles/styles';
+import styles from '../../../assets/styles/styles';
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 import { useState } from 'react'
 import { TextInput, View, Text, Alert } from 'react-native'
@@ -54,14 +54,14 @@ export default function ConnexionScreen({ navigation }) {
                     placeholder='Password'
                     secureTextEntry={true}
                 />
-          
-                <ButtonComponent 
-                contButon={styles.contenerCenter}
-                button={styles.butonStyle}
-                txtButton={styles.textButon}
-                text={"Connexion"}
-                onPress={handleSubmit}
-            />
+
+                <ButtonComponent
+                    contButon={styles.contenerCenter}
+                    button={styles.butonStyle}
+                    txtButton={styles.textButon}
+                    text={"Connexion"}
+                    onPress={handleSubmit}
+                />
             </View>
         </SafeAreaView>
     )

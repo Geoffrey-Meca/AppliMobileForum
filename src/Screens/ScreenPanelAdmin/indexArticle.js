@@ -6,6 +6,7 @@ import BoutonAdmin from '../../Composants/Bouton/indexAdmin';
 import Header from '../../Composants/Header';
 import { patchComment, deleteComment, getCommentsByArticle, patchArticle, getArticleById } from '../../../api';
 import Pagination from '../../Composants/Pagination';
+import styles from '../../../assets/styles/styles'
 
 export default function ArticleEditScreen({ navigation }) {
 
@@ -73,10 +74,10 @@ export default function ArticleEditScreen({ navigation }) {
       <Header nav={navigation} />
       <ScrollView style={{ width: "100%" }}>
         <Text style={styles.title}>Modification de l'article n° {articleId}</Text>
-        <View style={styles.formArticle}>
+        <View style={styles.formArticleAdmin}>
           <Text style={styles.txt}>Titre de l'article :</Text>
           <TextInput
-            style={styles.input}
+            style={styles.inputAdmin}
             onChangeText={(txt) => setArticle({ ...article, title: txt })}
             value={article ? article.title : ""}
           />
@@ -88,7 +89,7 @@ export default function ArticleEditScreen({ navigation }) {
             value={article ? article.content : ""}
           />
         </View>
-        <View style={styles.btn}>
+        <View style={styles.btna}>
           <BoutonAdmin text="Modifier"
             onPress={() => editArticle()}
           />
@@ -97,9 +98,9 @@ export default function ArticleEditScreen({ navigation }) {
           />
         </View>
 
-        <Text style={styles.titleH2}>Commentaires</Text>
+        <Text style={styles.titleH2Admin}>Commentaires</Text>
         {comments ? (comments['hydra:member'].map((item, index) => (
-          <View style={styles.formComments} key={item.id}>
+          <View style={styles.formCommentsAdmin} key={item.id}>
             <Text style={styles.txt}>N° {item.id} </Text>
             <TextInput
               value={item.content}
@@ -113,9 +114,9 @@ export default function ArticleEditScreen({ navigation }) {
                 });
                 setComments({ 'hydra:member': updatedComments });
               }}
-              style={styles.input}
+              style={styles.inputAdmin}
             />
-            <View style={styles.btn}>
+            <View style={styles.btna}>
               <BoutonAdmin text="Modifier" onPress={() => editComment(item.id)} />
               <BoutonAdmin text="Supprimer" onPress={() =>
                 Alert.alert(
@@ -153,57 +154,3 @@ export default function ArticleEditScreen({ navigation }) {
     </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    backgroundColor: "#0077B6",
-  },
-  title: {
-    color: "#FFFFFF",
-    fontSize: 30,
-    margin: 30,
-    fontFamily: 'Iceland_400Regular',
-    textAlign: "center"
-  },
-  formArticle: {
-    alignItems: "center"
-  },
-  titleH2: {
-    color: '#FFFFFF',
-    fontSize: 20,
-    textAlign: "center",
-    marginBottom: "5%"
-  },
-  formComments: {
-    alignItems: "center"
-  },
-  txt: {
-    color: '#FFFFFF',
-    fontSize: 20,
-  },
-  input: {
-    backgroundColor: "#F0F0F0",
-    borderColor: 'black',
-    borderWidth: 1,
-    borderRadius: 3,
-    width: '90 %',
-    height: 42,
-    margin: '5%',
-    paddingLeft: 15
-  },
-  inputContentArticle: {
-    width: "98%",
-    marginTop: "5%",
-    paddingHorizontal: "5%",
-    paddingVertical: "5%",
-    borderWidth: 1,
-    backgroundColor: "#00B4D8"
-  },
-  btn: {
-    flexDirection: "row",
-    justifyContent: "center",
-    margin: "5%"
-  }
-})

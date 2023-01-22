@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { TextInput, StyleSheet, View, Text, Pressable, Alert, ScrollView } from 'react-native'
+import { TextInput, View, Text, Pressable, Alert, ScrollView } from 'react-native'
 import { login } from '../../../api';
 
 import BoutonApp from '../Bouton'
+import styles from '../../../assets/styles/styles'
 
 
 export default function ModalConnexion(props) {
@@ -37,23 +38,23 @@ export default function ModalConnexion(props) {
         }
     };
     return (
-        <View style={styles.container}>
+        <View style={styles.modalContainer}>
             <Pressable style={{ alignItems: "flex-end", width: "100%" }} onPress={props.onPress}>
                 <Text style={styles.closeBtn}>X</Text>
             </Pressable>
             <ScrollView>
 
                 <View style={styles.formContainer}>
-                    <Text style={styles.title}>Identifiez-vous</Text>
+                    <Text style={styles.titleModal}>Identifiez-vous</Text>
                     <TextInput
-                        style={styles.input}
+                        style={styles.inputModal}
                         onChangeText={onChangeEmail}
                         value={newEmail}
                         placeholder='Email'
                         keyboardType='email-address'
                     />
                     <TextInput
-                        style={styles.input}
+                        style={styles.inputModal}
                         onChangeText={onChangePassword}
                         value={newPassword}
                         placeholder='Password'
@@ -67,38 +68,3 @@ export default function ModalConnexion(props) {
         </View>
     )
 }
-const styles = StyleSheet.create({
-    container: {
-        position: "absolute",
-        backgroundColor: "#023E8A",
-        width: "100%",
-        height: 400,
-        top: "40%"
-    },
-    closeBtn: {
-        backgroundColor: "grey",
-        textAlign: "center",
-        fontSize: 26,
-        width: 30,
-    },
-    formContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    title: {
-        color: '#fff',
-        fontSize: 30,
-        marginBottom: 20,
-        fontFamily: 'Iceland_400Regular'
-    },
-    input: {
-        backgroundColor: "#F0F0F0",
-        borderColor: 'black',
-        borderWidth: 1,
-        borderRadius: 3,
-        width: '80 %',
-        height: 42,
-        margin: '5%',
-        padding: 5
-    },
-})
