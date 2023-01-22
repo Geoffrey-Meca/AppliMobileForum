@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
-import { Alert, View, StyleSheet, Text, TextInput } from 'react-native'
+import { Alert, View, Text, TextInput } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../Composants/Header'
-import styles from '../../Composants/styles/styles';
+import styles from '../../../assets/styles/styles';
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 
 export default function InscriptionScreen({ navigation }) {
@@ -81,14 +81,14 @@ export default function InscriptionScreen({ navigation }) {
                     value={newLastName}
                     placeholder='LastName'
                 />
-    
-            <ButtonComponent 
-                contButon={styles.contenerCenter}
-                button={styles.butonStyle}
-                txtButton={styles.textButon}
-                text={"Inscription"}
-                onPress={handleSubmit}
-            />
+
+                <ButtonComponent
+                    contButon={styles.contenerCenter}
+                    button={styles.butonStyle}
+                    txtButton={styles.textButon}
+                    text={"Inscription"}
+                    onPress={handleSubmit}
+                />
             </View>
         </SafeAreaView >
     )

@@ -1,8 +1,9 @@
-//import React, { useState } from 'react'
 import React from 'react';
 import { useState } from 'react';
-import { TextInput, StyleSheet, View, Text, Pressable, Alert, ScrollView } from 'react-native'
+import { TextInput, View, Text, Pressable, Alert, ScrollView } from 'react-native'
 import { postUser, login } from '../../../api';
+import styles from '../../../assets/styles/styles'
+
 
 import BoutonApp from '../Bouton'
 
@@ -58,36 +59,36 @@ export default function ModalInscription(props) {
         }
     };
     return (
-        <View style={styles.container}>
+        <View style={styles.containerModalInscription}>
             <Pressable style={{ alignItems: "flex-end", width: "100%" }} onPress={props.onPress}>
                 <Text style={styles.closeBtn}>X</Text>
             </Pressable>
             <ScrollView>
 
                 <View style={styles.formContainer}>
-                    <Text style={styles.title}>Inscrivez-vous</Text>
+                    <Text style={styles.titleModal}>Inscrivez-vous</Text>
                     <TextInput
-                        style={styles.input}
+                        style={styles.inputModal}
                         onChangeText={onChangeEmail}
                         value={newEmail}
                         placeholder='Email'
                         keyboardType='email-address'
                     />
                     <TextInput
-                        style={styles.input}
+                        style={styles.inputModal}
                         onChangeText={onChangePassword}
                         value={newPassword}
                         placeholder='Password'
                         secureTextEntry={true}
                     />
                     <TextInput
-                        style={styles.input}
+                        style={styles.inputModal}
                         onChangeText={onChangeFirstName}
                         value={newFirstName}
                         placeholder='FirstName'
                     />
                     <TextInput
-                        style={styles.input}
+                        style={styles.inputModal}
                         onChangeText={onChangeLastName}
                         value={newLastName}
                         placeholder='LastName'
@@ -100,38 +101,3 @@ export default function ModalInscription(props) {
         </View>
     )
 }
-const styles = StyleSheet.create({
-    container: {
-        position: "absolute",
-        backgroundColor: "#023E8A",
-        width: "100%",
-        height: 520,
-        top: "30%"
-    },
-    closeBtn: {
-        backgroundColor: "grey",
-        textAlign: "center",
-        fontSize: 26,
-        width: 30,
-    },
-    formContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    title: {
-        color: '#fff',
-        fontSize: 30,
-        marginBottom: 20,
-        fontFamily: 'Iceland_400Regular'
-    },
-    input: {
-        backgroundColor: "#F0F0F0",
-        borderColor: 'black',
-        borderWidth: 1,
-        borderRadius: 3,
-        width: '80 %',
-        height: 42,
-        margin: '5%',
-        padding: 5
-    },
-})

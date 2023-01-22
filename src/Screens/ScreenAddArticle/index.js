@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { Text, TextInput, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import BoutonApp from '../../Composants/Bouton'
 import Header from '../../Composants/Header'
-
+import styles from '../../../assets/styles/styles'
 export default function AddArticleScreen({ navigation }) {
 
     const [newTitleArticle, setNewTitleArticle] = useState("");
@@ -21,17 +21,17 @@ export default function AddArticleScreen({ navigation }) {
             <Header nav={navigation} />
             <ScrollView>
                 <Text style={styles.title}>Ajouter un article</Text>
-                <View style={styles.titleInput}>
+                <View style={styles.titleInputContainer}>
                     <Text style={{ color: '#fff' }}>Titre de l'article : </Text>
                     <TextInput
-                        style={styles.input}
+                        style={styles.inputTitleArticle}
                         onChangeText={onChangeText}
                         value={newTitleArticle}
                         placeholder='Salut'
                     />
                 </View>
-                <Text style={styles.titleH2}>Texte de votre article</Text>
-                <View>
+                <Text style={styles.titleH2Article}>Texte de votre article :</Text>
+                <View style={styles.inputArticleContainer}>
                     <TextInput style={styles.inputArticle}
                         editable
                         multiline
@@ -47,46 +47,3 @@ export default function AddArticleScreen({ navigation }) {
         </SafeAreaView>
     )
 }
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        backgroundColor: "#0077B6",
-    },
-    title: {
-        color: '#FFFFFF',
-        fontSize: 40,
-        margin: 30,
-        textAlign: 'center',
-        fontFamily: 'Iceland_400Regular'
-    },
-    titleInput: {
-        flexDirection: "row",
-        justifyContent: "space-around",
-        marginBottom: "8%"
-    },
-    titleH2: {
-        fontFamily: 'Iceland_400Regular',
-        color: '#FFFFFF',
-        fontSize: 28,
-    },
-    input: {
-        backgroundColor: "#F0F0F0",
-        borderColor: 'black',
-        borderWidth: 1,
-        borderRadius: 3,
-        width: '50 %',
-        height: "95%",
-        paddingLeft: 15,
-    },
-    inputArticle: {
-        backgroundColor: "#F0F0F0",
-        borderColor: 'black',
-        borderWidth: 1,
-        borderRadius: 3,
-        width: '100 %',
-        height: "auto",
-        paddingLeft: 15,
-        marginBottom: "25%"
-    }
-})
