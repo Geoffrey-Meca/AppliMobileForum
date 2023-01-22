@@ -4,7 +4,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Pagination from '../../Composants/Pagination';
 import styles from '../../Composants/styles/styles';
 import { getArticles } from '../../../api';
-import Footer from '../../Composants/Footer';
 import Header from '../../Composants/Header'
 
 
@@ -48,13 +47,12 @@ export default function IndexArticleScreen({ navigation }) {
                 </View>
             </ScrollView>
             <Pagination
-            fetchData={fetchData}
-            page={page}
-            setPage={setPage}
-            totalItems={totalItems}
-            maxItems={maxItems}
+                fetchData={fetchData}
+                page={page}
+                setPage={setPage}
+                totalItems={totalItems}
+                maxItems={maxItems}
             />
-            <Footer />
         </SafeAreaView>
     )
 }

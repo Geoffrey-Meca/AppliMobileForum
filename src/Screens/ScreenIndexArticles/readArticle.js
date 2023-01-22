@@ -2,7 +2,6 @@ import React, { useState, useEffect, Fragment } from 'react'
 import { Text, StyleSheet, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getArticleById } from '../../../api';
-import Footer from '../../Composants/Footer';
 import Header from '../../Composants/Header';
 import BoutonApp from '../../Composants/Bouton';
 import ModalAddComment from '../../Composants/Modals/ModalAddComment';
@@ -91,7 +90,6 @@ export default function ReadArticle({ route, navigation }) {
                 )
                 }
             </ScrollView>
-            <Footer />
         </SafeAreaView>
     )
 }

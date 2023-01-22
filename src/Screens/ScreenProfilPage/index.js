@@ -6,7 +6,6 @@ import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 import BoutonApp from '../../Composants/Bouton'
 import { getMe } from '../../../api';
 import Header from '../../Composants/Header'
-import Footer from '../../Composants/Footer';
 
 import { login } from '../../../api';
 // Faire la logique/
@@ -52,7 +51,6 @@ export default function ProfilScreen({ navigation }) {
                 <BoutonApp text="Modifier" />
                 <BoutonApp text="Supprimer" />
             </ScrollView>
-            <Footer />
         </SafeAreaView>
     )
 }

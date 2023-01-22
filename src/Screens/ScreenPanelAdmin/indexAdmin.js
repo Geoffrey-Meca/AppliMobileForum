@@ -2,7 +2,6 @@ import { Text, StyleSheet, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import BoutonApp from '../../Composants/Bouton'
 import Header from '../../Composants/Header';
-import Footer from '../../Composants/Footer';
 
 export default function AdminScreen({ navigation }) {
 
@@ -14,7 +13,6 @@ export default function AdminScreen({ navigation }) {
                 <BoutonApp text="La liste des utilisateurs" onPress={() => navigation.navigate('Users')} />
                 <BoutonApp text="La liste des articles" onPress={() => navigation.navigate('ArticlesAdmin')} />
             </ScrollView>
-            <Footer />
         </SafeAreaView>
     )
 }
