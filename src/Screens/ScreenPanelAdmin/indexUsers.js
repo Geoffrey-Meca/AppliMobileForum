@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { getUsers, deleteUser } from '../../../api';
 import Header from '../../Composants/Header';
 import BoutonAdmin from '../../Composants/Bouton/indexAdmin';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useFocusEffect } from '@react-navigation/native';
 import Pagination from '../../Composants/Pagination';
 import styles from '../../../assets/styles/styles'
 

@@ -14,6 +14,7 @@ export default function UserProfileEditScreen({ navigation }) {
   const [user, setUser] = useState('');
   const route = useRoute();
   const userId = route.params.userId;
+  const refresh = route.params.refresh;
   const fetchData = async () => {
     getUserById(userId, (res) => {
       setUser(res.data)
@@ -21,11 +22,12 @@ export default function UserProfileEditScreen({ navigation }) {
   }
 
   useEffect(() => {
-    fetchData()
-  }, []);
+    fetchData();
+    if ({ "refresh": true }) { fetchData() };
+  }, [userId, route, refresh]);
 
   const editUser = async () => {
-    patchUser(userId, user.emeil, user.firstname, user.lastname, user.password, (res => {
+    patchUser(userId, user.email, user.firstname, user.lastname, (res => {
       console.log(res);
       Alert.alert(
         'Profil modifié',
@@ -73,19 +75,17 @@ export default function UserProfileEditScreen({ navigation }) {
             placeholder="Email"
           />
 
-          <Text style={styles.label}>Password :</Text>
+          {/* <Text style={styles.label}>Password :</Text>
           <TextInput
             style={styles.inputAdmin}
             onChangeText={(txt) => setUser({ ...user, password: txt })}
             value={user ? user.password : ""}
             placeholder="Modifiez votre mot de passe"
-          />
+          /> */}
 
           <View style={styles.btna}>
             <BoutonAdmin text="Modifier"
-              onPress={() => user.password ? editUser() :
-                Alert.alert(
-                  "Le champ mot de passe ne doit pas être vide")}
+              onPress={() => editUser()}
             />
             <BoutonAdmin text="Annuler"
               onPress={() => navigation.navigate('Users')}
