@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     },
     /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FORMULAIRE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
     formContainer: {
-        width: "80%",
+        width: "100%",
         alignItems: 'center',
 
     },
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: "5%",
     },
     butonStyleLitte: {
-        width: '25%',
+        width: '45%',
         height: 42,
         borderWidth: 2,
         borderRadius: 10,
@@ -135,7 +135,6 @@ const styles = StyleSheet.create({
     },
     inputArticle: {
         backgroundColor: "#F0F0F0",
-        borderColor: 'black',
         borderWidth: 1,
         borderRadius: 3,
         width: '100 %',
@@ -195,52 +194,46 @@ const styles = StyleSheet.create({
     /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX MODALS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
     modalContainer: {
         position: "absolute",
+        alignSelf: "center",
         backgroundColor: "#023E8A",
-        width: "100%",
-        height: 400,
-        top: "40%"
-    },
-    containerModalInscription: {
-        position: "absolute",
-        backgroundColor: "#023E8A",
-        width: "100%",
-        height: 520,
-        top: "30%"
-    },
-    modalCommentContainer: {
-        position: "absolute",
-        backgroundColor: "#48CAE4",
-        width: "100%",
-        borderRadius: 5,
+        width: "95%",
+        height: "auto",
+        top: "20%",
+        zIndex: 1,
         justifyContent: "center",
         alignItems: "center",
-        top: '40%',
-        zIndex: 1
+        borderRadius: 5,
+    },
+    modalCommentContainer: {
+        height: "auto",
+        position: "absolute",
+        alignSelf: "center",
+        backgroundColor: "#48CAE4",
+        width: "95%",
+        justifyContent: "center",
+        alignItems: "center",
+        top: '1%',
+        zIndex: 1,
+        borderRadius: 5,
     },
     closeBtn: {
         backgroundColor: "grey",
         textAlign: "center",
         fontSize: 26,
         width: 30,
+        borderTopRightRadius: 5
     },
     inputModalComment: {
         backgroundColor: "#F0F0F0",
         borderWidth: 1,
         borderRadius: 5,
-        width: '90 %',
-        height: 250,
+        width: "95%",
+        height: "auto",
         textAlignVertical: 'top',
-        marginTop: "5%",
+        marginTop: "2%",
+        marginBottom: "0%"
     },
-    inputModal: {
-        backgroundColor: "#F0F0F0",
-        borderWidth: 1,
-        borderRadius: 3,
-        width: '80 %',
-        height: 42,
-        margin: '5%',
-        padding: 5
-    },
+
     /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX PANEL ADMIN XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
 
     pageContainerAdmin: {
@@ -252,12 +245,7 @@ const styles = StyleSheet.create({
         padding: "5%",
         borderWidth: 1,
         backgroundColor: "#00B4D8",
-    },
 
-    btna: {
-        flexDirection: "row",
-        justifyContent: "center",
-        margin: "5%"
     },
     formArticleAdmin: {
         alignItems: "center"
@@ -276,7 +264,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     /*XXXXXXXXXXXTITLEXXXXXXXXXXX*/
-    titleHome: {
+    H1B: {
         fontSize: 55,
         margin: 20,
         textAlign: 'center',
@@ -316,12 +304,6 @@ const styles = StyleSheet.create({
         width: '50 %',
         height: "95%",
         paddingLeft: 15,
-    },
-    titleModal: {
-        color: '#fff',
-        fontSize: 30,
-        marginBottom: 20,
-        fontFamily: 'Iceland_400Regular'
     },
     titleH2Admin: {
         color: '#FFFFFF',

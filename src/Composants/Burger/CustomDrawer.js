@@ -2,6 +2,7 @@ import React from 'react'
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
 import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
+import clearCache from 'react-native-clear-cache';
 
 import { isLogged, isAdmin } from '../../../lib'
 
@@ -19,7 +20,11 @@ export default function CustomDrawer(props) {
                 {
                     text: "Oui", onPress: () => {
                         SecureStore.deleteItemAsync('jwt').then(
-                            props.navigation.navigate('Home')
+                            //props.navigation.navigate('Home')
+                            props.navigation.reset({
+                                index: 0,
+                                routes: [{ name: 'Home' }],
+                              })
                         )
                     }
                 }
