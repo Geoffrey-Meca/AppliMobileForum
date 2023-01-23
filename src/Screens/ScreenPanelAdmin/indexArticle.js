@@ -7,6 +7,8 @@ import Header from '../../Composants/Header';
 import { patchComment, deleteComment, getCommentsByArticle, patchArticle, getArticleById } from '../../../api';
 import Pagination from '../../Composants/Pagination';
 import styles from '../../../assets/styles/styles'
+import ButtonComponent from '../../Composants/Bouton/buttonComponent';
+
 
 export default function ArticleEditScreen({ navigation }) {
 
@@ -90,10 +92,19 @@ export default function ArticleEditScreen({ navigation }) {
           />
         </View>
         <View style={styles.OneLine}>
-          <BoutonAdmin text="Modifier"
+   
+          <ButtonComponent
+            contButon={styles.contenerCenter}
+            button={styles.butonStyleLarge}
+            txtButton={styles.textButon}
+            text={"Modifier"}
             onPress={() => editArticle()}
           />
-          <BoutonAdmin text="Annuler"
+          <ButtonComponent
+            contButon={styles.contenerCenter}
+            button={styles.butonStyleLarge}
+            txtButton={styles.textButon}
+            text={"Annuler"}
             onPress={() => navigation.navigate('ArticlesAdmin')}
           />
         </View>
@@ -117,8 +128,19 @@ export default function ArticleEditScreen({ navigation }) {
               style={styles.input}
             />
             <View style={styles.OneLine}>
-              <BoutonAdmin text="Modifier" onPress={() => editComment(item.id)} />
-              <BoutonAdmin text="Supprimer" onPress={() =>
+            <ButtonComponent
+              contButon={styles.contenerCenter}
+              button={styles.butonStyleLarge}
+              txtButton={styles.textButon}
+              text={"Modifer"}
+              onPress={() => editComment(item.id)}
+            />
+            <ButtonComponent
+              contButon={styles.contenerCenter}
+              button={styles.butonStyleLarge}
+              txtButton={styles.textButon}
+              text={"Modifer"}
+              onPress={() =>
                 Alert.alert(
                   "Vous êtes sur le point de supprimer le comment",
                   "Êtes-vous sur de vouloir procéder ?",
@@ -136,7 +158,8 @@ export default function ArticleEditScreen({ navigation }) {
 
                   ],
                 )}
-              />
+            />
+       
             </View>
           </View>
         ))

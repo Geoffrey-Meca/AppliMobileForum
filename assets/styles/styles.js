@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
     /*XXXXXXXXXXXInputWXXXXXXXXXXXX*/
     input: {
         backgroundColor: "#F0F0F0",
-        borderColor: 'black',
         borderWidth: 1,
         borderRadius: 3,
         width: '80 %',
@@ -71,6 +70,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: "5%",
         paddingVertical: "5%",
         borderWidth: 1,
+        borderRadius: 19,
         backgroundColor: "#F0F0F0",
     },
     /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX BOUTON XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
