@@ -77,7 +77,7 @@ export default function ArticleEditScreen({ navigation }) {
         <View style={styles.formArticleAdmin}>
           <Text style={styles.txt}>Titre de l'article :</Text>
           <TextInput
-            style={styles.inputAdmin}
+            style={styles.input}
             onChangeText={(txt) => setArticle({ ...article, title: txt })}
             value={article ? article.title : ""}
           />
@@ -89,7 +89,7 @@ export default function ArticleEditScreen({ navigation }) {
             value={article ? article.content : ""}
           />
         </View>
-        <View style={styles.btna}>
+        <View style={styles.OneLine}>
           <BoutonAdmin text="Modifier"
             onPress={() => editArticle()}
           />
@@ -114,9 +114,9 @@ export default function ArticleEditScreen({ navigation }) {
                 });
                 setComments({ 'hydra:member': updatedComments });
               }}
-              style={styles.inputAdmin}
+              style={styles.input}
             />
-            <View style={styles.btna}>
+            <View style={styles.OneLine}>
               <BoutonAdmin text="Modifier" onPress={() => editComment(item.id)} />
               <BoutonAdmin text="Supprimer" onPress={() =>
                 Alert.alert(
