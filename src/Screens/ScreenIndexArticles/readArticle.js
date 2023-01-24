@@ -24,10 +24,7 @@ export default function ReadArticle({ route, navigation }) {
 
     async function openAdd() {
         // Permet de forcé le refresh des commentaires.
-
-        if (isOpenAdd) {
-            await fetchData();
-        }
+        await fetchData();
         setIsOpenAdd(!isOpenAdd)
     }
     function brassageDate(date) {
@@ -45,13 +42,13 @@ export default function ReadArticle({ route, navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             <Header nav={navigation} />
-            <ScrollView style={{ marginBottom: "10%" }}>
+            <ScrollView>
                 {article && article.comments ? (
                     <View>
                         <Text style={styles.titleH2}>{article.title}</Text>
                         <View style={styles.Author}>
                             <Text style={styles.date}>Le {brassageDate(article.createdAt)}</Text>
-                            <Text style={styles.date}>Par : {article.userId.lastname + ' ' + article.userId.firstname}</Text>
+                            <Text style={styles.date}>Par : {article.userId.firstname + ' ' + article.userId.lastname}</Text>
                         </View>
                         <View style={styles.articleContainer}>
                             <Text style={styles.txt}>{article.content}</Text>

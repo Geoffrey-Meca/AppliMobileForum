@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 
 import { Text, Image, View, ScrollView } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
@@ -6,12 +6,16 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ModalConnexion from '../../Composants/Modals/ModalConnexion';
 import ModalInscription from '../../Composants/Modals/ModalInscription';
 import styles from '../../../assets/styles/styles';
-
+import { isLogged } from '../../../lib';
 import { useFonts, Iceland_400Regular } from '@expo-google-fonts/iceland';
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 
 
 export default function LandingScreen({ navigation }) {
+
+    
+    let log = isLogged()
+
     const [isFormConnexionVisible, setIsFormConnexionVisible] = useState(false)
     const [isFormInscriptionVisible, setIsFormInscriptionVisible] = useState(false)
 
@@ -39,7 +43,7 @@ export default function LandingScreen({ navigation }) {
                     />
                 </View>
                 <View style={styles.textContainer}>
-                    <Text style={styles.titleHome}>CODEHUB</Text>
+                    <Text style={styles.H1B}>CODEHUB</Text>
                 </View>
                 <ButtonComponent
                     contButon={styles.contenerCenter}
@@ -48,6 +52,8 @@ export default function LandingScreen({ navigation }) {
                     text={"Entrer"}
                     onPress={() => navigation.navigate('Articles')}
                 />
+               {log ? (<Text></Text>) : (
+                <Fragment>
                 <ButtonComponent
                     contButon={styles.contenerCenter}
                     button={styles.butonStyle}
@@ -62,6 +68,10 @@ export default function LandingScreen({ navigation }) {
                     text={"Inscription"}
                     onPress={_toggleFormInscription}
                 />
+                </Fragment>
+               )
+               } 
+       
                 {isFormConnexionVisible && <ModalConnexion onPress={_toggleFormConnexion} onClose={_toggleFormConnexion} nav={navigation} />}
                 {isFormInscriptionVisible && <ModalInscription onPress={_toggleFormInscription} onClose={_toggleFormInscription} nav={navigation} />}
                 <StatusBar style="light" />

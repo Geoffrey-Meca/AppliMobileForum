@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { TextInput, View, Text, Pressable, Alert, ScrollView } from 'react-native'
 import { login } from '../../../api';
-
-import BoutonApp from '../Bouton'
+import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 import styles from '../../../assets/styles/styles'
 
 
@@ -45,24 +44,29 @@ export default function ModalConnexion(props) {
             <ScrollView>
 
                 <View style={styles.formContainer}>
-                    <Text style={styles.titleModal}>Identifiez-vous</Text>
+                    <Text style={styles.titleH3}>Identifiez-vous</Text>
                     <TextInput
-                        style={styles.inputModal}
+                        style={styles.input}
                         onChangeText={onChangeEmail}
                         value={newEmail}
                         placeholder='Email'
                         keyboardType='email-address'
                     />
                     <TextInput
-                        style={styles.inputModal}
+                        style={styles.input}
                         onChangeText={onChangePassword}
                         value={newPassword}
                         placeholder='Password'
                         secureTextEntry={true}
                     />
-                    <BoutonApp text="Connexion"
-                        onPress={handleSubmit}
-                    />
+          
+                <ButtonComponent
+                    contButon={styles.contenerCenter}
+                    button={styles.butonStyle}
+                    txtButton={styles.textButon}
+                    text={"Connexion"}
+                    onPress={handleSubmit}
+                />
                 </View>
             </ScrollView>
         </View>

@@ -6,6 +6,8 @@ import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 import BoutonApp from '../../Composants/Bouton'
 import { getMe } from '../../../api';
 import Header from '../../Composants/Header'
+import clearCache from 'react-native-clear-cache';
+
 
 import { login } from '../../../api';
 // Faire la logique/
@@ -22,6 +24,7 @@ export default function ProfilScreen({ navigation }) {
         };
         fetchData();
     }, []);
+    console.log(user.userId)
     console.log(user.role)
     return (
         <SafeAreaView style={styles.container}>

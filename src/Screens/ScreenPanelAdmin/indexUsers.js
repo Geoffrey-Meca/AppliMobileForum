@@ -3,10 +3,13 @@ import { Text, View, ScrollView, Alert } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { getUsers, deleteUser } from '../../../api';
 import Header from '../../Composants/Header';
-import BoutonAdmin from '../../Composants/Bouton/indexAdmin';
+
 import { useRoute } from '@react-navigation/native';
+
 import Pagination from '../../Composants/Pagination';
-import styles from '../../../assets/styles/styles'
+import styles from '../../../assets/styles/styles';
+import ButtonComponent from '../../Composants/Bouton/buttonComponent';
+
 
 
 export default function IndexUsersScreen({ navigation }) {
@@ -33,7 +36,7 @@ export default function IndexUsersScreen({ navigation }) {
         <SafeAreaView style={styles.container}>
             <Header nav={navigation} />
             <Text style={styles.title}>{"Liste des utilisateurs"}</Text>
-            <ScrollView style={{ width: "100%" }}>
+            <ScrollView>
                 {users ? (users['hydra:member'].map((item, index) => (
                     <View style={styles.pageContainerAdmin} key={index}>
                         <Text style={{ color: "#fff", fontSize: 25, paddingBottom: "5%", fontFamily: 'Iceland_400Regular' }} >User: {item.id}</Text>
@@ -41,26 +44,38 @@ export default function IndexUsersScreen({ navigation }) {
                             <Text style={styles.linkUserAdmin} >{item.firstname} {item.lastname} : </Text>
                             <Text style={styles.linkUserAdmin} >{item.email}</Text>
                         </View>
-                        <View style={styles.btna} >
-                            <BoutonAdmin text="Modifier" onPress={() => navigation.navigate('User', { userId: item.id })} />
-                            <BoutonAdmin text="Supprimer" onPress={() =>
-                                Alert.alert(
-                                    "Vous êtes sur le point de supprimer l'utilisateur",
-                                    "Êtes-vous sur de vouloir procéder ?",
-                                    [
-                                        {
-                                            text: "Non",
-                                        },
-                                        {
-                                            text: 'Oui',
-                                            onPress: () => deleteUser(item.id, (res) => {
-                                                console.log(res.data);
-                                                navigation.navigate('Users', { refresh: true });
-                                            }),
-                                        },
-                                    ],
-                                )}
+                        <View style={styles.OneLine} >
+                            <ButtonComponent 
+                                contButon={styles.contenerCenter}
+                                button={styles.butonStyleLarge}
+                                txtButton={styles.textButon}
+                                text={"Modifier"}
+                                onPress={() => navigation.navigate('User', { userId: item.id })}
                             />
+                            <ButtonComponent 
+                                contButon={styles.contenerCenter}
+                                button={styles.butonStyleLarge}
+                                txtButton={styles.textButon}
+                                text={"Supprimer"}
+                                onPress={() =>
+                                    Alert.alert(
+                                        "Vous êtes sur le point de supprimer l'utilisateur",
+                                        "Êtes-vous sur de vouloir procéder ?",
+                                        [
+                                            {
+                                                text: "Non",
+                                            },
+                                            {
+                                                text: 'Oui',
+                                                onPress: () => deleteUser(item.id, (res) => {
+                                                    console.log(res.data);
+                                                    navigation.navigate('Users', { refresh: true });
+                                                }),
+                                            },
+                                        ],
+                                    )}
+                            />
+
                         </View>
                     </View>
                 ))

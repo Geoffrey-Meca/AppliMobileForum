@@ -3,17 +3,19 @@ import { Text, View, TextInput, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { getUserById, patchUser } from '../../../api';
 import { useRoute } from '@react-navigation/native';
-import BoutonAdmin from '../../Composants/Bouton/indexAdmin';
 import Header from '../../Composants/Header';
-import { ScrollView } from 'react-native-gesture-handler';
-import styles from '../../../assets/styles/styles'
 
+import { ScrollView } from 'react-native-gesture-handler';
+import styles from '../../../assets/styles/styles';
+import { SelectList } from 'react-native-dropdown-select-list'
+import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 
 export default function UserProfileEditScreen({ navigation }) {
 
   const [user, setUser] = useState('');
   const route = useRoute();
   const userId = route.params.userId;
+  const refresh = route.params.refresh;
   const fetchData = async () => {
     getUserById(userId, (res) => {
       setUser(res.data)
@@ -21,11 +23,14 @@ export default function UserProfileEditScreen({ navigation }) {
   }
 
   useEffect(() => {
-    fetchData()
-  }, []);
+    fetchData();
+    if ({ "refresh": true }) { fetchData() };
+  }, [userId, route, refresh]);
 
   const editUser = async () => {
-    patchUser(userId, user.emeil, user.firstname, user.lastname, user.password, (res => {
+
+    patchUser(userId, user.email, user.firstname, user.lastname, user.roles, (res => {
+
       console.log(res);
       Alert.alert(
         'Profil modifié',
@@ -38,20 +43,24 @@ export default function UserProfileEditScreen({ navigation }) {
         ],
       );
     }))
-
-
   }
+  const [selected, setSelected] = React.useState("");
+  
+  const data = [
+      {key:'USER', value: ["ROLE_USER"]},
+      {key:'ADMIN', value: ["ROLE_ADMIN"]},
+  ]
+  console.log(user.roles);
 
   return (
     <SafeAreaView style={styles.container}>
       <Header nav={navigation} />
-      <ScrollView style={{ width: "100%" }}>
-        <Text style={styles.title}>Modifier l'utilisateur n° {userId}</Text>
+        <Text style={styles.titleH3}>Modifier l'utilisateur n° {userId}</Text>
         <View>
 
           <Text style={styles.label}>Prénom :</Text>
           <TextInput
-            style={styles.inputAdmin}
+            style={styles.input}
             onChangeText={(txt) => setUser({ ...user, firstname: txt })}
             value={user ? user.firstname : ""}
             placeholder="Prénom"
@@ -59,7 +68,7 @@ export default function UserProfileEditScreen({ navigation }) {
 
           <Text style={styles.label}>Nom :</Text>
           <TextInput
-            style={styles.inputAdmin}
+            style={styles.input}
             onChangeText={(txt) => setUser({ ...user, lastname: txt })}
             value={user ? user.lastname : ""}
             placeholder="Nom"
@@ -67,32 +76,48 @@ export default function UserProfileEditScreen({ navigation }) {
 
           <Text style={styles.label}>Email :</Text>
           <TextInput
-            style={styles.inputAdmin}
+            style={styles.input}
             onChangeText={(txt) => setUser({ ...user, email: txt })}
             value={user ? user.email : ""}
             placeholder="Email"
           />
+          <Text style={styles.label}>Role : {user.roles.includes('ROLE_ADMIN') ? "ADMIN" : "USER"} </Text>
+          <SelectList 
+            setSelected={(val) => setSelected(val)}
+            boxStyles={styles.inputAdmin}
+            onSelect={() => setUser({ ...user, roles: selected })} 
+            data={data} 
+            save="value"
+            search={false}
+          />
 
-          <Text style={styles.label}>Password :</Text>
+          {/* <Text style={styles.label}>Password :</Text>
           <TextInput
-            style={styles.inputAdmin}
+            style={styles.input}
             onChangeText={(txt) => setUser({ ...user, password: txt })}
             value={user ? user.password : ""}
             placeholder="Modifiez votre mot de passe"
-          />
+          /> */}
 
-          <View style={styles.btna}>
-            <BoutonAdmin text="Modifier"
+          <View style={styles.OneLine}>
+            <ButtonComponent 
+              contButon={styles.contenerCenter}
+              button={styles.butonStyleLarge}
+              txtButton={styles.textButon}
+              text={"Modifier"}
               onPress={() => user.password ? editUser() :
                 Alert.alert(
                   "Le champ mot de passe ne doit pas être vide")}
             />
-            <BoutonAdmin text="Annuler"
+          <ButtonComponent 
+              contButon={styles.contenerCenter}
+              button={styles.butonStyleLarge}
+              txtButton={styles.textButon}
+              text={"Annuler"}
               onPress={() => navigation.navigate('Users')}
             />
           </View>
         </View>
-      </ScrollView>
     </SafeAreaView >
   )
 }

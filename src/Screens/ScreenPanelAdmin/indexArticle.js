@@ -7,6 +7,8 @@ import Header from '../../Composants/Header';
 import { patchComment, deleteComment, getCommentsByArticle, patchArticle, getArticleById } from '../../../api';
 import Pagination from '../../Composants/Pagination';
 import styles from '../../../assets/styles/styles'
+import ButtonComponent from '../../Composants/Bouton/buttonComponent';
+
 
 export default function ArticleEditScreen({ navigation }) {
 
@@ -77,7 +79,7 @@ export default function ArticleEditScreen({ navigation }) {
         <View style={styles.formArticleAdmin}>
           <Text style={styles.txt}>Titre de l'article :</Text>
           <TextInput
-            style={styles.inputAdmin}
+            style={styles.input}
             onChangeText={(txt) => setArticle({ ...article, title: txt })}
             value={article ? article.title : ""}
           />
@@ -89,11 +91,20 @@ export default function ArticleEditScreen({ navigation }) {
             value={article ? article.content : ""}
           />
         </View>
-        <View style={styles.btna}>
-          <BoutonAdmin text="Modifier"
+        <View style={styles.OneLine}>
+   
+          <ButtonComponent
+            contButon={styles.contenerCenter}
+            button={styles.butonStyleLarge}
+            txtButton={styles.textButon}
+            text={"Modifier"}
             onPress={() => editArticle()}
           />
-          <BoutonAdmin text="Annuler"
+          <ButtonComponent
+            contButon={styles.contenerCenter}
+            button={styles.butonStyleLarge}
+            txtButton={styles.textButon}
+            text={"Annuler"}
             onPress={() => navigation.navigate('ArticlesAdmin')}
           />
         </View>
@@ -114,11 +125,22 @@ export default function ArticleEditScreen({ navigation }) {
                 });
                 setComments({ 'hydra:member': updatedComments });
               }}
-              style={styles.inputAdmin}
+              style={styles.input}
             />
-            <View style={styles.btna}>
-              <BoutonAdmin text="Modifier" onPress={() => editComment(item.id)} />
-              <BoutonAdmin text="Supprimer" onPress={() =>
+            <View style={styles.OneLine}>
+            <ButtonComponent
+              contButon={styles.contenerCenter}
+              button={styles.butonStyleLarge}
+              txtButton={styles.textButon}
+              text={"Modifer"}
+              onPress={() => editComment(item.id)}
+            />
+            <ButtonComponent
+              contButon={styles.contenerCenter}
+              button={styles.butonStyleLarge}
+              txtButton={styles.textButon}
+              text={"Supprimer"}
+              onPress={() =>
                 Alert.alert(
                   "Vous êtes sur le point de supprimer le comment",
                   "Êtes-vous sur de vouloir procéder ?",
@@ -136,7 +158,8 @@ export default function ArticleEditScreen({ navigation }) {
 
                   ],
                 )}
-              />
+            />
+       
             </View>
           </View>
         ))
