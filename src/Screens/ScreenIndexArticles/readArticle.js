@@ -24,10 +24,7 @@ export default function ReadArticle({ route, navigation }) {
 
     async function openAdd() {
         // Permet de forcé le refresh des commentaires.
-
-        if (isOpenAdd) {
-            await fetchData();
-        }
+        await fetchData();
         setIsOpenAdd(!isOpenAdd)
     }
     function brassageDate(date) {

@@ -2,11 +2,14 @@ import React from 'react'
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
 import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
-import clearCache from 'react-native-clear-cache';
+import { useState } from 'react/cjs/react.production.min'
+
 
 import { isLogged, isAdmin } from '../../../lib'
 
 export default function CustomDrawer(props) {
+
+
     const Admin = isAdmin()
     const isLog = isLogged()
     function logOut() {

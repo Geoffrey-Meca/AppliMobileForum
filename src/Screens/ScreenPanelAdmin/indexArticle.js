@@ -139,7 +139,7 @@ export default function ArticleEditScreen({ navigation }) {
               contButon={styles.contenerCenter}
               button={styles.butonStyleLarge}
               txtButton={styles.textButon}
-              text={"Modifer"}
+              text={"Supprimer"}
               onPress={() =>
                 Alert.alert(
                   "Vous êtes sur le point de supprimer le comment",
