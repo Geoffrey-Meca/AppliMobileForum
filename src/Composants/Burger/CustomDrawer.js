@@ -1,24 +1,40 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import { useState, useEffect } from 'react';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
-import { Image, Text, TouchableOpacity, View } from 'react-native'
+import { Image,Text, TouchableOpacity, View } from 'react-native'
 import styles from '../../../assets/styles/styles'
-
-// import * as SecureStore from 'expo-secure-store'
-
+import { getMe } from '../../../api';
 import { isLogged, isAdmin, logOut } from '../../../lib'
 
 export default function CustomDrawer(props) {
 
-    let Admin = isAdmin()
-    let isLog = isLogged()
+    const [user, setUser] = useState("");
+
+    useEffect(() => {
+        const fetchData = async () => {
+            getMe((res) => {
+                setUser(res.data);
+            });
+        };
+        fetchData();
+    }, []);
+
+    const Admin = isAdmin()
+    const isLog = isLogged()
 
     return (
         <View style={{ flex: 1 }}>
             <DrawerContentScrollView {...props}>
                 <View style={styles.header}>
-                    <View style={styles.OneLine}>
-                        <Text style={styles.headerTxt}></Text>
-                        <Text style={styles.headerTxt}></Text>
+                    <View>
+                        {isLog ?
+                            (<>
+                                <Text style={styles.headerTxt}>{user.firstname} {user.lastname}</Text>
+                                <Text style={styles.headerTxt}>{user.email}</Text>
+                            </>
+                            ) :
+                            (<Text style={styles.headerTxt}>Vous nêtes pas connecté</Text>)
+                        }
                     </View>
                     <Image style={styles.imgDrawer} source={require('../../../assets/Pictures/320px-Emblème_de_l\'Ordre_Jedi..png')} />
                 </View>
@@ -34,7 +50,7 @@ export default function CustomDrawer(props) {
                 </View>
 
             </DrawerContentScrollView >
-            <TouchableOpacity style={styles.footer} onPress={{}}>
+            <TouchableOpacity style={styles.footer} onPress={() => logOut(props.navigation)}>
                 {isLog && <Text>Deconnexion</Text>}
             </TouchableOpacity>
         </View >

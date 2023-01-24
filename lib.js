@@ -62,6 +62,7 @@ const useRefreshNavigation = (routeName) => {
 
 
 function logOut(navigation) {
+
     Alert.alert(
         "Vous êtes sur le point de vous déconnecter",
         "Êtes-vous sur de vouloir procéder ?",
