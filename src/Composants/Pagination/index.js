@@ -9,18 +9,18 @@ export default function Pagination({ fetchData, page, setPage, totalItems, maxIt
     const pagesNom = Math.ceil(totalItems / maxItems);
 
     useEffect(() => {
+        fetchData()
         setNext(false)
         setPrevious(false)
         pageCheck(page)
-        fetchData()
-    }, [page]);
+    }, [totalItems, page]);
 
     const pageCheck = (page) => {
         if (page == pagesNom) {
             setPage(pagesNom)
             setNext(true)
         }
-        else if (page == 1) {
+        if (page == 1) {
             setPrevious(true)
         }
     }

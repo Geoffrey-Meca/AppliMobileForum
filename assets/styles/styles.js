@@ -131,7 +131,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#48CAE4",
         marginVertical: "7%",
 
-    }, titleInputContainer: {
+    }, 
+    titleInputContainer: {
         flexDirection: "row",
         justifyContent: "space-around",
         marginBottom: "8%"

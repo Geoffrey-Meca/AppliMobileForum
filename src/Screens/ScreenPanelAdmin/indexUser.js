@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, TextInput, StyleSheet, Alert } from 'react-native';
+import { Text, View, TextInput, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { getUserById, patchUser } from '../../../api';
 import { useRoute } from '@react-navigation/native';

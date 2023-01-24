@@ -1,18 +1,13 @@
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store'
-import { useNavigation } from '@react-navigation/native';
-import { Alert } from 'react-native'
 const getJwtToken = async () => {
     const token = await SecureStore.getItemAsync('jwt');
-    if (token) {
+    if(token){
         api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
 }
 const api = axios.create({
-    baseURL: 'https://rany-alo.students-laplateforme.io/app-mobile-forum/public/api',
-    // headers: {
-    //     'Content-type': 'application/ld+json'
-    // }
+    baseURL: 'https://rany-alo.students-laplateforme.io/app-mobile-forum/public/api'
 });
 
 const request = async (method, url, data, callback) => {
@@ -52,7 +47,7 @@ const getArticles = (page, callback) => {
 
 const getArticleById = (id, callback) => {
     request("get", `/article/${id}`, null, (res) => {
-        return callback(res)
+            return callback(res)
     });
 }
 const postArticle = (title, content, callback) => {
@@ -86,7 +81,7 @@ const getUserById = (id, callback) => {
     });
 }
 const postUser = (email, firstname, lastname, password, callback) => {
-    request("post", `/inscription`, { email, firstname, lastname, password }, (res) => {
+    request("post", `/inscription`, {email, firstname, lastname, password}, (res) => {
         return callback(res)
     });
 }

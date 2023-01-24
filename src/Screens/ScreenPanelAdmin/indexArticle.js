@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, TextInput, StyleSheet, Alert, ScrollView } from 'react-native';
+import { Text, View, TextInput, Alert, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useRoute } from '@react-navigation/native';
 import BoutonAdmin from '../../Composants/Bouton/indexAdmin';
