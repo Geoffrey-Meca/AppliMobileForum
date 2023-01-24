@@ -90,8 +90,10 @@ const postUser = (email, firstname, lastname, password, callback) => {
         return callback(res)
     });
 }
-const patchUser = (id, email, firstname, lastname, callback) => {
-    request("patch", `/userProfileEdit/${id}`, { email, firstname, lastname }, (res) => {
+
+const patchUser = (id, email, firstname, lastname, roles, callback) => {
+    request("patch", `/userProfileEdit/${id}`, { email, firstname, lastname, roles }, (res) => {
+
         return callback(res)
     });
 }

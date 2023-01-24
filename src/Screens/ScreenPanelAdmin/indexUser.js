@@ -4,10 +4,11 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { getUserById, patchUser } from '../../../api';
 import { useRoute } from '@react-navigation/native';
 import Header from '../../Composants/Header';
+
+import { ScrollView } from 'react-native-gesture-handler';
+import styles from '../../../assets/styles/styles';
+import { SelectList } from 'react-native-dropdown-select-list'
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
-
-import styles from '../../../assets/styles/styles'
-
 
 export default function UserProfileEditScreen({ navigation }) {
 
@@ -27,7 +28,9 @@ export default function UserProfileEditScreen({ navigation }) {
   }, [userId, route, refresh]);
 
   const editUser = async () => {
-    patchUser(userId, user.email, user.firstname, user.lastname, (res => {
+
+    patchUser(userId, user.email, user.firstname, user.lastname, user.roles, (res => {
+
       console.log(res);
       Alert.alert(
         'Profil modifié',
@@ -40,9 +43,14 @@ export default function UserProfileEditScreen({ navigation }) {
         ],
       );
     }))
-
-
   }
+  const [selected, setSelected] = React.useState("");
+  
+  const data = [
+      {key:'USER', value: ["ROLE_USER"]},
+      {key:'ADMIN', value: ["ROLE_ADMIN"]},
+  ]
+  console.log(user.roles);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -72,6 +80,15 @@ export default function UserProfileEditScreen({ navigation }) {
             onChangeText={(txt) => setUser({ ...user, email: txt })}
             value={user ? user.email : ""}
             placeholder="Email"
+          />
+          <Text style={styles.label}>Role : {user.roles.includes('ROLE_ADMIN') ? "ADMIN" : "USER"} </Text>
+          <SelectList 
+            setSelected={(val) => setSelected(val)}
+            boxStyles={styles.inputAdmin}
+            onSelect={() => setUser({ ...user, roles: selected })} 
+            data={data} 
+            save="value"
+            search={false}
           />
 
           {/* <Text style={styles.label}>Password :</Text>
