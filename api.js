@@ -1,8 +1,9 @@
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store'
+import { Alert } from 'react-native';
 const getJwtToken = async () => {
     const token = await SecureStore.getItemAsync('jwt');
-    if (token) {
+    if(token){
         api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
 }
@@ -30,10 +31,11 @@ const request = async (method, url, data, callback) => {
             console.log(error.response.data.message)
             if (error.response.data.message == 'Expired JWT Token') {
                 SecureStore.deleteItemAsync('jwt').then(() => {
-                    Alert.alert(`Vous avez été déconnecté`, `Veuillez vous re-connecter pour continuer`, [{
-                        style: 'cancel'
-                    }])
                 })
+                Alert.alert('Votre session a expiré', 'Veuillez vous re-connecter pour continuer', [
+                    { text: 'OK', onPress: () =>  {} }
+                ])
+                return null
             }
             return callback(error.response)
         });
@@ -47,7 +49,7 @@ const getArticles = (page, callback) => {
 
 const getArticleById = (id, callback) => {
     request("get", `/article/${id}`, null, (res) => {
-        return callback(res)
+            return callback(res)
     });
 }
 const postArticle = (title, content, callback) => {
@@ -81,19 +83,12 @@ const getUserById = (id, callback) => {
     });
 }
 const postUser = (email, firstname, lastname, password, callback) => {
-    request("post", `/inscription`, { email, firstname, lastname, password }, (res) => {
+    request("post", `/inscription`, {email, firstname, lastname, password}, (res) => {
         return callback(res)
     });
 }
-
-const patchUser = (id, email, firstname, lastname, roles, callback) => {
-    request("patch", `/userProfileEdit/${id}`, { email, firstname, lastname, roles }, (res) => {
-        return callback(res)
-    });
-}
-const editUser = (id, email, firstname, lastname, password, callback) => {
+const patchUser = (id, email, firstname, lastname, password, callback) => {
     request("patch", `/userProfileEdit/${id}`, { email, firstname, lastname, password }, (res) => {
-
         return callback(res)
     });
 }
@@ -154,7 +149,6 @@ module.exports = {
     getUserById,
     postUser,
     patchUser,
-    editUser,
     deleteUser,
     getComments,
     getCommentById,

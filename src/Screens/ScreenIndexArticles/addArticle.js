@@ -25,10 +25,10 @@ export default function AddArticleScreen({ navigation }) {
 
             postArticle(newTitleArticle, newArticle, (res => {
                 if (res.status != 201) {
-                    Alert.alert("Erreur")
+                    Alert.alert("Erreur", `${res.data.message}`)
 
                 } else {
-                    Alert.alert('Votre article a bien était publié')
+                    Alert.alert('Votre article a bien été publié')
                     navigation.navigate('Articles')
                 }
             }))
