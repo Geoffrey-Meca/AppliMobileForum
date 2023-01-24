@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image,Text, TouchableOpacity, View } from 'react-native'
+import styles from '../../../assets/styles/styles'
 import { getMe } from '../../../api';
-
 import { isLogged, isAdmin, logOut } from '../../../lib'
 
 export default function CustomDrawer(props) {
@@ -35,9 +35,8 @@ export default function CustomDrawer(props) {
                             ) :
                             (<Text style={styles.headerTxt}>Vous nêtes pas connecté</Text>)
                         }
-
                     </View>
-                    <Image style={styles.img} source={require('../../../assets/Pictures/320px-Emblème_de_l\'Ordre_Jedi..png')} />
+                    <Image style={styles.imgDrawer} source={require('../../../assets/Pictures/320px-Emblème_de_l\'Ordre_Jedi..png')} />
                 </View>
                 <View style={styles.linkText}>
 
@@ -57,38 +56,3 @@ export default function CustomDrawer(props) {
         </View >
     )
 }
-const styles = StyleSheet.create({
-    header: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: 20,
-        backgroundColor: "#f6f6f6",
-        marginBottom: 20
-    },
-    img: {
-        width: 60,
-        height: 60,
-        radius: 30
-    },
-    headerTxt: {
-        margin: 5
-    },
-    linkText: {
-        color: "red",
-        fontSize: 30
-    },
-    footer: {
-        position: "absolute",
-        width: "100%",
-        height: "10%",
-        bottom: 0,
-        backgroundColor: "#f6f6f6",
-        padding: 20,
-        alignItems: "center",
-        justifyContent: "center"
-    },
-    hidden: {
-        display: "none"
-    }
-})

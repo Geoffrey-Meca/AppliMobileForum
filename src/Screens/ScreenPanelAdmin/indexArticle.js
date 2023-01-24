@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Text, View, TextInput, Alert, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useRoute } from '@react-navigation/native';
-import BoutonAdmin from '../../Composants/Bouton/indexAdmin';
 import Header from '../../Composants/Header';
 import { patchComment, deleteComment, getCommentsByArticle, patchArticle, getArticleById } from '../../../api';
 import Pagination from '../../Composants/Pagination';
