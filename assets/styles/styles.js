@@ -131,7 +131,6 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: "#48CAE4",
         marginVertical: "7%",
-
     },
     inputArticle: {
         backgroundColor: "#F0F0F0",
