@@ -49,7 +49,7 @@ const getArticles = (page, callback) => {
 
 const getArticleById = (id, callback) => {
     request("get", `/article/${id}`, null, (res) => {
-            return callback(res)
+        return callback(res)
     });
 }
 const postArticle = (title, content, callback) => {
@@ -83,12 +83,19 @@ const getUserById = (id, callback) => {
     });
 }
 const postUser = (email, firstname, lastname, password, callback) => {
-    request("post", `/inscription`, {email, firstname, lastname, password}, (res) => {
+    request("post", `/inscription`, { email, firstname, lastname, password }, (res) => {
         return callback(res)
     });
 }
-const patchUser = (id, email, firstname, lastname, password, callback) => {
+
+const patchUser = (id, email, firstname, lastname, roles, callback) => {
+    request("patch", `/userProfileEdit/${id}`, { email, firstname, lastname, roles }, (res) => {
+        return callback(res)
+    });
+}
+const editUser = (id, email, firstname, lastname, password, callback) => {
     request("patch", `/userProfileEdit/${id}`, { email, firstname, lastname, password }, (res) => {
+
         return callback(res)
     });
 }
@@ -149,6 +156,7 @@ module.exports = {
     getUserById,
     postUser,
     patchUser,
+    editUser,
     deleteUser,
     getComments,
     getCommentById,
