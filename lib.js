@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import * as SecureStore from 'expo-secure-store'
 import jwtDecode from 'jwt-decode';
+import { Alert } from 'react-native';
 
 const isLogged = () => {
     const [isLogged, setIsLogged] = useState(false);
@@ -59,8 +60,28 @@ const useRefreshNavigation = (routeName) => {
     return navigateWithRefresh;
 };
 
+
+function logOut(navigation) {
+    Alert.alert(
+        "Vous êtes sur le point de vous déconnecter",
+        "Êtes-vous sur de vouloir procéder ?",
+        [
+            {
+                text: "Non",
+            },
+            {
+                text: "Oui", onPress: () => {
+                    SecureStore.deleteItemAsync('jwt').then(
+                        navigation.navigate('Home')
+                    )
+                }
+            }
+        ]
+    );
+}
 module.exports = {
     isLogged,
     isAdmin,
-    useRefreshNavigation
+    useRefreshNavigation,
+    logOut
 }

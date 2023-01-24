@@ -1,39 +1,17 @@
 import React from 'react'
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
 import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import * as SecureStore from 'expo-secure-store'
-import { useState } from 'react/cjs/react.production.min'
+// import * as SecureStore from 'expo-secure-store'
 
-
-import { isLogged, isAdmin } from '../../../lib'
+import { isLogged, isAdmin, logOut } from '../../../lib'
 
 export default function CustomDrawer(props) {
 
-
     const Admin = isAdmin()
     const isLog = isLogged()
-    function logOut() {
-        Alert.alert(
-            "Vous êtes sur le point de vous déconnecter",
-            "Êtes-vous sur de vouloir procéder ?",
-            [
-                {
-                    text: "Non",
-                },
-                {
-                    text: "Oui", onPress: () => {
-                        SecureStore.deleteItemAsync('jwt').then(
-                            //props.navigation.navigate('Home')
-                            props.navigation.reset({
-                                index: 0,
-                                routes: [{ name: 'Home' }],
-                              })
-                        )
-                    }
-                }
-            ]
-        );
-    }
+    // const deco = logOut()
+
+
     return (
         <View style={{ flex: 1 }}>
             <DrawerContentScrollView {...props}>
@@ -48,8 +26,8 @@ export default function CustomDrawer(props) {
 
                     <DrawerItem label={'Home'} onPress={() => props.navigation.navigate('Home')} />
                     <DrawerItem label={'Articles'} onPress={() => props.navigation.navigate('Articles')} />
-                    <DrawerItem label={'Ajouter un article'} onPress={() => props.navigation.navigate('AddArticle')} />
                     <DrawerItem label={'Profil'} onPress={() => props.navigation.navigate('Profil')} />
+                    {isLog && <DrawerItem label={'Ajouter un article'} onPress={() => props.navigation.navigate('AddArticle')} />}
                     {!isLog && <DrawerItem label={'Connexion'} onPress={() => props.navigation.navigate('Connexion')} />}
                     {!isLog && <DrawerItem label={'Inscription'} onPress={() => props.navigation.navigate('Inscription')} />}
                     {Admin && < DrawerItem label={'Admin'} onPress={() => props.navigation.navigate('AdminScreen')} />}

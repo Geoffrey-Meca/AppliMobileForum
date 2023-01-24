@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as SecureStore from 'expo-secure-store'
 const getJwtToken = async () => {
     const token = await SecureStore.getItemAsync('jwt');
-    if(token){
+    if (token) {
         api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
 }
@@ -47,11 +47,11 @@ const getArticles = (page, callback) => {
 
 const getArticleById = (id, callback) => {
     request("get", `/article/${id}`, null, (res) => {
-            return callback(res)
+        return callback(res)
     });
 }
 const postArticle = (title, content, callback) => {
-    request("post", `/articles`, { title, content }, (res) => {
+    request("post", `/articlePost`, { title, content }, (res) => {
         return callback(res)
     });
 }
@@ -81,13 +81,18 @@ const getUserById = (id, callback) => {
     });
 }
 const postUser = (email, firstname, lastname, password, callback) => {
-    request("post", `/inscription`, {email, firstname, lastname, password}, (res) => {
+    request("post", `/inscription`, { email, firstname, lastname, password }, (res) => {
         return callback(res)
     });
 }
 
 const patchUser = (id, email, firstname, lastname, roles, callback) => {
     request("patch", `/userProfileEdit/${id}`, { email, firstname, lastname, roles }, (res) => {
+        return callback(res)
+    });
+}
+const editUser = (id, email, firstname, lastname, password, callback) => {
+    request("patch", `/userProfileEdit/${id}`, { email, firstname, lastname, password }, (res) => {
 
         return callback(res)
     });
@@ -149,6 +154,7 @@ module.exports = {
     getUserById,
     postUser,
     patchUser,
+    editUser,
     deleteUser,
     getComments,
     getCommentById,

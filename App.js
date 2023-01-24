@@ -4,16 +4,16 @@ import React from 'react';
 // Importation des Pages Screen
 import LandingScreen from './src/Screens/ScreenHome';
 import ProfilScreen from './src/Screens/ScreenProfilPage';
-import IndexArticleScreen from './src/Screens/ScreenIndexArticles';
 import ConnexionScreen from './src/Screens/ScreenConnexion';
 import InscriptionScreen from './src/Screens/ScreenInscription';
+import IndexArticleScreen from './src/Screens/ScreenIndexArticles';
 import ReadArticle from './src/Screens/ScreenIndexArticles/readArticle';
+import AddArticleScreen from './src/Screens/ScreenIndexArticles/addArticle';
 import AdminScreen from './src/Screens/ScreenPanelAdmin/indexAdmin';
 import IndexUsersScreen from './src/Screens/ScreenPanelAdmin/indexUsers';
 import UserProfileEditScreen from './src/Screens/ScreenPanelAdmin/indexUser';
 import IndexArticlesScreen from './src/Screens/ScreenPanelAdmin/indexArticles';
 import ArticleEditScreen from './src/Screens/ScreenPanelAdmin/indexArticle';
-import AddArticleScreen from './src/Screens/ScreenAddArticle';
 // Importation pour la navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';

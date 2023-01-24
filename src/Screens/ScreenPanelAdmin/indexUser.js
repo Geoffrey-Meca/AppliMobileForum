@@ -13,6 +13,7 @@ import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 export default function UserProfileEditScreen({ navigation }) {
 
   const [user, setUser] = useState('');
+
   const route = useRoute();
   const userId = route.params.userId;
   const refresh = route.params.refresh;
