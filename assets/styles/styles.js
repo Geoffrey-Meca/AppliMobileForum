@@ -11,26 +11,7 @@ const styles = StyleSheet.create({
         alignItems: "flex-start",
         marginLeft: "10%"
     },
-    titleHome: {
-        fontSize: 55,
-        margin: 20,
-        textAlign: 'center',
-        fontFamily: 'Iceland_400Regular'
-    },
-    title: {
-        color: '#FFFFFF',
-        fontSize: 40,
-        margin: 30,
-        textAlign: 'center',
-        fontFamily: 'Iceland_400Regular'
-    },
-    titleH2: {
-        color: '#FFFFFF',
-        fontSize: 35,
-        margin: 15,
-        textAlign: 'center',
-        fontFamily: 'Iceland_400Regular'
-    },
+    
     imgContainer: {
         alignItems: "center"
     },
@@ -69,13 +50,13 @@ const styles = StyleSheet.create({
     },
     /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FORMULAIRE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
     formContainer: {
-        width: "80%",
+        width: "100%",
         alignItems: 'center',
 
     },
+    /*XXXXXXXXXXXInputWXXXXXXXXXXXX*/
     input: {
         backgroundColor: "#F0F0F0",
-        borderColor: 'black',
         borderWidth: 1,
         borderRadius: 3,
         width: '80 %',
@@ -83,7 +64,27 @@ const styles = StyleSheet.create({
         margin: '5%',
         paddingLeft: 15,
     },
+    inputContentArticle: {
+        width: "98%",
+        marginTop: "5%",
+        paddingHorizontal: "5%",
+        paddingVertical: "5%",
+        borderWidth: 1,
+        borderRadius: 19,
+        backgroundColor: "#F0F0F0",
+    },
     /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX BOUTON XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+    butonStyleLarge: {
+        width: '75%',
+        height: 42,
+        borderWidth: 2,
+        borderRadius: 10,
+        backgroundColor: "#CAF0F8",
+        justifyContent: "center",
+        alignItems: "center",
+        margin: 20,
+        paddingHorizontal: "5%",
+    },
     butonStyle: {
         width: '50%',
         height: 42,
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: "5%",
     },
     butonStyleLitte: {
-        width: '50%',
+        width: '45%',
         height: 42,
         borderWidth: 2,
         borderRadius: 10,
@@ -131,28 +132,9 @@ const styles = StyleSheet.create({
         backgroundColor: "#48CAE4",
         marginVertical: "7%",
 
-    }, titleInputContainer: {
-        flexDirection: "row",
-        justifyContent: "space-around",
-        marginBottom: "8%"
-    },
-    titleH2Article: {
-        fontFamily: 'Iceland_400Regular',
-        color: '#FFFFFF',
-        fontSize: 28,
-    },
-    inputTitleArticle: {
-        backgroundColor: "#F0F0F0",
-        borderColor: 'black',
-        borderWidth: 1,
-        borderRadius: 3,
-        width: '50 %',
-        height: "95%",
-        paddingLeft: 15,
     },
     inputArticle: {
         backgroundColor: "#F0F0F0",
-        borderColor: 'black',
         borderWidth: 1,
         borderRadius: 3,
         width: '100 %',
@@ -212,66 +194,48 @@ const styles = StyleSheet.create({
     /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX MODALS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
     modalContainer: {
         position: "absolute",
+        alignSelf: "center",
         backgroundColor: "#023E8A",
-        width: "100%",
-        height: 400,
-        top: "40%"
-    },
-    containerModalInscription: {
-        position: "absolute",
-        backgroundColor: "#023E8A",
-        width: "100%",
-        height: 520,
-        top: "30%"
-    },
-    modalCommentContainer: {
-        position: "absolute",
-        backgroundColor: "#48CAE4",
-        width: "100%",
-        borderRadius: 5,
+        width: "95%",
+        height: "auto",
+        top: "20%",
+        zIndex: 1,
         justifyContent: "center",
         alignItems: "center",
-        top: '40%',
-        zIndex: 1
+        borderRadius: 5,
+    },
+    modalCommentContainer: {
+        height: "auto",
+        position: "absolute",
+        alignSelf: "center",
+        backgroundColor: "#48CAE4",
+        width: "95%",
+        justifyContent: "center",
+        alignItems: "center",
+        top: '1%',
+        zIndex: 1,
+        borderRadius: 5,
     },
     closeBtn: {
         backgroundColor: "grey",
         textAlign: "center",
         fontSize: 26,
         width: 30,
-    },
-    titleModal: {
-        color: '#fff',
-        fontSize: 30,
-        marginBottom: 20,
-        fontFamily: 'Iceland_400Regular'
+        borderTopRightRadius: 5
     },
     inputModalComment: {
         backgroundColor: "#F0F0F0",
         borderWidth: 1,
         borderRadius: 5,
-        width: '90 %',
-        height: 250,
+        width: "95%",
+        height: "auto",
         textAlignVertical: 'top',
-        marginTop: "5%",
+        marginTop: "2%",
+        marginBottom: "0%"
     },
-    inputModal: {
-        backgroundColor: "#F0F0F0",
-        borderWidth: 1,
-        borderRadius: 3,
-        width: '80 %',
-        height: 42,
-        margin: '5%',
-        padding: 5
-    },
+
     /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX PANEL ADMIN XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
-    title: {
-        color: '#FFFFFF',
-        fontSize: 40,
-        margin: 30,
-        textAlign: 'center',
-        fontFamily: 'Iceland_400Regular'
-    },
+
     pageContainerAdmin: {
         borderBottomWidth: 1,
         paddingVertical: "5%"
@@ -281,43 +245,12 @@ const styles = StyleSheet.create({
         padding: "5%",
         borderWidth: 1,
         backgroundColor: "#00B4D8",
-    },
-    articleAdmin: {
-        color: "#FFFFFF",
-        fontSize: 15,
-    },
-    btna: {
-        flexDirection: "row",
-        justifyContent: "center",
-        margin: "5%"
+
     },
     formArticleAdmin: {
         alignItems: "center"
     },
-    titleH2Admin: {
-        color: '#FFFFFF',
-        fontSize: 20,
-        textAlign: "center",
-        marginBottom: "5%"
-    },
-    inputAdmin: {
-        backgroundColor: "#F0F0F0",
-        borderColor: 'black',
-        borderWidth: 1,
-        borderRadius: 3,
-        width: '90 %',
-        height: 42,
-        margin: '5%',
-        paddingLeft: 15
-    },
-    inputContentArticle: {
-        width: "98%",
-        marginTop: "5%",
-        paddingHorizontal: "5%",
-        paddingVertical: "5%",
-        borderWidth: 1,
-        backgroundColor: "#00B4D8"
-    },
+
     infoUserAdmin: {
         flexDirection: "row",
         justifyContent: "space-around"
@@ -330,6 +263,67 @@ const styles = StyleSheet.create({
         color: "#fff",
         fontSize: 18,
     },
+    /*XXXXXXXXXXXTITLEXXXXXXXXXXX*/
+    H1B: {
+        fontSize: 55,
+        margin: 20,
+        textAlign: 'center',
+        fontFamily: 'Iceland_400Regular'
+    },
+    title: {
+        color: '#FFFFFF',
+        fontSize: 40,
+        margin: 30,
+        textAlign: 'center',
+        fontFamily: 'Iceland_400Regular'
+    },
+    titleH2: {
+        color: '#FFFFFF',
+        fontSize: 35,
+        margin: 15,
+        textAlign: 'center',
+        fontFamily: 'Iceland_400Regular'
+    },
+    titleH3: {
+        color: '#FFFFFF',
+        fontSize: 25, 
+        paddingBottom: "5%", 
+        fontFamily: 'Iceland_400Regular', 
+        textAlign: "center"
+    },
+    titleH2Article: {
+        fontFamily: 'Iceland_400Regular',
+        color: '#FFFFFF',
+        fontSize: 28,
+    },
+    inputTitleArticle: {
+        backgroundColor: "#F0F0F0",
+        borderColor: 'black',
+        borderWidth: 1,
+        borderRadius: 3,
+        width: '50 %',
+        height: "95%",
+        paddingLeft: 15,
+    },
+    titleH2Admin: {
+        color: '#FFFFFF',
+        fontSize: 20,
+        textAlign: "center",
+        marginBottom: "5%"
+    },
+    titleH3: {
+        color: '#FFFFFF',
+        fontSize: 26,
+        margin: 30,
+        textAlign: 'center',
+        fontFamily: 'Iceland_400Regular'
+    },
+    titleInputContainer: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        marginBottom: "8%"
+    },
+
 })
 
 module.exports = styles

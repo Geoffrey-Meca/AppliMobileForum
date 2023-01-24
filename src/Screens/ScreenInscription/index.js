@@ -5,6 +5,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../Composants/Header'
 import styles from '../../../assets/styles/styles';
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
+import { ScrollView } from 'react-native-gesture-handler';
+import { postUser, login } from '../../../api';
 
 export default function InscriptionScreen({ navigation }) {
     const emailRegex = /^\S+@\S+\.\S+$/;
@@ -53,43 +55,45 @@ export default function InscriptionScreen({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             <Header nav={navigation} />
-            <Text style={styles.title}>Inscription</Text>
-            <View style={styles.contenerCenter}>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={onChangeEmail}
-                    value={newEmail}
-                    placeholder='Email'
-                    keyboardType='email-address'
-                />
-                <TextInput
-                    style={styles.input}
-                    onChangeText={onChangePassword}
-                    value={newPassword}
-                    placeholder='Password'
-                    secureTextEntry={true}
-                />
-                <TextInput
-                    style={styles.input}
-                    onChangeText={onChangeFirstName}
-                    value={newFirstName}
-                    placeholder='FirstName'
-                />
-                <TextInput
-                    style={styles.input}
-                    onChangeText={onChangeLastName}
-                    value={newLastName}
-                    placeholder='LastName'
-                />
+            <ScrollView>
+                <Text style={styles.title}>Inscription</Text>
+                <View style={styles.contenerCenter}>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={onChangeEmail}
+                        value={newEmail}
+                        placeholder='Email'
+                        keyboardType='email-address'
+                    />
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={onChangePassword}
+                        value={newPassword}
+                        placeholder='Password'
+                        secureTextEntry={true}
+                    />
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={onChangeFirstName}
+                        value={newFirstName}
+                        placeholder='FirstName'
+                    />
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={onChangeLastName}
+                        value={newLastName}
+                        placeholder='LastName'
+                    />
 
-                <ButtonComponent
-                    contButon={styles.contenerCenter}
-                    button={styles.butonStyle}
-                    txtButton={styles.textButon}
-                    text={"Inscription"}
-                    onPress={handleSubmit}
-                />
-            </View>
+                    <ButtonComponent
+                        contButon={styles.contenerCenter}
+                        button={styles.butonStyle}
+                        txtButton={styles.textButon}
+                        text={"Inscription"}
+                        onPress={handleSubmit}
+                    />
+                </View>
+            </ScrollView>
         </SafeAreaView >
     )
 }
