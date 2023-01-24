@@ -5,7 +5,7 @@ export default function BoutonApp(props) {
 
     return (
         <View style={styles.container}>
-            <Pressable style={styles.btn} onPress={props.onPress}>
+            <Pressable style={styles.btn} onPress={props.tata}>
                 <Text style={styles.txt}>{props.text}</Text>
             </Pressable>
         </View>

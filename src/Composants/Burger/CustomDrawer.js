@@ -1,24 +1,41 @@
 import React from 'react'
+import { useState, useEffect } from 'react';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
-import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-// import * as SecureStore from 'expo-secure-store'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { getMe } from '../../../api';
 
 import { isLogged, isAdmin, logOut } from '../../../lib'
 
 export default function CustomDrawer(props) {
 
+    const [user, setUser] = useState("");
+
+    useEffect(() => {
+        const fetchData = async () => {
+            getMe((res) => {
+                setUser(res.data);
+            });
+        };
+        fetchData();
+    }, []);
+
     const Admin = isAdmin()
     const isLog = isLogged()
-    // const deco = logOut()
-
 
     return (
         <View style={{ flex: 1 }}>
             <DrawerContentScrollView {...props}>
                 <View style={styles.header}>
                     <View>
-                        <Text style={styles.headerTxt}>Geoffrey le BigBoss</Text>
-                        <Text style={styles.headerTxt}>test@test.com</Text>
+                        {isLog ?
+                            (<>
+                                <Text style={styles.headerTxt}>{user.firstname} {user.lastname}</Text>
+                                <Text style={styles.headerTxt}>{user.email}</Text>
+                            </>
+                            ) :
+                            (<Text style={styles.headerTxt}>Vous nêtes pas connecté</Text>)
+                        }
+
                     </View>
                     <Image style={styles.img} source={require('../../../assets/Pictures/320px-Emblème_de_l\'Ordre_Jedi..png')} />
                 </View>
@@ -34,7 +51,7 @@ export default function CustomDrawer(props) {
                 </View>
 
             </DrawerContentScrollView >
-            <TouchableOpacity style={styles.footer} onPress={{}}>
+            <TouchableOpacity style={styles.footer} onPress={() => logOut(props.navigation)}>
                 {isLog && <Text>Deconnexion</Text>}
             </TouchableOpacity>
         </View >

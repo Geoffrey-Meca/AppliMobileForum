@@ -84,6 +84,7 @@ export default function ProfilScreen({ navigation }) {
                         onChangeText={(txt) => setUser({ ...user, password: txt })}
                         value={user ? user.password : ""}
                         placeholder='newPassword'
+                        secureTextEntry={true}
                     />
                     <Text style={styles.txt}>FirstName:</Text>
                     <TextInput
