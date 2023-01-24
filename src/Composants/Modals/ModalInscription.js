@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { TextInput, View, Text, Pressable, Alert, ScrollView } from 'react-native'
 import { postUser, login } from '../../../api';
 import styles from '../../../assets/styles/styles'
-
+import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 
 import BoutonApp from '../Bouton'
 
@@ -59,43 +59,47 @@ export default function ModalInscription(props) {
         }
     };
     return (
-        <View style={styles.containerModalInscription}>
+        <View style={styles.modalContainer}>
             <Pressable style={{ alignItems: "flex-end", width: "100%" }} onPress={props.onPress}>
                 <Text style={styles.closeBtn}>X</Text>
             </Pressable>
             <ScrollView>
 
                 <View style={styles.formContainer}>
-                    <Text style={styles.titleModal}>Inscrivez-vous</Text>
+                    <Text style={styles.title}>Inscrivez-vous</Text>
                     <TextInput
-                        style={styles.inputModal}
+                        style={styles.input}
                         onChangeText={onChangeEmail}
                         value={newEmail}
                         placeholder='Email'
                         keyboardType='email-address'
                     />
                     <TextInput
-                        style={styles.inputModal}
+                        style={styles.input}
                         onChangeText={onChangePassword}
                         value={newPassword}
                         placeholder='Password'
                         secureTextEntry={true}
                     />
                     <TextInput
-                        style={styles.inputModal}
+                        style={styles.input}
                         onChangeText={onChangeFirstName}
                         value={newFirstName}
                         placeholder='FirstName'
                     />
                     <TextInput
-                        style={styles.inputModal}
+                        style={styles.input}
                         onChangeText={onChangeLastName}
                         value={newLastName}
                         placeholder='LastName'
                     />
-                    <BoutonApp text="Inscription"
-                        onPress={handleSubmit}
-                    />
+                <ButtonComponent
+                    contButon={styles.contenerCenter}
+                    button={styles.butonStyle}
+                    txtButton={styles.textButon}
+                    text={"Inscription"}
+                    onPress={handleSubmit}
+                />
                 </View>
             </ScrollView>
         </View>
