@@ -3,6 +3,7 @@ import { Alert, Text, TextInput, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { postArticle } from '../../../api';
+import ButtonComponent from '../../Composants/Bouton'
 import Header from '../../Composants/Header'
 import styles from '../../../assets/styles/styles'
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
@@ -56,20 +57,20 @@ export default function AddArticleScreen({ navigation }) {
                 <Text style={styles.titleH2Article}>Texte de votre article :</Text>
                 <View style={styles.inputArticleContainer}>
                     <ScrollView>
-                    <TextInput style={styles.inputArticle}
-                        editable
-                        multiline
-                        onChangeText={onChangeTextArticle}
-                        numberOfLines={8}
-                        maxLength={755}
-                        value={newArticle}
-                        placeholder={"Votre Article"}
-                    />
+                        <TextInput style={styles.inputArticle}
+                            editable
+                            multiline
+                            onChangeText={onChangeTextArticle}
+                            numberOfLines={8}
+                            maxLength={755}
+                            value={newArticle}
+                            placeholder={"Votre Article"}
+                        />
                     </ScrollView>
                 </View>
                 <ButtonComponent
                     contButon={styles.contenerCenter}
-                    button={styles.butonStyleLitte}
+                    button={styles.butonStyle}
                     txtButton={styles.textButon}
                     text={"Publiez"}
                     onPress={addArticle}

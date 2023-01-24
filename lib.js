@@ -20,6 +20,7 @@ const isLogged = () => {
 
     return isLogged
 }
+
 const isAdmin = () => {
     const [isAdmin, setIsAdmin] = useState(false);
 

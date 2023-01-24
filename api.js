@@ -3,7 +3,7 @@ import * as SecureStore from 'expo-secure-store'
 import { Alert } from 'react-native';
 const getJwtToken = async () => {
     const token = await SecureStore.getItemAsync('jwt');
-    if(token){
+    if (token) {
         api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
 }
@@ -33,7 +33,7 @@ const request = async (method, url, data, callback) => {
                 SecureStore.deleteItemAsync('jwt').then(() => {
                 })
                 Alert.alert('Votre session a expiré', 'Veuillez vous re-connecter pour continuer', [
-                    { text: 'OK', onPress: () =>  {} }
+                    { text: 'OK', onPress: () => { } }
                 ])
                 return null
             }
