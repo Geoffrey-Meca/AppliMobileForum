@@ -322,6 +322,40 @@ const styles = StyleSheet.create({
         justifyContent: "space-around",
         marginBottom: "8%"
     },
+    /*XXXXXXXXXXXXXXXXXXXXXXXXXBURGERSTYLEXXXXXXXXXXXXXXXXXXX*/
+    header: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        padding: 20,
+        backgroundColor: "#f6f6f6",
+        marginBottom: 20
+    },
+    imgDrawer: {
+        width: 60,
+        height: 60,
+        radius: 30
+    },
+    headerTxt: {
+        margin: 5
+    },
+    linkText: {
+        color: "red",
+        fontSize: 30
+    },
+    footer: {
+        position: "absolute",
+        width: "100%",
+        height: "10%",
+        bottom: 0,
+        backgroundColor: "#f6f6f6",
+        padding: 20,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    hidden: {
+        display: "none"
+    }
 
 })
 
