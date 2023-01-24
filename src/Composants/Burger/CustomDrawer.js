@@ -34,7 +34,7 @@ export default function CustomDrawer(props) {
                 </View>
 
             </DrawerContentScrollView >
-            <TouchableOpacity style={styles.footer} onPress={logOut}>
+            <TouchableOpacity style={styles.footer} onPress={{}}>
                 {isLog && <Text>Deconnexion</Text>}
             </TouchableOpacity>
         </View >
