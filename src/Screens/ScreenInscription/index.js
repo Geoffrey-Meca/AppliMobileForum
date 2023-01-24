@@ -94,15 +94,6 @@ export default function InscriptionScreen({ navigation }) {
                     />
                 </View>
             </ScrollView>
-            <ButtonComponent
-                contButon={styles.contenerCenter}
-                button={styles.butonStyle}
-                txtButton={styles.textButon}
-                text={"Inscription"}
-                onPress={handleSubmit}
-            />
-        </View>
-            </ScrollView >
         </SafeAreaView >
     )
 }
