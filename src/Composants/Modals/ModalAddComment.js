@@ -9,6 +9,7 @@ export default function ModalAddComment(props) {
 
   const targetId = props.id
   const [NewComment, setNewComment] = useState("");
+
   const onChangeComment = (val) => {
     setNewComment(val);
   }
