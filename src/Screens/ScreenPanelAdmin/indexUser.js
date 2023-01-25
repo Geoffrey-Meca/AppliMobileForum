@@ -91,15 +91,6 @@ export default function UserProfileEditScreen({ navigation }) {
             save="value"
             search={false}
           />
-
-          {/* <Text style={styles.label}>Password :</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={(txt) => setUser({ ...user, password: txt })}
-            value={user ? user.password : ""}
-            placeholder="Modifiez votre mot de passe"
-          /> */}
-
           <View style={styles.OneLine}>
             <ButtonComponent 
               contButon={styles.contenerCenter}

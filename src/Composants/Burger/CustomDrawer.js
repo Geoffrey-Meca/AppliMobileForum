@@ -9,19 +9,18 @@ import { isLogged, isAdmin, logOut } from '../../../lib'
 export default function CustomDrawer(props) {
 
     const [user, setUser] = useState("");
-
-    useEffect(() => {
-        const fetchData = async () => {
-            getMe((res) => {
-                setUser(res.data);
-            });
-        };
-        fetchData();
-    }, []);
-
     const Admin = isAdmin()
     const isLog = isLogged()
-
+   
+        useEffect(() => {
+            const fetchData = async () => {
+                    isLog && getMe((res) => {
+                        setUser(res.data);
+                    });
+            };
+            fetchData();
+        }, [isLog]);
+    
     return (
         <View style={{ flex: 1 }}>
             <DrawerContentScrollView {...props}>
@@ -47,6 +46,7 @@ export default function CustomDrawer(props) {
                     {!isLog && <DrawerItem label={'Connexion'} onPress={() => props.navigation.navigate('Connexion')} />}
                     {!isLog && <DrawerItem label={'Inscription'} onPress={() => props.navigation.navigate('Inscription')} />}
                     {Admin && < DrawerItem label={'Admin'} onPress={() => props.navigation.navigate('AdminScreen')} />}
+                    <DrawerItem label={'About'} onPress={() => props.navigation.navigate('About')} />
                 </View>
 
             </DrawerContentScrollView >

@@ -3,6 +3,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 // Importation des Pages Screen
 import LandingScreen from './src/Screens/ScreenHome';
+import About from './src/Screens/ScreenAbout';
 import ProfilScreen from './src/Screens/ScreenProfilPage';
 import ConnexionScreen from './src/Screens/ScreenConnexion';
 import InscriptionScreen from './src/Screens/ScreenInscription';
@@ -14,6 +15,7 @@ import IndexUsersScreen from './src/Screens/ScreenPanelAdmin/indexUsers';
 import UserProfileEditScreen from './src/Screens/ScreenPanelAdmin/indexUser';
 import IndexArticlesScreen from './src/Screens/ScreenPanelAdmin/indexArticles';
 import ArticleEditScreen from './src/Screens/ScreenPanelAdmin/indexArticle';
+
 // Importation pour la navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -42,6 +44,7 @@ const DrawerNavigator = () => {
       <Drawer.Screen name="User" component={UserProfileEditScreen} />
       <Drawer.Screen name="ArticlesAdmin" component={IndexArticlesScreen} />
       <Drawer.Screen name="ArticleAdmin" component={ArticleEditScreen} />
+      <Drawer.Screen name="About" component={About} />
     </Drawer.Navigator>
   )
 }
