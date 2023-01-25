@@ -3,9 +3,9 @@ import { Alert, Text, TextInput, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { postArticle } from '../../../api';
-import BoutonApp from '../../Composants/Bouton'
 import Header from '../../Composants/Header'
 import styles from '../../../assets/styles/styles'
+import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 
 export default function AddArticleScreen({ navigation }) {
 
@@ -20,9 +20,7 @@ export default function AddArticleScreen({ navigation }) {
     }
 
     const addArticle = () => {
-        // Controle size of Article 
         if (newArticle.length >= 50) {
-
             postArticle(newTitleArticle, newArticle, (res => {
                 if (res.status != 201) {
                     Alert.alert("Erreur", `${res.data.message}`)
@@ -64,7 +62,13 @@ export default function AddArticleScreen({ navigation }) {
                         placeholder={"Votre Article"}
                     />
                 </View>
-                <BoutonApp text="Publiez" onPress={addArticle} />
+                <ButtonComponent
+                    contButon={styles.contenerCenter}
+                    button={styles.butonStyleLitte}
+                    txtButton={styles.textButon}
+                    text={"Publiez"}
+                    onPress={addArticle}
+                />
             </ScrollView>
         </SafeAreaView>
     )
