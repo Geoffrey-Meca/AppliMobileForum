@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         borderRadius: 19,
         backgroundColor: "#F0F0F0",
     },
-    /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX BOUTON XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+    /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX BUTTON XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
     butonStyleLarge: {
         width: '75%',
         height: 42,
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
         paddingLeft: 15,
         marginBottom: "25%"
     },
-    /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX COMMENTAIRES XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+    /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX COMMENTS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
     commentsContainer: {
         marginTop: "5%"
     },
