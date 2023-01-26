@@ -89,7 +89,6 @@ export default function UserProfileEditScreen({ navigation }) {
             save="value"
             search={false}
           />
-
           <View style={styles.OneLine}>
             <ButtonComponent 
               contButon={styles.contenerCenter}

@@ -5,7 +5,6 @@ import { postUser, login } from '../../../api';
 import styles from '../../../assets/styles/styles'
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 
-import BoutonApp from '../Bouton'
 
 export default function ModalInscription(props) {
 

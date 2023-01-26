@@ -20,9 +20,7 @@ export default function ModalConnexion(props) {
         if (emailRegex.test(newEmail)) {
             login(newEmail, newPassword, (res => {
                 if (res.status != 200) {
-                    Alert.alert(`Erreur`, `${res.data.message}`, [{
-                        style: 'cancel'
-                    }])
+                    Alert.alert(`Erreur`, `${res.data.message}`)
                 }
                 else {
                     setNewEmail("")
