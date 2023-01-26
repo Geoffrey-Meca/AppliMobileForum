@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 
 import { Text, Image, View, ScrollView } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
@@ -13,8 +13,8 @@ import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 
 export default function LandingScreen({ navigation }) {
 
-    
-   let log = isLogged()
+
+    let log = isLogged()
 
     const [isFormConnexionVisible, setIsFormConnexionVisible] = useState(false)
     const [isFormInscriptionVisible, setIsFormInscriptionVisible] = useState(false)
@@ -52,26 +52,21 @@ export default function LandingScreen({ navigation }) {
                     text={"Entrer"}
                     onPress={() => navigation.navigate('Articles', { refresh: true })}
                 />
-               {log ? (<Text></Text>) : (
-                <Fragment>
-                <ButtonComponent
+                {!log && <ButtonComponent
                     contButon={styles.contenerCenter}
                     button={styles.butonStyle}
                     txtButton={styles.textButon}
                     text={"Connexion"}
                     onPress={_toggleFormConnexion}
-                />
-                <ButtonComponent
+                />}
+
+                {!log && <ButtonComponent
                     contButon={styles.contenerCenter}
                     button={styles.butonStyle}
                     txtButton={styles.textButon}
                     text={"Inscription"}
                     onPress={_toggleFormInscription}
-                />
-                </Fragment>
-               )
-               } 
-       
+                />}
                 {isFormConnexionVisible && <ModalConnexion onPress={_toggleFormConnexion} onClose={_toggleFormConnexion} nav={navigation} />}
                 {isFormInscriptionVisible && <ModalInscription onPress={_toggleFormInscription} onClose={_toggleFormInscription} nav={navigation} />}
                 <StatusBar style="light" />

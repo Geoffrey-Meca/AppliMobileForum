@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
-import { Image,Text, TouchableOpacity, View, Alert } from 'react-native'
+import { Image, Text, TouchableOpacity, View, Alert } from 'react-native'
 import styles from '../../../assets/styles/styles'
 import { getMe } from '../../../api';
 import { isLogged, isAdmin, logOut } from '../../../lib'
@@ -15,12 +15,22 @@ export default function CustomDrawer(props) {
         });
     }
 
-    useEffect(() => {;
+    useEffect(() => {
+        ;
         fetchData();
     }, [isLog]);
 
     const Admin = isAdmin()
     const isLog = isLogged()
+
+    useEffect(() => {
+        const fetchData = async () => {
+            isLog && getMe((res) => {
+                setUser(res.data);
+            });
+        };
+        fetchData();
+    }, [isLog]);
 
     return (
         <View style={{ flex: 1 }}>
@@ -51,16 +61,16 @@ export default function CustomDrawer(props) {
                     {Admin && < DrawerItem label={'Admin'} onPress={() => props.navigation.navigate('AdminScreen')} />}
                     <DrawerItem label={'About'} onPress={() => props.navigation.navigate('About')} />
                 </View>
-                
+
             </DrawerContentScrollView >
             <TouchableOpacity style={styles.footer} onPress={() => Alert.alert("Vous êtes sur le point de vous déconnecter",
-            "Êtes-vous sur de vouloir procéder ?",[
-            {text: "Non"},
-            {text: "Oui", onPress: () => {logOut(props.navigation)}}
+                "Êtes-vous sur de vouloir procéder ?", [
+                { text: "Non" },
+                { text: "Oui", onPress: () => { logOut(props.navigation) } }
             ])}>
                 {isLog && <Text>Deconnexion</Text>}
             </TouchableOpacity>
         </View >
-    
+
     )
 }

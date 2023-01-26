@@ -56,15 +56,15 @@ export default function AddArticleScreen({ navigation }) {
                 <Text style={styles.titleH2Article}>Texte de votre article :</Text>
                 <View style={styles.inputArticleContainer}>
                     <ScrollView>
-                    <TextInput style={styles.inputArticle}
-                        editable
-                        multiline
-                        onChangeText={onChangeTextArticle}
-                        numberOfLines={8}
-                        maxLength={755}
-                        value={newArticle}
-                        placeholder={"Votre Article"}
-                    />
+                        <TextInput style={styles.inputArticle}
+                            editable
+                            multiline
+                            onChangeText={onChangeTextArticle}
+                            numberOfLines={8}
+                            maxLength={755}
+                            value={newArticle}
+                            placeholder={"Votre Article"}
+                        />
                     </ScrollView>
                 </View>
                 <ButtonComponent
