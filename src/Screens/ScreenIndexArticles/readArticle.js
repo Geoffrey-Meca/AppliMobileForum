@@ -69,7 +69,7 @@ export default function ReadArticle({ route, navigation }) {
 
                         {isOpenAdd && <ModalAddComment close={openAdd} onPress={openAdd} id={articleId.articleId} />}
 
-                        {article.comments.map(comment => (
+                        {(article.comments.reverse()).map(comment => (
                             <View style={styles.commentsContainer} key={comment['@id'].replace(/[^0-9]/g, '')}>
                                 <View style={styles.OneComments}>
                                     <Text>Le : {brassageDate(comment.createdAt)} Par : {comment.userId.firstname} {comment.userId.lastname} </Text>
