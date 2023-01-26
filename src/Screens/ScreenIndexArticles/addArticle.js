@@ -28,12 +28,15 @@ export default function AddArticleScreen({ navigation }) {
                 } else {
                     Alert.alert('Votre article a bien été publié')
                     navigation.navigate('Articles')
+                    setNewTitleArticle("")
+                    setNewArticle("")
                 }
             }))
 
         } else {
             alert("Article trop court ! Soyer plus créatif ;)")
         }
+
     }
 
     return (
@@ -52,6 +55,7 @@ export default function AddArticleScreen({ navigation }) {
                 </View>
                 <Text style={styles.titleH2Article}>Texte de votre article :</Text>
                 <View style={styles.inputArticleContainer}>
+                    <ScrollView>
                     <TextInput style={styles.inputArticle}
                         editable
                         multiline
@@ -61,6 +65,7 @@ export default function AddArticleScreen({ navigation }) {
                         value={newArticle}
                         placeholder={"Votre Article"}
                     />
+                    </ScrollView>
                 </View>
                 <ButtonComponent
                     contButon={styles.contenerCenter}
