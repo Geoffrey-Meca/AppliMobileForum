@@ -15,20 +15,10 @@ export default function CustomDrawer(props) {
         });
     }
 
-    useEffect(() => {
-        ;
-        fetchData();
-    }, [isLog]);
-
     const Admin = isAdmin()
     const isLog = isLogged()
 
     useEffect(() => {
-        const fetchData = async () => {
-            isLog && getMe((res) => {
-                setUser(res.data);
-            });
-        };
         fetchData();
     }, [isLog]);
 
