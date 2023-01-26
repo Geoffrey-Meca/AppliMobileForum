@@ -7,7 +7,6 @@ import { getMe, deleteUser, editUser } from '../../../api';
 import Header from '../../Composants/Header';
 import { logOut } from '../../../lib';
 import { useRoute } from '@react-navigation/native';
-import Header from '../../Composants/Header';
 import EditableText from '../../Composants/EditableText';
 
 export default function ProfilScreen({ navigation }) {
