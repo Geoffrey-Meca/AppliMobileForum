@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 // Importation de react
 import React from 'react';
+import { Alert, BackHandler } from 'react-native';
 // Importation des Pages Screen
 import LandingScreen from './src/Screens/ScreenHome';
 import About from './src/Screens/ScreenAbout';
@@ -20,12 +21,17 @@ import ArticleEditScreen from './src/Screens/ScreenPanelAdmin/indexArticle';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomDrawer from './src/Composants/Burger/CustomDrawer';
+import { createStackNavigator } from "@react-navigation/stack";
+
 // Importation de la Police
 // import { useFonts, Inter_900Black } from '@expo-google-fonts/inter'
 
 const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
+
 
 const DrawerNavigator = () => {
+
   return (
     <Drawer.Navigator
       initialRouteName="Home"

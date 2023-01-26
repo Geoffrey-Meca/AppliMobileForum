@@ -92,13 +92,13 @@ export default function ModalInscription(props) {
                         value={newLastName}
                         placeholder='LastName'
                     />
-                <ButtonComponent
-                    contButon={styles.contenerCenter}
-                    button={styles.butonStyle}
-                    txtButton={styles.textButon}
-                    text={"Inscription"}
-                    onPress={handleSubmit}
-                />
+                    <ButtonComponent
+                        contButon={styles.contenerCenter}
+                        button={styles.butonStyle}
+                        txtButton={styles.textButon}
+                        text={"Inscription"}
+                        onPress={handleSubmit}
+                    />
                 </View>
             </ScrollView>
         </View>

@@ -44,21 +44,21 @@ const isAdmin = () => {
     return isAdmin;
 }
 
-const useRefreshNavigation = (routeName) => {
-    const navigation = useNavigation();
-    const [refresh, setRefresh] = useState(false);
+// const useRefreshNavigation = (routeName) => {
+//     const navigation = useNavigation();
+//     const [refresh, setRefresh] = useState(false);
 
-    useEffect(() => {
-        navigation.setParams({ refresh: () => setRefresh(!refresh) });
-    }, [refresh]);
+//     useEffect(() => {
+//         navigation.setParams({ refresh: () => setRefresh(!refresh) });
+//     }, [refresh]);
 
-    const navigateWithRefresh = (routeName, params) => {
-        navigation.navigate(routeName, params);
-        setRefresh(!refresh);
-    };
+//     const navigateWithRefresh = (routeName, params) => {
+//         navigation.navigate(routeName, params);
+//         setRefresh(!refresh);
+//     };
 
-    return navigateWithRefresh;
-};
+//     return navigateWithRefresh;
+// };
 
 function logOut(navigation) {
     SecureStore.deleteItemAsync('jwt').then(
@@ -69,6 +69,6 @@ function logOut(navigation) {
 module.exports = {
     isLogged,
     isAdmin,
-    useRefreshNavigation,
+    // useRefreshNavigation,
     logOut
 }

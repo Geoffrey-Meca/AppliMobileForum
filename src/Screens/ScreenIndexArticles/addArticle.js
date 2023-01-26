@@ -3,7 +3,6 @@ import { Alert, Text, TextInput, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { postArticle } from '../../../api';
-import ButtonComponent from '../../Composants/Bouton'
 import Header from '../../Composants/Header'
 import styles from '../../../assets/styles/styles'
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
@@ -70,7 +69,7 @@ export default function AddArticleScreen({ navigation }) {
                 </View>
                 <ButtonComponent
                     contButon={styles.contenerCenter}
-                    button={styles.butonStyle}
+                    button={styles.butonStyleLitte}
                     txtButton={styles.textButon}
                     text={"Publiez"}
                     onPress={addArticle}
