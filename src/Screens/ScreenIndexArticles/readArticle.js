@@ -78,7 +78,7 @@ export default function ReadArticle({ navigation }) {
                             </View>
                         </Fragment>) : (<Text style={styles.carreful} onPress={_toggleFormConnexion}>Connectez-vous pour ajouter un commentaire !</Text>)}
 
-                        {isOpenAdd && <ModalAddComment close={openAdd} onPress={openAdd} id={articleId.articleId} />}
+                        {isOpenAdd && <ModalAddComment close={openAdd} onPress={openAdd} id={articleId} />}
 
                         {(article.comments.reverse()).map(comment => (
                             <View style={styles.commentsContainer} key={comment['@id'].replace(/[^0-9]/g, '')}>
