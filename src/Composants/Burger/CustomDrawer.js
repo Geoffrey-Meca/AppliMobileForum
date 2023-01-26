@@ -9,19 +9,18 @@ import { isLogged, isAdmin, logOut } from '../../../lib'
 export default function CustomDrawer(props) {
 
     const [user, setUser] = useState("");
-
-    useEffect(() => {
-        const fetchData = async () => {
-            isLog && getMe((res) => {
-                setUser(res.data);
-            });
-        };
-        fetchData();
-    }, [isLog]);
-
     const Admin = isAdmin()
     const isLog = isLogged()
-
+   
+        useEffect(() => {
+            const fetchData = async () => {
+                    isLog && getMe((res) => {
+                        setUser(res.data);
+                    });
+            };
+            fetchData();
+        }, [isLog]);
+    
     return (
         <View style={{ flex: 1 }}>
             <DrawerContentScrollView {...props}>
@@ -46,8 +45,9 @@ export default function CustomDrawer(props) {
                     {isLog && <DrawerItem label={'Ajouter un article'} onPress={() => props.navigation.navigate('AddArticle')} />}
                     {!isLog && <DrawerItem label={'Connexion'} onPress={() => props.navigation.navigate('Connexion')} />}
                     {!isLog && <DrawerItem label={'Inscription'} onPress={() => props.navigation.navigate('Inscription')} />}
-                    {Admin && <DrawerItem label={'Admin'} onPress={() => props.navigation.navigate('AdminScreen')} />}
-                </View>
+
+                    {Admin && < DrawerItem label={'Admin'} onPress={() => props.navigation.navigate('AdminScreen')} />}
+                    <DrawerItem label={'About'} onPress={() => props.navigation.navigate('About')} />
 
             </DrawerContentScrollView >
             <TouchableOpacity style={styles.footer} onPress={() => Alert.alert("Vous êtes sur le point de vous déconnecter",

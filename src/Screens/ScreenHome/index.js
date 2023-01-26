@@ -14,7 +14,7 @@ import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 export default function LandingScreen({ navigation }) {
 
     
-    let log = isLogged()
+   let log = isLogged()
 
     const [isFormConnexionVisible, setIsFormConnexionVisible] = useState(false)
     const [isFormInscriptionVisible, setIsFormInscriptionVisible] = useState(false)
