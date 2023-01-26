@@ -1,8 +1,9 @@
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store'
+import { Alert } from 'react-native';
 const getJwtToken = async () => {
     const token = await SecureStore.getItemAsync('jwt');
-    if (token) {
+    if(token){
         api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
 }
@@ -30,10 +31,11 @@ const request = async (method, url, data, callback) => {
             console.log(error.response.data.message)
             if (error.response.data.message == 'Expired JWT Token') {
                 SecureStore.deleteItemAsync('jwt').then(() => {
-                    Alert.alert(`Vous avez été déconnecté`, `Veuillez vous re-connecter pour continuer`, [{
-                        style: 'cancel'
-                    }])
                 })
+                Alert.alert('Votre session a expiré', 'Veuillez vous re-connecter pour continuer', [
+                    { text: 'OK', onPress: () =>  {} }
+                ])
+                return null
             }
             return callback(error.response)
         });
