@@ -14,7 +14,6 @@ export default function ProfilScreen({ navigation }) {
     const [refreshing, setRefreshing] = React.useState(false);
     const [user, setUser] = useState("");
     const [initial, setInitial] = useState("");
-    let shouldLogOut = false
 
     const route = useRoute();
     const refresh = route.params;
