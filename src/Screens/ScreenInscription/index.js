@@ -42,6 +42,7 @@ export default function InscriptionScreen({ navigation }) {
                             }])
                         }
                         else {
+                            Alert.alert('Votre inscription a bien était enregistré. Bienvenue !')
                             navigation.navigate('Articles')
                         }
                     }))
