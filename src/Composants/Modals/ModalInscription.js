@@ -47,7 +47,7 @@ export default function ModalInscription(props) {
                             setNewPassword("")
                             setNewLastName("")
                             setNewFirstName("")
-                            props.nav.navigate('Articles')
+                            props.nav.navigate('Articles', { refresh: true })
                         }
                     }))
                 }

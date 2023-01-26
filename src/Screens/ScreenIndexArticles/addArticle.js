@@ -27,7 +27,7 @@ export default function AddArticleScreen({ navigation }) {
 
                 } else {
                     Alert.alert('Votre article a bien été publié')
-                    navigation.navigate('Articles')
+                    navigation.navigate('Articles', { refresh: true })
                     setNewTitleArticle("")
                     setNewArticle("")
                 }

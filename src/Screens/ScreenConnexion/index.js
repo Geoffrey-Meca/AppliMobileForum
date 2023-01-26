@@ -27,7 +27,7 @@ export default function ConnexionScreen({ navigation }) {
                     }])
                 }
                 else {
-                    navigation.navigate('Articles')
+                    navigation.navigate('Articles', { refresh: true })
                 }
             }));
         }
