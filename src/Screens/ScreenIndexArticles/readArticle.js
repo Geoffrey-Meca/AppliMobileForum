@@ -24,7 +24,7 @@ export default function ReadArticle({ navigation }) {
         setIsFormConnexionVisible(!isFormConnexionVisible)
     }
     let fetchData = async () => {
-        getArticleById(articleId.articleId, (res) => {
+        getArticleById(articleId, (res) => {
             setArticle(res.data)
         })
     }
