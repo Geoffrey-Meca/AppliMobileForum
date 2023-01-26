@@ -6,40 +6,55 @@ import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 import { getMe, deleteUser, editUser } from '../../../api';
 import Header from '../../Composants/Header'
 import { logOut } from '../../../lib'
+import EditableText from '../../Composants/EditableText';
 
 export default function ProfilScreen({ navigation }) {
 
     const [refreshing, setRefreshing] = React.useState(false);
     const [user, setUser] = useState("");
+    const [initial, setInitial] = useState("");
+    let shouldLogOut = false
 
     useEffect(() => {
         const fetchData = async () => {
             getMe((res) => {
+                setInitial(res.data)
                 setUser(res.data);
             });
         };
         fetchData();
     }, []);
 
-    const editProfilUser = () => {
+    const logOutAlert = () => {
+        Alert.alert('Vous allez être déconnecté', 'Veuillez-vous re-connecter pour voir vos modifications', [
+            { text: 'Ok', onPress: () => logOut(navigation) },
+        ])
+    }
+
+    const editProfilUser = (shouldLogOut) => {
         editUser(user.id, user.email, user.firstname, user.lastname, user.password, (res => {
-            if (res.status == 200) {
-                Alert.alert('Vos modifications ont bien été prise en compte')
+            console.log(res.status)
+            if (res.status != 200) {
+                Alert.alert(`Erreur`, `${res.data.message}`,)
             } else {
-                Alert.alert('Il y a eu un probleme ! Désolé')
+                Alert.alert('Vos modifications ont bien été prise en compte')
+                setInitial(user)
+                shouldLogOut && logOutAlert()
             }
         }))
     }
-
     const removeUser = () => {
-        deleteUser(user.id, (res => {
-            if (res.status == 204) {
-                Alert.alert('Votre profile a bien était supprimé')
-                logOut(navigation)
-            } else {
-                Alert.alert('Erreur')
-            }
-        }))
+        Alert.alert('Supprimer votre compte', 'Êtes-vous sûr de vouloir supprimer votre compte ?', [
+            { text: 'Oui', onPress: () => deleteUser(user.id, (res => {
+                if (res.status != 204) {
+                    Alert.alert(`Erreur`, `${res.data.message}`,)
+                } else {
+                    Alert.alert('Votre profile a bien été supprimé')
+                    logOut(navigation)
+                }
+            })) },
+            { text: 'Non', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+        ])
     }
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
@@ -54,51 +69,39 @@ export default function ProfilScreen({ navigation }) {
                 <RefreshControl refreshing={refreshing}
                     onRefresh={onRefresh} />
             }>
-
                 <Text style={styles.title}>Profile</Text>
                 <View style={styles.contenerLeft}>
-                    <Text style={styles.txt}>Email: {user.email}
-                    </Text>
-                    <Text style={styles.txt}>
-                        FirstName: {user.firstname}
-                    </Text>
-                    <Text style={styles.txt}>
-                        LastName: {user.lastname}
-                    </Text>
-                    <Text style={styles.txt}>
-                        Rôle: {user.roles}
-                    </Text>
-                </View>
-                <Text style={styles.titleH2}>Modifier votre profile</Text>
-                <View style={styles.contenerLeft}>
-                    <Text style={styles.txt}>Email:</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={(txt) => setUser({ ...user, email: txt })}
-                        value={user ? user.email : ""}
-                        placeholder='newEmail'
+                    <EditableText
+                    label="Email"
+                    value={user.email}
+                    onChange={(txt) => setUser({ ...user, email: txt })}
+                    onConfirm={() => editProfilUser(true)}
+                    onCancel={() => setUser(initial)}
                     />
+                    <EditableText
+                    label="FirstName"
+                    value={user.firstname}
+                    onChange={(txt) => setUser({ ...user, firstname: txt })}
+                    onConfirm={() => editProfilUser(false)}
+                    onCancel={() => setUser(initial)}
+                    />
+                    <EditableText
+                    label="Lastname"
+                    value={user.lastname}
+                    onChange={(txt) => setUser({ ...user, lastname: txt })}
+                    onConfirm={() => editProfilUser(false)}
+                    onCancel={() => setUser(initial)}
+                    />
+                </View>
+                <Text style={styles.titleH2}>Modifier votre mot de passe</Text>
+                <View style={styles.contenerLeft}>
                     <Text style={styles.txt}>Password:</Text>
                     <TextInput
                         style={styles.input}
                         onChangeText={(txt) => setUser({ ...user, password: txt })}
                         value={user ? user.password : ""}
-                        placeholder='newPassword'
+                        placeholder='password'
                         secureTextEntry={true}
-                    />
-                    <Text style={styles.txt}>FirstName:</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={(txt) => setUser({ ...user, firstname: txt })}
-                        value={user ? user.firstname : ""}
-                        placeholder='newFirstName'
-                    />
-                    <Text style={styles.txt}>LastName:</Text>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={(txt) => setUser({ ...user, lastname: txt })}
-                        value={user ? user.lastname : ""}
-                        placeholder='newLastName'
                     />
                 </View>
                 <ButtonComponent
@@ -106,8 +109,9 @@ export default function ProfilScreen({ navigation }) {
                     button={styles.butonStyle}
                     txtButton={styles.textButon}
                     text={"Modifier"}
-                    onPress={editProfilUser}
+                    onPress={() => editProfilUser(true)}
                 />
+                <Text style={styles.titleH2}>Supprimer votre profile</Text>
                 <ButtonComponent
                     contButon={styles.contenerCenter}
                     button={styles.butonStyle}

@@ -4,8 +4,6 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { getUserById, patchUser } from '../../../api';
 import { useRoute } from '@react-navigation/native';
 import Header from '../../Composants/Header';
-
-import { ScrollView } from 'react-native-gesture-handler';
 import styles from '../../../assets/styles/styles';
 import { SelectList } from 'react-native-dropdown-select-list'
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
@@ -82,7 +80,7 @@ export default function UserProfileEditScreen({ navigation }) {
             value={user ? user.email : ""}
             placeholder="Email"
           />
-          <Text style={styles.label}>Role : {user.roles.includes('ROLE_ADMIN') ? "ADMIN" : "USER"} </Text>
+          <Text style={styles.label}>Role : {user.roles ? user.roles.includes('ROLE_ADMIN') ? "ADMIN" : "USER" : null} </Text>
           <SelectList 
             setSelected={(val) => setSelected(val)}
             boxStyles={styles.inputAdmin}

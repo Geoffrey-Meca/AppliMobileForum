@@ -6,6 +6,7 @@ import { postArticle } from '../../../api';
 import Header from '../../Composants/Header'
 import styles from '../../../assets/styles/styles'
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
+
 export default function AddArticleScreen({ navigation }) {
 
     const [newTitleArticle, setNewTitleArticle] = useState("");
@@ -19,15 +20,13 @@ export default function AddArticleScreen({ navigation }) {
     }
 
     const addArticle = () => {
-        // Controle size of Article 
         if (newArticle.length >= 50) {
-
             postArticle(newTitleArticle, newArticle, (res => {
                 if (res.status != 201) {
-                    Alert.alert("Erreur")
+                    Alert.alert("Erreur", `${res.data.message}`)
 
                 } else {
-                    Alert.alert('Votre article a bien était publié')
+                    Alert.alert('Votre article a bien été publié')
                     navigation.navigate('Articles')
                     setNewTitleArticle("")
                     setNewArticle("")
