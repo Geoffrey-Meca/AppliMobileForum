@@ -7,6 +7,7 @@ import Header from '../../Composants/Header';
 import styles from '../../../assets/styles/styles';
 import { SelectList } from 'react-native-dropdown-select-list'
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default function UserProfileEditScreen({ navigation }) {
 
@@ -53,6 +54,7 @@ export default function UserProfileEditScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <ScrollView>
       <Header nav={navigation} />
         <Text style={styles.titleH3}>Modifier l'utilisateur n° {userId}</Text>
         <View>
@@ -108,6 +110,7 @@ export default function UserProfileEditScreen({ navigation }) {
             />
           </View>
         </View>
+        </ScrollView>
     </SafeAreaView >
   )
 }

@@ -6,11 +6,11 @@ import ButtonComponent from '../Bouton/buttonComponent';
 export default function EditableText ({label, value, onChange, onConfirm, onCancel}){
     const [editing, setEditing] = useState(false);
     return (
-        <View style={styles.OneLine}>
+        <View style={styles.OneLineP}>
             {editing ? (
                 <View>
                     <View style={styles.OneLine}>
-                        <Text style={styles.txt}>{label}: </Text>
+                        <Text style={styles.txt}>{label}</Text>
                         <TextInput style={styles.input} value={value} onChangeText={onChange} />
                     </View>
                     <View style={styles.OneLine}>
@@ -31,7 +31,7 @@ export default function EditableText ({label, value, onChange, onConfirm, onCanc
                     </View>
                 </View>
             ) : (
-                <Text style={styles.txt}>{label}: {value}</Text>
+                <Text style={styles.txt}>{label} : {value}</Text>
             )}
             {!editing && <ButtonComponent
                         contButon={styles.contenerCenter}
@@ -40,6 +40,7 @@ export default function EditableText ({label, value, onChange, onConfirm, onCanc
                         text={"Edit"}
                         onPress={() => setEditing(true)}
                     />}
+                    
         </View>
     )
 }

@@ -65,34 +65,37 @@ export default function ProfilScreen({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             <Header nav={navigation} />
-            <ScrollView style={{ marginBottom: "15%", width: "100%" }} refreshControl={
+            <ScrollView style={styles.container} refreshControl={
                 <RefreshControl refreshing={refreshing}
                     onRefresh={onRefresh} />
             }>
-                <Text style={styles.title}>Profile</Text>
-                <View style={styles.contenerLeft}>
-                    <EditableText
-                    label="Email"
-                    value={user.email}
-                    onChange={(txt) => setUser({ ...user, email: txt })}
-                    onConfirm={() => editProfilUser(true)}
-                    onCancel={() => setUser(initial)}
-                    />
-                    <EditableText
-                    label="FirstName"
-                    value={user.firstname}
-                    onChange={(txt) => setUser({ ...user, firstname: txt })}
-                    onConfirm={() => editProfilUser(false)}
-                    onCancel={() => setUser(initial)}
-                    />
-                    <EditableText
-                    label="Lastname"
-                    value={user.lastname}
-                    onChange={(txt) => setUser({ ...user, lastname: txt })}
-                    onConfirm={() => editProfilUser(false)}
-                    onCancel={() => setUser(initial)}
-                    />
-                </View>
+               
+                <Text style={styles.titleH2}>Profile</Text>
+             
+                    <View style={styles.contenerProfil}>
+                        <EditableText
+                            label="Email"
+                            value={user.email}
+                            onChange={(txt) => setUser({ ...user, email: txt })}
+                            onConfirm={() => editProfilUser(true)}
+                            onCancel={() => setUser(initial)}
+                        />
+                        <EditableText
+                            label="Prenom"
+                            value={user.firstname}
+                            onChange={(txt) => setUser({ ...user, firstname: txt })}
+                            onConfirm={() => editProfilUser(false)}
+                            onCancel={() => setUser(initial)}
+                        />
+                        <EditableText
+                            label="Nom"
+                            value={user.lastname}
+                            onChange={(txt) => setUser({ ...user, lastname: txt })}
+                            onConfirm={() => editProfilUser(false)}
+                            onCancel={() => setUser(initial)}
+                        />
+                    </View>
+        
                 <Text style={styles.titleH2}>Modifier votre mot de passe</Text>
                 <View style={styles.contenerLeft}>
                     <Text style={styles.txt}>Password:</Text>
