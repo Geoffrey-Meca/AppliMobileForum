@@ -49,7 +49,7 @@ export default function IndexArticlesScreen({ navigation }) {
                                 button={styles.butonStyleLarge}
                                 txtButton={styles.textButon}
                                 text={"Modifier"}
-                                onPress={() => navigation.navigate('ArticleAdmin', { articleId: item.id })}
+                                onPress={() => navigation.navigate('ArticleAdmin', { articleId: item.id, refresh: true  })}
                             />
                             <ButtonComponent 
                                 contButon={styles.contenerCenter}

@@ -43,7 +43,7 @@ export default function InscriptionScreen({ navigation }) {
                         }
                         else {
                             Alert.alert('Votre inscription a bien été prise en compte', 'Bienvenue sur le Forum !')
-                            navigation.navigate('Articles')
+                            navigation.navigate('Articles', { refresh: true })
                         }
                     }))
                 }

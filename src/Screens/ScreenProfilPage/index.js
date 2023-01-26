@@ -4,8 +4,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from '../../../assets/styles/styles';
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 import { getMe, deleteUser, editUser } from '../../../api';
-import Header from '../../Composants/Header'
-import { logOut } from '../../../lib'
+import Header from '../../Composants/Header';
+import { logOut } from '../../../lib';
+import { useRoute } from '@react-navigation/native';
+import Header from '../../Composants/Header';
 import EditableText from '../../Composants/EditableText';
 
 export default function ProfilScreen({ navigation }) {
@@ -15,6 +17,9 @@ export default function ProfilScreen({ navigation }) {
     const [initial, setInitial] = useState("");
     let shouldLogOut = false
 
+    const route = useRoute();
+    const refresh = route.params;
+
     useEffect(() => {
         const fetchData = async () => {
             getMe((res) => {
@@ -23,7 +28,7 @@ export default function ProfilScreen({ navigation }) {
             });
         };
         fetchData();
-    }, []);
+    }, [route, refresh]);
 
     const logOutAlert = () => {
         Alert.alert('Vous allez être déconnecté', 'Veuillez-vous re-connecter pour voir vos modifications', [
@@ -65,34 +70,37 @@ export default function ProfilScreen({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             <Header nav={navigation} />
-            <ScrollView style={{ marginBottom: "15%", width: "100%" }} refreshControl={
+            <ScrollView style={styles.container} refreshControl={
                 <RefreshControl refreshing={refreshing}
                     onRefresh={onRefresh} />
             }>
-                <Text style={styles.title}>Profile</Text>
-                <View style={styles.contenerLeft}>
-                    <EditableText
-                    label="Email"
-                    value={user.email}
-                    onChange={(txt) => setUser({ ...user, email: txt })}
-                    onConfirm={() => editProfilUser(true)}
-                    onCancel={() => setUser(initial)}
-                    />
-                    <EditableText
-                    label="FirstName"
-                    value={user.firstname}
-                    onChange={(txt) => setUser({ ...user, firstname: txt })}
-                    onConfirm={() => editProfilUser(false)}
-                    onCancel={() => setUser(initial)}
-                    />
-                    <EditableText
-                    label="Lastname"
-                    value={user.lastname}
-                    onChange={(txt) => setUser({ ...user, lastname: txt })}
-                    onConfirm={() => editProfilUser(false)}
-                    onCancel={() => setUser(initial)}
-                    />
-                </View>
+               
+                <Text style={styles.titleH2}>Profile</Text>
+             
+                    <View style={styles.contenerProfil}>
+                        <EditableText
+                            label="Email"
+                            value={user.email}
+                            onChange={(txt) => setUser({ ...user, email: txt })}
+                            onConfirm={() => editProfilUser(true)}
+                            onCancel={() => setUser(initial)}
+                        />
+                        <EditableText
+                            label="Prenom"
+                            value={user.firstname}
+                            onChange={(txt) => setUser({ ...user, firstname: txt })}
+                            onConfirm={() => editProfilUser(false)}
+                            onCancel={() => setUser(initial)}
+                        />
+                        <EditableText
+                            label="Nom"
+                            value={user.lastname}
+                            onChange={(txt) => setUser({ ...user, lastname: txt })}
+                            onConfirm={() => editProfilUser(false)}
+                            onCancel={() => setUser(initial)}
+                        />
+                    </View>
+        
                 <Text style={styles.titleH2}>Modifier votre mot de passe</Text>
                 <View style={styles.contenerLeft}>
                     <Text style={styles.txt}>Password:</Text>

@@ -38,17 +38,20 @@ export default function CustomDrawer(props) {
                     </View>
                     <Image style={styles.imgDrawer} source={require('../../../assets/Pictures/320px-Emblème_de_l\'Ordre_Jedi..png')} />
                 </View>
+
                 <View style={styles.linkText}>
-                    {!isLog && <DrawerItem label={'Home'} onPress={() => props.navigation.navigate('Home')} />}
-                    <DrawerItem label={'Articles'} onPress={() => props.navigation.navigate('Articles')} />
-                    {isLog && <DrawerItem label={'Profil'} onPress={() => props.navigation.navigate('Profil')} />}
-                    {isLog && <DrawerItem label={'Ajouter un article'} onPress={() => props.navigation.navigate('AddArticle')} />}
+
+                    <DrawerItem label={'Articles'} onPress={() => props.navigation.navigate('Articles', { refresh: true })} />
+                    {isLog && <DrawerItem label={'Ajouter un article'} onPress={() => props.navigation.navigate('AddArticle', { refresh: true })} />}
+                    {!isLog && <DrawerItem label={'Home'} onPress={() => props.navigation.navigate('Home', { refresh: true })} />}
+                    {isLog && <DrawerItem label={'Profil'} onPress={() => props.navigation.navigate('Profil', { refresh: true })} />}
+
                     {!isLog && <DrawerItem label={'Connexion'} onPress={() => props.navigation.navigate('Connexion')} />}
                     {!isLog && <DrawerItem label={'Inscription'} onPress={() => props.navigation.navigate('Inscription')} />}
-
                     {Admin && < DrawerItem label={'Admin'} onPress={() => props.navigation.navigate('AdminScreen')} />}
                     <DrawerItem label={'About'} onPress={() => props.navigation.navigate('About')} />
                 </View>
+                
             </DrawerContentScrollView >
             <TouchableOpacity style={styles.footer} onPress={() => Alert.alert("Vous êtes sur le point de vous déconnecter",
             "Êtes-vous sur de vouloir procéder ?",[
@@ -58,5 +61,6 @@ export default function CustomDrawer(props) {
                 {isLog && <Text>Deconnexion</Text>}
             </TouchableOpacity>
         </View >
+    
     )
 }
