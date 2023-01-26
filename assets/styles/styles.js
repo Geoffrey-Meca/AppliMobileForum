@@ -11,7 +11,12 @@ const styles = StyleSheet.create({
         alignItems: "flex-start",
         marginLeft: "10%"
     },
-    
+    contenerProfil: {
+        width: "100%",
+        alignItems: 'baseline',
+        marginLeft: "2%"
+       
+    },
     imgContainer: {
         alignItems: "center"
     },
@@ -47,6 +52,12 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-around"
+    },
+    OneLineP: {
+        flexDirection: "row-reverse",
+        alignItems: "baseline",
+        flexWrap: "wrap",
+
     },
     /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FORMULAIRE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
     formContainer: {

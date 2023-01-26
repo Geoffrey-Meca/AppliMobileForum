@@ -37,6 +37,7 @@ export default function CustomDrawer(props) {
                     </View>
                     <Image style={styles.imgDrawer} source={require('../../../assets/Pictures/320px-Emblème_de_l\'Ordre_Jedi..png')} />
                 </View>
+
                 <View style={styles.linkText}>
 
                     <DrawerItem label={'Articles'} onPress={() => props.navigation.navigate('Articles', { refresh: true })} />
@@ -48,6 +49,7 @@ export default function CustomDrawer(props) {
                     {Admin && < DrawerItem label={'Admin'} onPress={() => props.navigation.navigate('AdminScreen')} />}
                     <DrawerItem label={'About'} onPress={() => props.navigation.navigate('About')} />
                 </View>
+
             </DrawerContentScrollView >
             <TouchableOpacity style={styles.footer} onPress={() => Alert.alert("Vous êtes sur le point de vous déconnecter",
             "Êtes-vous sur de vouloir procéder ?",[
@@ -57,5 +59,6 @@ export default function CustomDrawer(props) {
                 {isLog && <Text>Deconnexion</Text>}
             </TouchableOpacity>
         </View >
+    
     )
 }
