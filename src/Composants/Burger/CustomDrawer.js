@@ -9,13 +9,13 @@ import { isLogged, isAdmin, logOut } from '../../../lib'
 export default function CustomDrawer(props) {
 
     const [user, setUser] = useState("");
+    const fetchData = async () => {
+        isLog && getMe((res) => {
+            setUser(res.data);
+        });
+    }
 
-    useEffect(() => {
-        const fetchData = async () => {
-            isLog && getMe((res) => {
-                setUser(res.data);
-            });
-        };
+    useEffect(() => {;
         fetchData();
     }, [isLog]);
 
