@@ -80,7 +80,7 @@ export default function UserProfileEditScreen({ navigation }) {
             value={user ? user.email : ""}
             placeholder="Email"
           />
-          <Text style={styles.label}>Role : {user.roles ? user.roles.includes('ROLE_ADMIN') ? "ADMIN" : "USER" : null} </Text>
+          <Text style={styles.label}>Role : {user.roles} </Text>
           <SelectList 
             setSelected={(val) => setSelected(val)}
             boxStyles={styles.inputAdmin}
@@ -95,16 +95,14 @@ export default function UserProfileEditScreen({ navigation }) {
               button={styles.butonStyleLarge}
               txtButton={styles.textButon}
               text={"Modifier"}
-              onPress={() => user.password ? editUser() :
-                Alert.alert(
-                  "Le champ mot de passe ne doit pas être vide")}
+              onPress={editUser}
             />
           <ButtonComponent 
               contButon={styles.contenerCenter}
               button={styles.butonStyleLarge}
               txtButton={styles.textButon}
               text={"Annuler"}
-              onPress={() => navigation.navigate('Users')}
+              onPress={() => navigation.navigate('Users', { refresh: true })}
             />
           </View>
         </View>

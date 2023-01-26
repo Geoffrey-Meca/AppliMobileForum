@@ -4,8 +4,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from '../../../assets/styles/styles';
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 import { getMe, deleteUser, editUser } from '../../../api';
-import Header from '../../Composants/Header'
-import { logOut } from '../../../lib'
+import Header from '../../Composants/Header';
+import { logOut } from '../../../lib';
+import { useRoute } from '@react-navigation/native';
+import Header from '../../Composants/Header';
 import EditableText from '../../Composants/EditableText';
 
 export default function ProfilScreen({ navigation }) {
@@ -15,6 +17,9 @@ export default function ProfilScreen({ navigation }) {
     const [initial, setInitial] = useState("");
     let shouldLogOut = false
 
+    const route = useRoute();
+    const refresh = route.params;
+
     useEffect(() => {
         const fetchData = async () => {
             getMe((res) => {
@@ -23,7 +28,7 @@ export default function ProfilScreen({ navigation }) {
             });
         };
         fetchData();
-    }, []);
+    }, [route, refresh]);
 
     const logOutAlert = () => {
         Alert.alert('Vous allez être déconnecté', 'Veuillez-vous re-connecter pour voir vos modifications', [

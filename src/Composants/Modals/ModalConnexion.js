@@ -25,7 +25,7 @@ export default function ModalConnexion(props) {
                 else {
                     setNewEmail("")
                     setNewPassword("")
-                    props.nav.navigate('Articles')
+                    props.nav.navigate('Articles', { refresh: true })
                     props.onClose()
                 }
             }));

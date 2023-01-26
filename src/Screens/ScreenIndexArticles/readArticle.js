@@ -7,10 +7,13 @@ import ModalAddComment from '../../Composants/Modals/ModalAddComment';
 import { isLogged } from '../../../lib';
 import styles from '../../../assets/styles/styles';
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
+import { useRoute } from '@react-navigation/native';
 
-export default function ReadArticle({ route, navigation }) {
+export default function ReadArticle({ navigation }) {
     const log = isLogged()
-    const articleId = route.params
+    const route = useRoute();
+    const articleId = route.params.articleId;
+    const refresh = route.params.refresh;
     const [article, setArticle] = useState('')
     const [isOpenAdd, setIsOpenAdd] = useState(false);
     let fetchData = async () => {
@@ -20,7 +23,8 @@ export default function ReadArticle({ route, navigation }) {
     }
     useEffect(() => {
         fetchData();
-    }, [articleId]);
+        if ({ "refresh": true }) { fetchData() }
+    }, [articleId, route, refresh]);
 
     async function openAdd() {
         // Permet de forcé le refresh des commentaires.

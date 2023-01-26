@@ -4,10 +4,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Pagination from '../../Composants/Pagination';
 import styles from '../../../assets/styles/styles';
 import { getArticles } from '../../../api';
-import Header from '../../Composants/Header'
+import Header from '../../Composants/Header';
+import { useRoute } from '@react-navigation/native';
 
 
 export default function IndexArticleScreen({ navigation }) {
+
+    const route = useRoute();
+    const refresh = route.params.refresh;
 
     const [articles, setArticles] = useState('');
     const [page, setPage] = useState(1);
@@ -22,11 +26,11 @@ export default function IndexArticleScreen({ navigation }) {
 
     useEffect(() => {
         fetchData()
-    }, [page]);
+    }, [page, route, refresh]);
 
     function goToArticle(id) {
         navigation.navigate("ReadArticle", {
-            articleId: id
+            articleId: id, refresh: true 
         });
     }
 
