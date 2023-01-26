@@ -7,7 +7,9 @@ import ModalAddComment from '../../Composants/Modals/ModalAddComment';
 import { isLogged } from '../../../lib';
 import styles from '../../../assets/styles/styles';
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
+import ModalConnexion from '../../Composants/Modals/ModalConnexion';
 import { useRoute } from '@react-navigation/native';
+
 
 export default function ReadArticle({ navigation }) {
     const log = isLogged()
@@ -16,6 +18,11 @@ export default function ReadArticle({ navigation }) {
     const refresh = route.params.refresh;
     const [article, setArticle] = useState('')
     const [isOpenAdd, setIsOpenAdd] = useState(false);
+    const [isFormConnexionVisible, setIsFormConnexionVisible] = useState(false)
+
+    const _toggleFormConnexion = () => {
+        setIsFormConnexionVisible(!isFormConnexionVisible)
+    }
     let fetchData = async () => {
         getArticleById(articleId.articleId, (res) => {
             setArticle(res.data)
@@ -69,7 +76,7 @@ export default function ReadArticle({ navigation }) {
                                     onPress={openAdd}
                                 />
                             </View>
-                        </Fragment>) : (<Text style={styles.carreful}>Connectez-vous pour ajouter un commentaire !</Text>)}
+                        </Fragment>) : (<Text style={styles.carreful} onPress={_toggleFormConnexion}>Connectez-vous pour ajouter un commentaire !</Text>)}
 
                         {isOpenAdd && <ModalAddComment close={openAdd} onPress={openAdd} id={articleId.articleId} />}
 
@@ -86,6 +93,7 @@ export default function ReadArticle({ navigation }) {
                     <Text style={styles.txt}>...loading</Text>
                 )
                 }
+                {isFormConnexionVisible && <ModalConnexion onPress={_toggleFormConnexion} onClose={_toggleFormConnexion} nav={navigation} />}
             </ScrollView>
         </SafeAreaView>
     )
