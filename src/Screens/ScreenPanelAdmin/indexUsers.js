@@ -50,7 +50,7 @@ export default function IndexUsersScreen({ navigation }) {
                                 button={styles.butonStyleLarge}
                                 txtButton={styles.textButon}
                                 text={"Modifier"}
-                                onPress={() => navigation.navigate('User', { userId: item.id })}
+                                onPress={() => navigation.navigate('User', { userId: item.id, refresh: true  })}
                             />
                             <ButtonComponent 
                                 contButon={styles.contenerCenter}

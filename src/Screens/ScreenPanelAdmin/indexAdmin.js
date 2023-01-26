@@ -15,14 +15,14 @@ export default function AdminScreen({ navigation }) {
                     button={styles.butonStyleLarge}
                     txtButton={styles.textButon}
                     text={"La liste des utilisateurs"}
-                    onPress={() => navigation.navigate('Users')}
+                    onPress={() => navigation.navigate('Users', { refresh: true })}
                 />
                 <ButtonComponent 
                     contButon={styles.contenerCenter}
                     button={styles.butonStyleLarge}
                     txtButton={styles.textButon}
                     text={"La liste des articles"}
-                    onPress={() => navigation.navigate('ArticlesAdmin')}
+                    onPress={() => navigation.navigate('ArticlesAdmin', { refresh: true })}
                 />
         </SafeAreaView>
     )

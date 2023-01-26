@@ -104,7 +104,7 @@ export default function ArticleEditScreen({ navigation }) {
             button={styles.butonStyleLarge}
             txtButton={styles.textButon}
             text={"Annuler"}
-            onPress={() => navigation.navigate('ArticlesAdmin')}
+            onPress={() => navigation.navigate('ArticlesAdmin', { refresh: true })}
           />
         </View>
 

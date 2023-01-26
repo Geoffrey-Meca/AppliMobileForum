@@ -40,10 +40,10 @@ export default function CustomDrawer(props) {
                 </View>
                 <View style={styles.linkText}>
 
-                    <DrawerItem label={'Home'} onPress={() => props.navigation.navigate('Home')} />
-                    <DrawerItem label={'Articles'} onPress={() => props.navigation.navigate('Articles')} />
-                    <DrawerItem label={'Profil'} onPress={() => props.navigation.navigate('Profil')} />
-                    {isLog && <DrawerItem label={'Ajouter un article'} onPress={() => props.navigation.navigate('AddArticle')} />}
+                    <DrawerItem label={'Home'} onPress={() => props.navigation.navigate('Home', { refresh: true })} />
+                    <DrawerItem label={'Articles'} onPress={() => props.navigation.navigate('Articles', { refresh: true })} />
+                    <DrawerItem label={'Profil'} onPress={() => props.navigation.navigate('Profil', { refresh: true })} />
+                    {isLog && <DrawerItem label={'Ajouter un article'} onPress={() => props.navigation.navigate('AddArticle', { refresh: true })} />}
                     {!isLog && <DrawerItem label={'Connexion'} onPress={() => props.navigation.navigate('Connexion')} />}
                     {!isLog && <DrawerItem label={'Inscription'} onPress={() => props.navigation.navigate('Inscription')} />}
                     {Admin && < DrawerItem label={'Admin'} onPress={() => props.navigation.navigate('AdminScreen')} />}

@@ -4,13 +4,17 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from '../../../assets/styles/styles';
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 import { getMe, deleteUser, editUser } from '../../../api';
-import Header from '../../Composants/Header'
-import { logOut } from '../../../lib'
+import Header from '../../Composants/Header';
+import { logOut } from '../../../lib';
+import { useRoute } from '@react-navigation/native';
 
 export default function ProfilScreen({ navigation }) {
 
     const [refreshing, setRefreshing] = React.useState(false);
     const [user, setUser] = useState("");
+
+    const route = useRoute();
+    const refresh = route.params;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -19,7 +23,7 @@ export default function ProfilScreen({ navigation }) {
             });
         };
         fetchData();
-    }, []);
+    }, [route, refresh]);
 
     const editProfilUser = () => {
         editUser(user.id, user.email, user.firstname, user.lastname, user.password, (res => {

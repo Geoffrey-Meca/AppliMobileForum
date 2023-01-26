@@ -3,9 +3,10 @@ import { Alert, Text, TextInput, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { postArticle } from '../../../api';
-import BoutonApp from '../../Composants/Bouton'
-import Header from '../../Composants/Header'
-import styles from '../../../assets/styles/styles'
+import BoutonApp from '../../Composants/Bouton';
+import Header from '../../Composants/Header';
+import styles from '../../../assets/styles/styles';
+
 
 export default function AddArticleScreen({ navigation }) {
 
@@ -29,7 +30,7 @@ export default function AddArticleScreen({ navigation }) {
 
                 } else {
                     Alert.alert('Votre article a bien été publié')
-                    navigation.navigate('Articles')
+                    navigation.navigate('Articles', { refresh: true })
                 }
             }))
 

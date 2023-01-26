@@ -50,7 +50,7 @@ export default function LandingScreen({ navigation }) {
                     button={styles.butonStyle}
                     txtButton={styles.textButon}
                     text={"Entrer"}
-                    onPress={() => navigation.navigate('Articles')}
+                    onPress={() => navigation.navigate('Articles', { refresh: true })}
                 />
                {log ? (<Text></Text>) : (
                 <Fragment>
