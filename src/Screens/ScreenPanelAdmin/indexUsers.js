@@ -68,7 +68,6 @@ export default function IndexUsersScreen({ navigation }) {
                                             {
                                                 text: 'Oui',
                                                 onPress: () => deleteUser(item.id, (res) => {
-                                                    console.log(res.data);
                                                     navigation.navigate('Users', { refresh: true });
                                                 }),
                                             },

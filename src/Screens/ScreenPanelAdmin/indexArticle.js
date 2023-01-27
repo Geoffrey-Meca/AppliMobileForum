@@ -39,7 +39,6 @@ export default function ArticleEditScreen({ navigation }) {
 
   const editArticle = async () => {
     patchArticle(articleId, article.title, article.content, (res => {
-      console.log(res);
       fetchData();
       Alert.alert(
         'L\'article a été mis à jour avec succès.',
@@ -150,7 +149,6 @@ export default function ArticleEditScreen({ navigation }) {
                     {
                       text: 'Oui',
                       onPress: () => deleteComment(item.id, (res) => {
-                        console.log(res.data);
                         navigation.navigate('ArticleAdmin', { refresh: true, articleId: item.article.id });
                       }),
                     },

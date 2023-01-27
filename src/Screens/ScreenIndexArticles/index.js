@@ -26,7 +26,7 @@ export default function IndexArticleScreen({ navigation }) {
 
     useEffect(() => {
         fetchData()
-    }, [page, route, refresh]);
+    }, [page, refresh]);
 
     function goToArticle(id) {
         navigation.navigate("ReadArticle", {

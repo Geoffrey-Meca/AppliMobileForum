@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { Text, Image, View, ScrollView } from 'react-native'
 import { StatusBar } from 'expo-status-bar';
@@ -7,8 +7,8 @@ import ModalConnexion from '../../Composants/Modals/ModalConnexion';
 import ModalInscription from '../../Composants/Modals/ModalInscription';
 import styles from '../../../assets/styles/styles';
 import { useFonts, Iceland_400Regular } from '@expo-google-fonts/iceland';
-import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 
+import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 
 export default function LandingScreen({ navigation }) {
 

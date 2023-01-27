@@ -16,7 +16,6 @@ export default function ModalAddComment(props) {
   const AddComment = () => {
     // Controle size of comment 
     if (NewComment.length >= 10) {
-
       postComment(targetId, NewComment, (res => { }))
       props.close()
     } else {
