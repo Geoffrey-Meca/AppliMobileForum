@@ -29,6 +29,7 @@ export default function IndexArticleScreen({ navigation }) {
         if ({ "refresh": true }) { fetchData() }
     }, [page, route, refresh]);
 
+
     function goToArticle(id) {
         navigation.navigate("ReadArticle", {
             articleId: id, refresh: true

@@ -67,8 +67,9 @@ export default function IndexArticlesScreen({ navigation }) {
                                             {
                                                 text: 'Oui',
                                                 onPress: () => deleteArticle(item.id, (res) => {
-                                                    console.log(res.data);
-                                                    navigation.navigate('ArticlesAdmin', { refresh: true });
+
+                                                navigation.navigate('ArticlesAdmin', { refresh: true });
+
                                                 }),
                                             },
                                         ],

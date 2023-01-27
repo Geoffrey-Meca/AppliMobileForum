@@ -29,8 +29,9 @@ export default function ProfilScreen({ navigation }) {
 
     const logOutAlert = () => {
         Alert.alert('Vous allez être déconnecté', 'Veuillez-vous re-connecter pour voir vos modifications', [
-            { text: 'Ok', onPress: () => logOut(navigation) },
+            { text: 'Ok' },
         ])
+        logOut(navigation)
     }
 
     const editProfilUser = (shouldLogOut) => {
@@ -38,25 +39,24 @@ export default function ProfilScreen({ navigation }) {
             if (res.status != 200) {
                 Alert.alert(`Erreur`, `${res.data.message}`,)
             } else {
-                Alert.alert('Vos modifications ont bien été prise en compte')
-                setInitial(user)
-                shouldLogOut && logOutAlert()
+                Alert.alert('Vos modifications ont bien été prise en compte', '', [
+                    { text: 'Ok', onPress: () => {setInitial(user), shouldLogOut && logOutAlert()}}
+                ])
             }
         }))
     }
     const removeUser = () => {
         Alert.alert('Supprimer votre compte', 'Êtes-vous sûr de vouloir supprimer votre compte ?', [
-            {
-                text: 'Oui', onPress: () => deleteUser(user.id, (res => {
-                    if (res.status != 204) {
-                        Alert.alert(`Erreur`, `${res.data.message}`,)
-                    } else {
-                        Alert.alert('Votre profile a bien été supprimé')
-                        logOut(navigation)
-                    }
-                }))
-            },
-            { text: 'Non', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+        
+            { text: 'Confirmer', onPress: () => deleteUser(user.id, (res => {
+                if (res.status != 204) {
+                    Alert.alert(`Erreur`, `${res.data.message}`,)
+                } else {
+                    Alert.alert('Votre profile a bien été supprimé')
+                    logOut(navigation)
+                }
+            })) },
+            { text: 'Annuler'},
         ])
     }
 

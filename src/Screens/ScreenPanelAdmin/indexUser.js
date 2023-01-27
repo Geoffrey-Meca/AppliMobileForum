@@ -49,7 +49,6 @@ export default function UserProfileEditScreen({ navigation }) {
     { key: 'USER', value: ["ROLE_USER"] },
     { key: 'ADMIN', value: ["ROLE_ADMIN"] },
   ]
-  console.log(user.roles);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -80,6 +79,7 @@ export default function UserProfileEditScreen({ navigation }) {
             onChangeText={(txt) => setUser({ ...user, email: txt })}
             value={user ? user.email : ""}
             placeholder="Email"
+            keyboardType='email-address'
           />
           <Text style={styles.label}>Role : {user.roles} </Text>
           <SelectList
