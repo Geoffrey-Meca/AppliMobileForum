@@ -27,7 +27,7 @@ export default function IndexArticleScreen({ navigation }) {
     useEffect(() => {
         fetchData()
         if ({ "refresh": true }) { fetchData() }
-    }, [page, route, refresh]);
+    }, [page, refresh]);
 
 
     function goToArticle(id) {
