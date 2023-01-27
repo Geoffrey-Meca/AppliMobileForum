@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Text, TextInput, View, ScrollView, Alert, RefreshControl } from 'react-native'
+import { Text, TextInput, View, ScrollView, Alert } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from '../../../assets/styles/styles';
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
@@ -11,20 +11,19 @@ import EditableText from '../../Composants/EditableText';
 
 export default function ProfilScreen({ navigation }) {
 
-    const [refreshing, setRefreshing] = React.useState(false);
     const [user, setUser] = useState("");
     const [initial, setInitial] = useState("");
 
     const route = useRoute();
     const refresh = route.params;
 
+    const fetchData = async () => {
+        getMe((res) => {
+            setInitial(res.data)
+            setUser(res.data);
+        });
+    };
     useEffect(() => {
-        const fetchData = async () => {
-            getMe((res) => {
-                setInitial(res.data)
-                setUser(res.data);
-            });
-        };
         fetchData();
     }, [route, refresh]);
 
@@ -48,6 +47,7 @@ export default function ProfilScreen({ navigation }) {
     }
     const removeUser = () => {
         Alert.alert('Supprimer votre compte', 'Êtes-vous sûr de vouloir supprimer votre compte ?', [
+        
             { text: 'Confirmer', onPress: () => deleteUser(user.id, (res => {
                 if (res.status != 204) {
                     Alert.alert(`Erreur`, `${res.data.message}`,)
@@ -59,46 +59,38 @@ export default function ProfilScreen({ navigation }) {
             { text: 'Annuler'},
         ])
     }
-    const onRefresh = React.useCallback(() => {
-        setRefreshing(true);
-        setTimeout(() => {
-            setRefreshing(false);
-        }, 1000);
-    }, []);
+
     return (
         <SafeAreaView style={styles.container}>
             <Header nav={navigation} />
-            <ScrollView style={styles.container} refreshControl={
-                <RefreshControl refreshing={refreshing}
-                    onRefresh={onRefresh} />
-            }>
-               
+            <ScrollView style={styles.container}>
+
                 <Text style={styles.titleH2}>Profile</Text>
-             
-                    <View style={styles.contenerProfil}>
-                        <EditableText
-                            label="Email"
-                            value={user.email}
-                            onChange={(txt) => setUser({ ...user, email: txt })}
-                            onConfirm={() => editProfilUser(true)}
-                            onCancel={() => setUser(initial)}
-                        />
-                        <EditableText
-                            label="Prenom"
-                            value={user.firstname}
-                            onChange={(txt) => setUser({ ...user, firstname: txt })}
-                            onConfirm={() => editProfilUser(false)}
-                            onCancel={() => setUser(initial)}
-                        />
-                        <EditableText
-                            label="Nom"
-                            value={user.lastname}
-                            onChange={(txt) => setUser({ ...user, lastname: txt })}
-                            onConfirm={() => editProfilUser(false)}
-                            onCancel={() => setUser(initial)}
-                        />
-                    </View>
-        
+
+                <View style={styles.contenerProfil}>
+                    <EditableText
+                        label="Email"
+                        value={user.email}
+                        onChange={(txt) => setUser({ ...user, email: txt })}
+                        onConfirm={() => editProfilUser(true)}
+                        onCancel={() => setUser(initial)}
+                    />
+                    <EditableText
+                        label="Prenom"
+                        value={user.firstname}
+                        onChange={(txt) => setUser({ ...user, firstname: txt })}
+                        onConfirm={() => editProfilUser(false)}
+                        onCancel={() => setUser(initial)}
+                    />
+                    <EditableText
+                        label="Nom"
+                        value={user.lastname}
+                        onChange={(txt) => setUser({ ...user, lastname: txt })}
+                        onConfirm={() => editProfilUser(false)}
+                        onCancel={() => setUser(initial)}
+                    />
+                </View>
+
                 <Text style={styles.titleH2}>Modifier votre mot de passe</Text>
                 <View style={styles.contenerLeft}>
                     <Text style={styles.txt}>Password:</Text>

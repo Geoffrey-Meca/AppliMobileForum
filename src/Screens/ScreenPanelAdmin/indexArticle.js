@@ -35,7 +35,7 @@ export default function ArticleEditScreen({ navigation }) {
     fetchData();
     fetchComments();
     if ({ "refresh": true }) { fetchData() }
-  }, [articleId, route, refresh, page]);
+  }, [articleId, refresh, page]);
 
   const editArticle = async () => {
     patchArticle(articleId, article.title, article.content, (res => {
@@ -90,7 +90,7 @@ export default function ArticleEditScreen({ navigation }) {
           />
         </View>
         <View style={styles.OneLine}>
-   
+
           <ButtonComponent
             contButon={styles.contenerCenter}
             button={styles.butonStyleLarge}
@@ -126,37 +126,39 @@ export default function ArticleEditScreen({ navigation }) {
               style={styles.input}
             />
             <View style={styles.OneLine}>
-            <ButtonComponent
-              contButon={styles.contenerCenter}
-              button={styles.butonStyleLarge}
-              txtButton={styles.textButon}
-              text={"Modifer"}
-              onPress={() => editComment(item.id)}
-            />
-            <ButtonComponent
-              contButon={styles.contenerCenter}
-              button={styles.butonStyleLarge}
-              txtButton={styles.textButon}
-              text={"Supprimer"}
-              onPress={() =>
-                Alert.alert(
-                  "Vous êtes sur le point de supprimer le comment",
-                  "Êtes-vous sur de vouloir procéder ?",
-                  [
-                    {
-                      text: "Non",
-                    },
-                    {
-                      text: 'Oui',
-                      onPress: () => deleteComment(item.id, (res) => {
-                        navigation.navigate('ArticleAdmin', { refresh: true, articleId: item.article.id });
-                      }),
-                    },
 
-                  ],
-                )}
-            />
-       
+              <ButtonComponent
+                contButon={styles.contenerCenter}
+                button={styles.butonStyleLarge}
+                txtButton={styles.textButon}
+                text={"Modifer"}
+                onPress={() => editComment(item.id)}
+              />
+              <ButtonComponent
+                contButon={styles.contenerCenter}
+                button={styles.butonStyleLarge}
+                txtButton={styles.textButon}
+                text={"Supprimer"}
+                onPress={() =>
+                  Alert.alert(
+                    "Vous êtes sur le point de supprimer le comment",
+                    "Êtes-vous sur de vouloir procéder ?",
+                    [
+                      {
+                        text: "Non",
+                      },
+                      {
+                        text: 'Oui',
+                        onPress: () => deleteComment(item.id, (res) => {
+                          console.log(res.data);
+                          navigation.navigate('ArticleAdmin', { refresh: true, articleId: item.article.id });
+                        }),
+                      },
+
+                    ],
+                  )}
+              />
+
             </View>
           </View>
         ))

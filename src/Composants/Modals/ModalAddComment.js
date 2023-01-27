@@ -19,6 +19,7 @@ export default function ModalAddComment(props) {
       postComment(targetId, NewComment, (res => { }))
       props.close()
     } else {
+      console.log(targetId)
       alert("Comment too short !")
     }
   }
@@ -44,7 +45,7 @@ export default function ModalAddComment(props) {
         text={"Add"}
         onPress={AddComment}
       />
-      
+
     </View>
   )
 }

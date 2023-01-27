@@ -25,11 +25,12 @@ export default function UserProfileEditScreen({ navigation }) {
   useEffect(() => {
     fetchData();
     if ({ "refresh": true }) { fetchData() };
-  }, [userId, route, refresh]);
+  }, [userId, refresh]);
 
   const editUser = async () => {
 
     patchUser(userId, user.email, user.firstname, user.lastname, user.roles, (res => {
+
       Alert.alert(
         'Profil modifié',
         'Le profil de l\'utilisateur a été mis à jour avec succès.',
@@ -43,16 +44,16 @@ export default function UserProfileEditScreen({ navigation }) {
     }))
   }
   const [selected, setSelected] = React.useState("");
-  
+
   const data = [
-      {key:'USER', value: ["ROLE_USER"]},
-      {key:'ADMIN', value: ["ROLE_ADMIN"]},
+    { key: 'USER', value: ["ROLE_USER"] },
+    { key: 'ADMIN', value: ["ROLE_ADMIN"] },
   ]
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-      <Header nav={navigation} />
+        <Header nav={navigation} />
         <Text style={styles.titleH3}>Modifier l'utilisateur n° {userId}</Text>
         <View>
 
@@ -81,23 +82,23 @@ export default function UserProfileEditScreen({ navigation }) {
             keyboardType='email-address'
           />
           <Text style={styles.label}>Role : {user.roles} </Text>
-          <SelectList 
+          <SelectList
             setSelected={(val) => setSelected(val)}
             boxStyles={styles.inputAdmin}
-            onSelect={() => setUser({ ...user, roles: selected })} 
-            data={data} 
+            onSelect={() => setUser({ ...user, roles: selected })}
+            data={data}
             save="value"
             search={false}
           />
           <View style={styles.OneLine}>
-            <ButtonComponent 
+            <ButtonComponent
               contButon={styles.contenerCenter}
               button={styles.butonStyleLarge}
               txtButton={styles.textButon}
               text={"Modifier"}
               onPress={editUser}
             />
-          <ButtonComponent 
+            <ButtonComponent
               contButon={styles.contenerCenter}
               button={styles.butonStyleLarge}
               txtButton={styles.textButon}
@@ -106,7 +107,7 @@ export default function UserProfileEditScreen({ navigation }) {
             />
           </View>
         </View>
-        </ScrollView>
+      </ScrollView>
     </SafeAreaView >
   )
 }

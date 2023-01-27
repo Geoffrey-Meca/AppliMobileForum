@@ -31,13 +31,14 @@ export default function ReadArticle({ navigation }) {
     useEffect(() => {
         fetchData();
         if ({ "refresh": true }) { fetchData() }
-    }, [articleId, route, refresh]);
+    }, [articleId, refresh]);
 
     async function openAdd() {
         // Permet de forcé le refresh des commentaires.
         await fetchData();
         setIsOpenAdd(!isOpenAdd)
     }
+
     function brassageDate(date) {
         if (date == null || date == '') {
             return false
