@@ -9,7 +9,6 @@ export default function ModalAddComment(props) {
 
   const targetId = props.id
   const [NewComment, setNewComment] = useState("");
-  console.log('képasa')
 
   const onChangeComment = (val) => {
     setNewComment(val);
