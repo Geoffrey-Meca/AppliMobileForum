@@ -4,13 +4,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { getArticleById } from '../../../api';
 import Header from '../../Composants/Header';
 import ModalAddComment from '../../Composants/Modals/ModalAddComment';
-import { isLogged } from '../../../lib';
+import { isLogged, brassageDate } from '../../../lib';
 import styles from '../../../assets/styles/styles';
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 import ModalConnexion from '../../Composants/Modals/ModalConnexion';
 import { useRoute } from '@react-navigation/native';
-
-
 export default function ReadArticle({ navigation }) {
     const log = isLogged()
     const route = useRoute();
@@ -36,19 +34,7 @@ export default function ReadArticle({ navigation }) {
     async function openAdd() {
         // Permet de forcé le refresh des commentaires.
         await fetchData();
-        setIsOpenAdd(!isOpenAdd)
-    }
-
-    function brassageDate(date) {
-        if (date == null || date == '') {
-            return false
-        } else {
-            let buffer = date.split('T')
-            let ymd = buffer[0]
-            let brassage = ymd.split('-')
-            let dmy = brassage[2] + '/' + brassage[1] + '/' + brassage[0]
-            return dmy
-        }
+        setIsOpenAdd(!isOpenAdd);
     }
 
     return (
