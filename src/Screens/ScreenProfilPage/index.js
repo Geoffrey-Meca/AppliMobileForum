@@ -48,7 +48,7 @@ export default function ProfilScreen({ navigation }) {
     }
     const removeUser = () => {
         Alert.alert('Supprimer votre compte', 'Êtes-vous sûr de vouloir supprimer votre compte ?', [
-            { text: 'Oui', onPress: () => deleteUser(user.id, (res => {
+            { text: 'Confirmer', onPress: () => deleteUser(user.id, (res => {
                 if (res.status != 204) {
                     Alert.alert(`Erreur`, `${res.data.message}`,)
                 } else {
@@ -56,7 +56,7 @@ export default function ProfilScreen({ navigation }) {
                     logOut(navigation)
                 }
             })) },
-            { text: 'Non', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+            { text: 'Annuler'},
         ])
     }
     const onRefresh = React.useCallback(() => {

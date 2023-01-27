@@ -30,8 +30,6 @@ export default function UserProfileEditScreen({ navigation }) {
   const editUser = async () => {
 
     patchUser(userId, user.email, user.firstname, user.lastname, user.roles, (res => {
-
-      console.log(res);
       Alert.alert(
         'Profil modifié',
         'Le profil de l\'utilisateur a été mis à jour avec succès.',
@@ -50,7 +48,6 @@ export default function UserProfileEditScreen({ navigation }) {
       {key:'USER', value: ["ROLE_USER"]},
       {key:'ADMIN', value: ["ROLE_ADMIN"]},
   ]
-  console.log(user.roles);
 
   return (
     <SafeAreaView style={styles.container}>
