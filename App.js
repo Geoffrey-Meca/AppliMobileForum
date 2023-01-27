@@ -1,7 +1,6 @@
 import 'react-native-gesture-handler';
 // Importation de react
 import React from 'react';
-import { Alert, BackHandler } from 'react-native';
 // Importation des Pages Screen
 import LandingScreen from './src/Screens/ScreenHome';
 import About from './src/Screens/ScreenAbout';
@@ -27,8 +26,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 // import { useFonts, Inter_900Black } from '@expo-google-fonts/inter'
 
 const Drawer = createDrawerNavigator();
-const Stack = createStackNavigator();
-
 
 const DrawerNavigator = () => {
 
