@@ -38,8 +38,8 @@ export default function IndexUsersScreen({ navigation }) {
             <Text style={styles.title}>{"Liste des utilisateurs"}</Text>
             <ScrollView>
                 {users ? (users['hydra:member'].map((item, index) => (
-                    <View style={styles.pageContainerAdmin} key={index}>
-                        <Text style={{ color: "#fff", fontSize: 25, paddingBottom: "5%", fontFamily: 'Iceland_400Regular' }} >User: {item.id}</Text>
+                    <View style={styles.box} key={index}>
+                        <Text style={styles.tinyText} >User: {item.id}</Text>
                         <View style={styles.infoUserAdmin}>
                             <Text style={styles.linkUserAdmin} >{item.firstname} {item.lastname} : </Text>
                             <Text style={styles.linkUserAdmin} >{item.email}</Text>
@@ -54,7 +54,7 @@ export default function IndexUsersScreen({ navigation }) {
                             />
                             <ButtonComponent
                                 contButon={styles.contenerCenter}
-                                button={styles.butonStyleLarge}
+                                button={styles.butonDangerous}
                                 txtButton={styles.textButon}
                                 text={"Supprimer"}
                                 onPress={() =>

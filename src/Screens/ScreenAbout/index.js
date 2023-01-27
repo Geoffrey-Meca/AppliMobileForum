@@ -10,7 +10,7 @@ export default function About({ navigation }) {
 <SafeAreaView style={styles.container}>
         <Header nav={navigation} />
         <ScrollView>
-          <View>
+          <View style={styles.articleContainer}>
           <Text style={styles.titleH2}>L'équipe de développeurs</Text>
           <Text style={styles.txt}>
             L'équipe CodeHub a concocté un petit forum mobile avec React Native. L’aventure a duré six semaines. Nous sommes passés par plusieurs étapes, que toute aventure humaine rencontre à un moment où un autre de son périple.

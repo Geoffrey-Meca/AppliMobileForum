@@ -33,6 +33,17 @@ const styles = StyleSheet.create({
         textAlign: "justify",
         padding: "1%"
     },
+    tinyText: {
+        fontSize: 16,
+        color: "#FFFFFF",
+        textAlign: "justify",
+        padding: "1%"
+    },
+    labelText: {
+        fontSize: 15,
+        color: "#FFFFFF",
+        marginRight: "0%"
+    },
     img: {
         width: "90%",
         height: 300,
@@ -96,6 +107,17 @@ const styles = StyleSheet.create({
         margin: 20,
         paddingHorizontal: "5%",
     },
+    butonDangerous: {
+        width: '75%',
+        height: 42,
+        borderWidth: 2,
+        borderRadius: 10,
+        backgroundColor: "#F74823",
+        justifyContent: "center",
+        alignItems: "center",
+        margin: 20,
+        paddingHorizontal: "5%",
+    },
     butonStyle: {
         width: '50%',
         height: 42,
@@ -127,10 +149,19 @@ const styles = StyleSheet.create({
     inputArticleContainer: {
         margin: "3%"
     },
+    box: {
+        width: "100%",
+        borderBottomColor: "rgba(255, 255, 255, 0.60)",
+        borderBottomWidth: 1
+    },
+
     linkArticle: {
         color: "#FFFFFF",
-        fontSize: 20,
-        marginBottom: 20,
+        fontSize: 25,
+        marginBottom: "2%",
+        marginTop: "1%",
+        textAlign: "right",
+        fontFamily: 'Iceland_400Regular'
     },
     Author: {
         flexDirection: "row",
