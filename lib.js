@@ -42,8 +42,21 @@ function logOut(navigation) {
     )
 }
 
+function brassageDate(date) {
+    if (date == null || date == '') {
+        return false
+    } else {
+        let buffer = date.split('T')
+        let ymd = buffer[0]
+        let brassage = ymd.split('-')
+        let dmy = brassage[2] + '/' + brassage[1] + '/' + brassage[0]
+        return dmy
+    }
+}
 module.exports = {
     isLogged,
     isAdmin,
+    brassageDate,
+    // useRefreshNavigation,
     logOut
 }

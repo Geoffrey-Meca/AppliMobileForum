@@ -6,9 +6,10 @@ import styles from '../../../assets/styles/styles';
 import { getArticles } from '../../../api';
 import Header from '../../Composants/Header';
 import { useRoute } from '@react-navigation/native';
-
+import { brassageDate } from '../../../lib';
 
 export default function IndexArticleScreen({ navigation }) {
+
 
     const route = useRoute();
     const refresh = route.params.refresh;
@@ -43,8 +44,9 @@ export default function IndexArticleScreen({ navigation }) {
                 <Text style={styles.title}>Post du forum</Text>
                 <View style={styles.contenerCenter}>
                     {articles ? (articles['hydra:member'].map((item, index) => (
-                        <Pressable key={index} onPress={() => goToArticle(item['@id'].replace(/[^0-9]/g, ''))}>
-                            <Text style={styles.linkArticle} key={index}>{item.title}</Text>
+                        <Pressable style={styles.box} key={index} onPress={() => goToArticle(item['@id'].replace(/[^0-9]/g, ''))}>
+                                <Text style={styles.tinyText}>Article du {brassageDate(item.createdAt)}</Text>
+                                <Text style={styles.linkArticle} key={index}>{item.title}</Text>
                         </Pressable>
                     ))
                     ) : (

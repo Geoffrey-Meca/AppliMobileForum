@@ -10,7 +10,7 @@ export default function EditableText ({label, value, onChange, onConfirm, onCanc
             {editing ? (
                 <View>
                     <View style={styles.OneLine}>
-                        <Text style={styles.txt}>{label}</Text>
+                        <Text style={styles.labelText}>{label}</Text>
                         <TextInput style={styles.input} value={value} onChangeText={onChange} />
                     </View>
                     <View style={styles.OneLine}>

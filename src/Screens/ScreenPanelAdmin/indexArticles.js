@@ -37,7 +37,7 @@ export default function IndexArticlesScreen({ navigation }) {
             <Text style={styles.title}>{"Liste des articles"}</Text>
             <ScrollView>
                 {articles ? (articles['hydra:member'].map((item, index) => (
-                    <View key={index}>
+                    <View key={index} style={styles.box}>
                         <Text style={styles.titleH3} >Article n° {item.id} :</Text>
                         <Text style={styles.titleH3} >{item.title}</Text>
                         <View style={styles.infoArticle}>
@@ -53,7 +53,7 @@ export default function IndexArticlesScreen({ navigation }) {
                             />
                             <ButtonComponent
                                 contButon={styles.contenerCenter}
-                                button={styles.butonStyleLarge}
+                                button={styles.butonDangerous}
                                 txtButton={styles.textButon}
                                 text={"Supprimer"}
                                 onPress={() =>
