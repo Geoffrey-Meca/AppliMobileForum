@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store'
 import { Alert } from 'react-native';
+
 const getJwtToken = async () => {
     const token = await SecureStore.getItemAsync('jwt');
     if (token) {
@@ -11,7 +12,7 @@ const getJwtToken = async () => {
     }
 }
 const api = axios.create({
-    baseURL: 'https://mathieu-ruiz.students-laplateforme.io/app-mobile-forum/public/api/'
+    baseURL: 'https://geoffrey-meca.students-laplateforme.io/API-mobile-forum/public/api/'
 });
 
 const request = async (method, url, data, callback) => {

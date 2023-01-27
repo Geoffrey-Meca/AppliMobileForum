@@ -45,8 +45,8 @@ export default function IndexArticleScreen({ navigation }) {
                 <View style={styles.contenerCenter}>
                     {articles ? (articles['hydra:member'].map((item, index) => (
                         <Pressable style={styles.box} key={index} onPress={() => goToArticle(item['@id'].replace(/[^0-9]/g, ''))}>
-                                <Text style={styles.tinyText}>Article du {brassageDate(item.createdAt)}</Text>
-                                <Text style={styles.linkArticle} key={index}>{item.title}</Text>
+                            <Text style={styles.tinyText}>Article du {brassageDate(item.createdAt)}</Text>
+                            <Text style={styles.linkArticle} key={index}>{item.title}</Text>
                         </Pressable>
                     ))
                     ) : (
