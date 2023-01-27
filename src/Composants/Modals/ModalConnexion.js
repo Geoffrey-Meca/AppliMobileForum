@@ -6,25 +6,17 @@ import styles from '../../../assets/styles/styles'
 
 
 export default function ModalConnexion(props) {
-    const [newEmail, setNewEmail] = useState("")
-    const [newPassword, setNewPassword] = useState("")
+    const [user, setUser] = useState('');
     const emailRegex = /^\S+@\S+\.\S+$/;
 
-    const onChangeEmail = (val) => {
-        setNewEmail(val);
-    }
-    const onChangePassword = (val) => {
-        setNewPassword(val)
-    }
     const handleSubmit = () => {
-        if (emailRegex.test(newEmail)) {
-            login(newEmail, newPassword, (res => {
+        if (emailRegex.test(user.email)) {
+            login(user.email, user.password, (res => {
                 if (res.status != 200) {
                     Alert.alert(`Erreur`, `${res.data.message}`)
                 }
                 else {
-                    setNewEmail("")
-                    setNewPassword("")
+                    setUser('')
                     props.nav.navigate('Articles', { refresh: true })
                     props.onClose()
                 }
@@ -45,15 +37,15 @@ export default function ModalConnexion(props) {
                     <Text style={styles.titleH3}>Identifiez-vous</Text>
                     <TextInput
                         style={styles.input}
-                        onChangeText={onChangeEmail}
-                        value={newEmail}
+                        onChangeText={(txt) => setUser({ ...user, email: txt })}
+                        value={user ? user.email : ''}
                         placeholder='Email'
                         keyboardType='email-address'
                     />
                     <TextInput
                         style={styles.input}
-                        onChangeText={onChangePassword}
-                        value={newPassword}
+                        onChangeText={(txt) => setUser({ ...user, password: txt })}
+                        value={user ? user.password : ''}
                         placeholder='Password'
                         secureTextEntry={true}
                     />
