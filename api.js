@@ -6,9 +6,12 @@ const getJwtToken = async () => {
     if (token) {
         api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
+    else {
+        delete api.defaults.headers.common['Authorization'];
+    }
 }
 const api = axios.create({
-    baseURL: 'https://rany-alo.students-laplateforme.io/app-mobile-forum/public/api'
+    baseURL: 'https://mathieu-ruiz.students-laplateforme.io/app-mobile-forum/public/api/'
 });
 
 const request = async (method, url, data, callback) => {
@@ -24,6 +27,7 @@ const request = async (method, url, data, callback) => {
         data: data,
         headers: header
     }).then(res => {
+        console.log(res)
         return callback(res);
     })
         .catch(error => {
@@ -37,6 +41,7 @@ const request = async (method, url, data, callback) => {
                 ])
                 return null
             }
+            console.log(error.response)
             return callback(error.response)
         });
 };
