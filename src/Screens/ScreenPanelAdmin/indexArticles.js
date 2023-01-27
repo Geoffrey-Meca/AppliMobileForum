@@ -29,7 +29,7 @@ export default function IndexArticlesScreen({ navigation }) {
     useEffect(() => {
         fetchData()
         if ({ "refresh": true }) { fetchData() }
-    }, [page, route, refresh]);
+    }, [page, refresh]);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -44,34 +44,34 @@ export default function IndexArticlesScreen({ navigation }) {
                             <Text style={styles.txt} >{item.content}</Text>
                         </View>
                         <View style={styles.OneLine}>
-                            <ButtonComponent 
+                            <ButtonComponent
                                 contButon={styles.contenerCenter}
                                 button={styles.butonStyleLarge}
                                 txtButton={styles.textButon}
                                 text={"Modifier"}
-                                onPress={() => navigation.navigate('ArticleAdmin', { articleId: item.id, refresh: true  })}
+                                onPress={() => navigation.navigate('ArticleAdmin', { articleId: item.id, refresh: true })}
                             />
-                            <ButtonComponent 
+                            <ButtonComponent
                                 contButon={styles.contenerCenter}
                                 button={styles.butonStyleLarge}
                                 txtButton={styles.textButon}
                                 text={"Supprimer"}
                                 onPress={() =>
-                                        Alert.alert(
+                                    Alert.alert(
                                         "Vous êtes sur le point de supprimer l'article",
                                         "Êtes-vous sur de vouloir procéder ?",
                                         [
                                             {
-                                            text: "Non",
+                                                text: "Non",
                                             },
-                                        {
-                                            text: 'Oui',
+                                            {
+                                                text: 'Oui',
                                                 onPress: () => deleteArticle(item.id, (res) => {
-                                                console.log(res.data);
-                                                navigation.navigate('ArticlesAdmin', { refresh: true });
+                                                    console.log(res.data);
+                                                    navigation.navigate('ArticlesAdmin', { refresh: true });
                                                 }),
-                                        },
-                                    ],
+                                            },
+                                        ],
                                     )}
                             />
                         </View>

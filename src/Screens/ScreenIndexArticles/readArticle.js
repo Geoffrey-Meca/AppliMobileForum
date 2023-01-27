@@ -24,20 +24,21 @@ export default function ReadArticle({ navigation }) {
         setIsFormConnexionVisible(!isFormConnexionVisible)
     }
     let fetchData = async () => {
-        getArticleById(articleId.articleId, (res) => {
+        getArticleById(articleId, (res) => {
             setArticle(res.data)
         })
     }
     useEffect(() => {
         fetchData();
         if ({ "refresh": true }) { fetchData() }
-    }, [articleId, route, refresh]);
+    }, [articleId, refresh]);
 
     async function openAdd() {
         // Permet de forcé le refresh des commentaires.
         await fetchData();
         setIsOpenAdd(!isOpenAdd)
     }
+
     function brassageDate(date) {
         if (date == null || date == '') {
             return false
@@ -78,7 +79,7 @@ export default function ReadArticle({ navigation }) {
                             </View>
                         </Fragment>) : (<Text style={styles.carreful} onPress={_toggleFormConnexion}>Connectez-vous pour ajouter un commentaire !</Text>)}
 
-                        {isOpenAdd && <ModalAddComment close={openAdd} onPress={openAdd} id={articleId.articleId} />}
+                        {isOpenAdd && <ModalAddComment close={openAdd} onPress={openAdd} id={articleId} />}
 
                         {(article.comments.reverse()).map(comment => (
                             <View style={styles.commentsContainer} key={comment['@id'].replace(/[^0-9]/g, '')}>
