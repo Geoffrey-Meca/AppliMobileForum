@@ -26,8 +26,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 // import { useFonts, Inter_900Black } from '@expo-google-fonts/inter'
 
 const Drawer = createDrawerNavigator();
-const Stack = createStackNavigator();
-
 
 const DrawerNavigator = () => {
 
