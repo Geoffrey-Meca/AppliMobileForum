@@ -9,6 +9,7 @@ import { useRoute } from '@react-navigation/native';
 
 
 export default function IndexArticleScreen({ navigation }) {
+    console.log('Chargement de la page')
 
     const route = useRoute();
     const refresh = route.params.refresh;
@@ -25,8 +26,9 @@ export default function IndexArticleScreen({ navigation }) {
     }
 
     useEffect(() => {
+        console.log('useEffect')
         fetchData()
-    }, [page, route, refresh]);
+    }, [page, refresh]);
 
     function goToArticle(id) {
         navigation.navigate("ReadArticle", {

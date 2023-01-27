@@ -14,7 +14,6 @@ export default function ProfilScreen({ navigation }) {
     const [refreshing, setRefreshing] = React.useState(false);
     const [user, setUser] = useState("");
     const [initial, setInitial] = useState("");
-    let shouldLogOut = false
 
     const route = useRoute();
     const refresh = route.params;
@@ -31,19 +30,19 @@ export default function ProfilScreen({ navigation }) {
 
     const logOutAlert = () => {
         Alert.alert('Vous allez être déconnecté', 'Veuillez-vous re-connecter pour voir vos modifications', [
-            { text: 'Ok', onPress: () => logOut(navigation) },
+            { text: 'Ok' },
         ])
+        logOut(navigation)
     }
 
     const editProfilUser = (shouldLogOut) => {
         editUser(user.id, user.email, user.firstname, user.lastname, user.password, (res => {
-            console.log(res.status)
             if (res.status != 200) {
                 Alert.alert(`Erreur`, `${res.data.message}`,)
             } else {
-                Alert.alert('Vos modifications ont bien été prise en compte')
-                setInitial(user)
-                shouldLogOut && logOutAlert()
+                Alert.alert('Vos modifications ont bien été prise en compte', '', [
+                    { text: 'Ok', onPress: () => {setInitial(user), shouldLogOut && logOutAlert()}}
+                ])
             }
         }))
     }

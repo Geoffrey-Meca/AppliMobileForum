@@ -3,6 +3,7 @@ import * as SecureStore from 'expo-secure-store'
 import { Alert } from 'react-native';
 const getJwtToken = async () => {
     const token = await SecureStore.getItemAsync('jwt');
+    console.log(token)
     if (token) {
         api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
@@ -13,6 +14,7 @@ const api = axios.create({
 
 const request = async (method, url, data, callback) => {
     await getJwtToken();
+    console.log(await getJwtToken())
     header = { 'Content-type': 'application/json', }
     if (method == "patch") {
         header = { 'Content-type': 'application/merge-patch+json' }
@@ -24,6 +26,7 @@ const request = async (method, url, data, callback) => {
         data: data,
         headers: header
     }).then(res => {
+        console.log(res)
         return callback(res);
     })
         .catch(error => {
@@ -37,6 +40,7 @@ const request = async (method, url, data, callback) => {
                 ])
                 return null
             }
+            console.log(error)
             return callback(error.response)
         });
 };
