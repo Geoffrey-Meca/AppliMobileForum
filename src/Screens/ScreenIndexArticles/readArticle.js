@@ -30,11 +30,9 @@ export default function ReadArticle({ navigation }) {
         fetchData();
         if ({ "refresh": true }) { fetchData() }
     }, [articleId, refresh]);
-
-    async function openAdd() {
-        // Permet de forcé le refresh des commentaires.
-        await fetchData();
-        setIsOpenAdd(!isOpenAdd);
+    
+    function openAdd() {
+        setIsOpenAdd(!isOpenAdd)
     }
 
     return (
@@ -65,7 +63,7 @@ export default function ReadArticle({ navigation }) {
                             </View>
                         </Fragment>) : (<Text style={styles.carreful} onPress={_toggleFormConnexion}>Connectez-vous pour ajouter un commentaire !</Text>)}
 
-                        {isOpenAdd && <ModalAddComment close={openAdd} onPress={openAdd} id={articleId} />}
+                        {isOpenAdd && <ModalAddComment fetchData={() => fetchData()} close={openAdd} onPress={openAdd} id={articleId} />}
 
                         {(article.comments.reverse()).map(comment => (
                             <View style={styles.commentsContainer} key={comment['@id'].replace(/[^0-9]/g, '')}>

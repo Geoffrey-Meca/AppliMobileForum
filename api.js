@@ -27,7 +27,6 @@ const request = async (method, url, data, callback) => {
         data: data,
         headers: header
     }).then(res => {
-        console.log(res)
         return callback(res);
     })
         .catch(error => {
@@ -41,7 +40,6 @@ const request = async (method, url, data, callback) => {
                 ])
                 return null
             }
-            console.log(error.response)
             return callback(error.response)
         });
 };
