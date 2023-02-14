@@ -12,7 +12,7 @@ const getJwtToken = async () => {
     }
 }
 const api = axios.create({
-    baseURL: 'https://192.168.43.18:8000/api'
+    baseURL: 'http://10.10.4.159:8000/api'
 });
 
 const request = async (method, url, data, callback) => {
