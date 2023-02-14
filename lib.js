@@ -56,6 +56,5 @@ module.exports = {
     isLogged,
     isAdmin,
     brassageDate,
-    // useRefreshNavigation,
     logOut
 }
