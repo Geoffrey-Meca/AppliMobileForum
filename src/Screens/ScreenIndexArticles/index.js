@@ -27,51 +27,47 @@ export default function IndexArticleScreen({ navigation }) {
         });
     }
 
-    const route = useRoute();
-    const refresh = route.params.refresh;
-};
+    useEffect(() => {
+        fetchData();
+    }, [page, refresh]);
 
-useEffect(() => {
-    fetchData();
-}, [page, refresh]);
-
-function goToArticle(id) {
-    navigation.navigate('ReadArticle', {
-        articleId: id,
-        refresh: true,
-    });
-}
-
-const renderFooter = () => {
-    if (loading) {
-        return (
-            <View>
-                {<ActivityIndicator />}
-            </View>
-        );
+    function goToArticle(id) {
+        navigation.navigate('ReadArticle', {
+            articleId: id,
+            refresh: true,
+        });
     }
-};
 
-return (
-    <SafeAreaView style={styles.container}>
-        <Header nav={navigation} />
-        <FlatList
-            data={articles}
-            renderItem={({ item }) => (
-                <Pressable key={item.id} onPress={() => goToArticle(item.id)}>
-                    <Card info={item} />
-                </Pressable>
-            )}
-            keyExtractor={item => item.id.toString()}
-            onEndReachedThreshold={0.1}
-            onEndReached={() => {
-                if (articles.length < totalItems) {
-                    setPage(page + 1);
-                }
-            }}
-            ListFooterComponent={renderFooter}
-        />
-    </SafeAreaView>
-);
+    const renderFooter = () => {
+        if (loading) {
+            return (
+                <View>
+                    {<ActivityIndicator />}
+                </View>
+            );
+        }
+    };
+
+    return (
+        <SafeAreaView style={styles.container}>
+            <Header nav={navigation} />
+            <FlatList
+                data={articles}
+                renderItem={({ item }) => (
+                    <Pressable key={item.id} onPress={() => goToArticle(item.id)}>
+                        <Card info={item} />
+                    </Pressable>
+                )}
+                keyExtractor={item => item.id.toString()}
+                onEndReachedThreshold={0.1}
+                onEndReached={() => {
+                    if (articles.length < totalItems) {
+                        setPage(page + 1);
+                    }
+                }}
+                ListFooterComponent={renderFooter}
+            />
+        </SafeAreaView>
+    );
 
 }
