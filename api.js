@@ -12,7 +12,10 @@ const getJwtToken = async () => {
     }
 }
 const api = axios.create({
-    baseURL: 'http://10.10.4.159:8000/api'
+    baseURL: 'https://geoffrey-meca.students-laplateforme.io/API-mobile-forum/public/api/'
+    // baseURL: 'https://rany-alo.students-laplateforme.io/app-mobile-forum/public/api/'
+    // baseURL: 'http://10.10.20.159:8000/api'
+
 });
 
 const request = async (method, url, data, callback) => {
