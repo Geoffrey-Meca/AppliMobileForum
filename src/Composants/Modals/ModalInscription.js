@@ -4,6 +4,7 @@ import { TextInput, View, Text, Pressable, Alert, ScrollView } from 'react-nativ
 import { postUser, login } from '../../../api';
 import styles from '../../../assets/styles/styles'
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
+import { Ionicons } from '@expo/vector-icons';
 
 
 export default function ModalInscription(props) {
@@ -60,7 +61,7 @@ export default function ModalInscription(props) {
     return (
         <View style={styles.modalContainer}>
             <Pressable style={{ alignItems: "flex-end", width: "100%" }} onPress={props.onPress}>
-                <Text style={styles.closeBtn}>X</Text>
+                <Text style={styles.closeBtn}><Ionicons name="md-close-sharp" size={24} color="black" /></Text>
             </Pressable>
             <ScrollView>
 
@@ -96,7 +97,7 @@ export default function ModalInscription(props) {
                         contButon={styles.contenerCenter}
                         button={styles.butonStyle}
                         txtButton={styles.textButon}
-                        text={"Inscription"}
+                        text={<Ionicons name="person-add" size={24} color="black" />}
                         onPress={handleSubmit}
                     />
                 </View>

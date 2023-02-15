@@ -3,7 +3,8 @@ import { TextInput, View, Text, Pressable, Alert, ScrollView } from 'react-nativ
 import { login } from '../../../api';
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 import styles from '../../../assets/styles/styles'
-
+import { Ionicons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 export default function ModalConnexion(props) {
     const [newEmail, setNewEmail] = useState("")
@@ -37,7 +38,7 @@ export default function ModalConnexion(props) {
     return (
         <View style={styles.modalContainer}>
             <Pressable style={{ alignItems: "flex-end", width: "100%" }} onPress={props.onPress}>
-                <Text style={styles.closeBtn}>X</Text>
+                <Text style={styles.closeBtn}><Ionicons name="md-close-sharp" size={24} color="black" /></Text>
             </Pressable>
             <ScrollView>
 
@@ -62,7 +63,7 @@ export default function ModalConnexion(props) {
                     contButon={styles.contenerCenter}
                     button={styles.butonStyle}
                     txtButton={styles.textButon}
-                    text={"Connexion"}
+                    text={<AntDesign name="login" size={24} color="black" />}
                     onPress={handleSubmit}
                 />
                 </View>

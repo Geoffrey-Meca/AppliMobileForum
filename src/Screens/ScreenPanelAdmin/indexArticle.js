@@ -7,8 +7,9 @@ import { patchComment, deleteComment, getCommentsByArticle, patchArticle, getArt
 import Pagination from '../../Composants/Pagination';
 import styles from '../../../assets/styles/styles'
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
-
-
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 export default function ArticleEditScreen({ navigation }) {
 
   const [article, setArticle] = useState('');
@@ -93,16 +94,16 @@ export default function ArticleEditScreen({ navigation }) {
 
           <ButtonComponent
             contButon={styles.contenerCenter}
-            button={styles.butonStyleLarge}
+            button={styles.butonStyleIcon}
             txtButton={styles.textButon}
-            text={"Modifier"}
+            text={<FontAwesome name="pencil" size={24} color="black" />}
             onPress={() => editArticle()}
           />
           <ButtonComponent
             contButon={styles.contenerCenter}
-            button={styles.butonStyleLarge}
+            button={styles.butonStyleIcon}
             txtButton={styles.textButon}
-            text={"Annuler"}
+            text={<MaterialCommunityIcons name="lock-reset" size={24} color="black" />}
             onPress={() => navigation.navigate('ArticlesAdmin', { refresh: true })}
           />
         </View>
@@ -129,16 +130,16 @@ export default function ArticleEditScreen({ navigation }) {
 
               <ButtonComponent
                 contButon={styles.contenerCenter}
-                button={styles.butonStyleLarge}
+                button={styles.butonStyleIcon}
                 txtButton={styles.textButon}
-                text={"Modifer"}
+                text={<FontAwesome name="pencil" size={24} color="black" />}
                 onPress={() => editComment(item.id)}
               />
               <ButtonComponent
                 contButon={styles.contenerCenter}
-                button={styles.butonStyleLarge}
+                button={styles.butonDangerous}
                 txtButton={styles.textButon}
-                text={"Supprimer"}
+                text={<AntDesign name="delete" size={25} color="black" />}
                 onPress={() =>
                   Alert.alert(
                     "Vous êtes sur le point de supprimer le comment",

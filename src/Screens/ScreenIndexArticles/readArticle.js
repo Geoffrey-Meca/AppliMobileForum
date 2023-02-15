@@ -9,6 +9,8 @@ import styles from '../../../assets/styles/styles';
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 import ModalConnexion from '../../Composants/Modals/ModalConnexion';
 import { useRoute } from '@react-navigation/native';
+import { MaterialIcons } from '@expo/vector-icons';
+
 export default function ReadArticle({ navigation }) {
     const log = isLogged()
     const route = useRoute();
@@ -55,9 +57,9 @@ export default function ReadArticle({ navigation }) {
                                 <Text style={styles.date}>Commentaires</Text>
                                 <ButtonComponent
                                     contButon={styles.date}
-                                    button={styles.butonStyleLitte}
+                                    button={styles.butonStyleIcon}
                                     txtButton={styles.textButon}
-                                    text={"Add"}
+                                    text={<MaterialIcons name="add-comment" size={24} color="black" />}
                                     onPress={openAdd}
                                 />
                             </View>

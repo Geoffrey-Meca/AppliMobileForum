@@ -7,9 +7,8 @@ import { useRoute } from '@react-navigation/native';
 import Pagination from '../../Composants/Pagination';
 import styles from '../../../assets/styles/styles'
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
-
-
-
+import { FontAwesome } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 export default function IndexArticlesScreen({ navigation }) {
 
     const [articles, setArticles] = useState('');
@@ -46,16 +45,16 @@ export default function IndexArticlesScreen({ navigation }) {
                         <View style={styles.OneLine}>
                             <ButtonComponent
                                 contButon={styles.contenerCenter}
-                                button={styles.butonStyleLarge}
+                                button={styles.butonStyleIcon}
                                 txtButton={styles.textButon}
-                                text={"Modifier"}
+                                text={<FontAwesome name="pencil" size={25} color="black" />}
                                 onPress={() => navigation.navigate('ArticleAdmin', { articleId: item.id, refresh: true })}
                             />
                             <ButtonComponent
                                 contButon={styles.contenerCenter}
                                 button={styles.butonDangerous}
                                 txtButton={styles.textButon}
-                                text={"Supprimer"}
+                                text={<AntDesign name="delete" size={25} color="black" />}
                                 onPress={() =>
                                     Alert.alert(
                                         "Vous êtes sur le point de supprimer l'article",

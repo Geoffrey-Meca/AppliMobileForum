@@ -7,6 +7,9 @@ import { getArticles } from '../../../api';
 import Header from '../../Composants/Header';
 import { useRoute } from '@react-navigation/native';
 import { brassageDate } from '../../../lib';
+import ButtonComponent from '../../Composants/Bouton/buttonComponent';
+
+import { Ionicons } from '@expo/vector-icons';
 const debug = true;
 
 
@@ -15,7 +18,7 @@ export default function IndexArticleScreen({ navigation }) {
 
     const route = useRoute();
     const refresh = route.params.refresh;
-
+    console.log(refresh)
     const [articles, setArticles] = useState('');
     const [page, setPage] = useState(1);
     const [totalItems, setTotalItems] = useState(0);
@@ -35,7 +38,8 @@ export default function IndexArticleScreen({ navigation }) {
     //console.log(articles);
     useEffect(() => {
         fetchData()
-        if ({ "refresh": true }) { fetchData() }
+        //if ({ "refresh": true }) { fetchData() }
+        if (refresh) { fetchData() }
     }, [page, refresh]);
 
 
@@ -49,7 +53,15 @@ export default function IndexArticleScreen({ navigation }) {
         <SafeAreaView style={styles.container}>
             <Header nav={navigation} />
             <ScrollView>
-                <Text style={styles.title}>Post du forum</Text>
+               <View style={styles.OneLine}>
+                <Text style={styles.title}>Les posts du forum</Text>
+                <ButtonComponent
+                    button={styles.butonStyleLarge}
+                    txtButton={styles.textButon}
+                    text={<Ionicons name="md-add-circle-outline" size={24} color="black" />}
+                    onPress={() => navigation.navigate('AddArticle', { refresh: true })}   contButon={styles.contenerCenter}
+                    />
+                </View>
                 <View style={styles.contenerCenter}>
                     {articles ? (articles['hydra:member'].map((item, index) => (
                         <Pressable style={styles.box} key={index} onPress={() => goToArticle(item['@id'].replace(/[^0-9]/g, ''))}>
@@ -60,8 +72,10 @@ export default function IndexArticleScreen({ navigation }) {
                     ) : (
                         <Text>Loading...</Text>
                     )}
+       
                 </View>
             </ScrollView>
+
             <Pagination
                 fetchData={fetchData}
                 page={page}

@@ -6,7 +6,9 @@ import { postArticle } from '../../../api';
 import Header from '../../Composants/Header'
 import styles from '../../../assets/styles/styles'
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
-
+import { Entypo } from '@expo/vector-icons';
+import { Foundation } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 export default function AddArticleScreen({ navigation }) {
 
     const [newTitleArticle, setNewTitleArticle] = useState("");
@@ -71,7 +73,7 @@ export default function AddArticleScreen({ navigation }) {
                     contButon={styles.contenerCenter}
                     button={styles.butonStyleLitte}
                     txtButton={styles.textButon}
-                    text={"Publiez"}
+                    text={<MaterialIcons name="post-add" size={24} color="black" />}
                     onPress={addArticle}
                 />
             </ScrollView>
