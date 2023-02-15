@@ -7,6 +7,8 @@ import { getArticles } from '../../../api';
 import Header from '../../Composants/Header';
 import { useRoute } from '@react-navigation/native';
 import { brassageDate } from '../../../lib';
+const debug = true;
+
 
 export default function IndexArticleScreen({ navigation }) {
 
@@ -18,13 +20,19 @@ export default function IndexArticleScreen({ navigation }) {
     const [page, setPage] = useState(1);
     const [totalItems, setTotalItems] = useState(0);
     const maxItems = 5;
+    let number = 0
     const fetchData = () => {
         getArticles(page, (res) => {
             setArticles(res.data);
             setTotalItems(res.data['hydra:totalItems']);
         });
+        if(debug) {
+            number = number + 1
+            console.log("Fetch"+number)
+        }
+     
     }
-
+    //console.log(articles);
     useEffect(() => {
         fetchData()
         if ({ "refresh": true }) { fetchData() }

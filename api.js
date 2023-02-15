@@ -11,7 +11,12 @@ const getJwtToken = async () => {
     }
 }
 const api = axios.create({
-    baseURL: 'https://mathieu-ruiz.students-laplateforme.io/app-mobile-forum/public/api/'
+    // Choix de l'API.
+
+    //baseURL: 'https://mathieu-ruiz.students-laplateforme.io/app-mobile-forum/public/api/'
+    baseURL: 'https://christophep-calmes.students-laplateforme.io/app-mobile-forum/public/api/'
+    //baseURL: 'https://rany-alo.students-laplateforme.io/app-mobile-forum/public/api/'
+    //baseURL: 'https://geoffrey-meca.students-laplateforme.io/API-mobile-forum/public/api/'
 });
 
 const request = async (method, url, data, callback) => {
