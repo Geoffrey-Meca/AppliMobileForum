@@ -40,7 +40,7 @@ export default function IndexArticleScreen({ navigation }) {
         fetchData()
         //if ({ "refresh": true }) { fetchData() }
         if (refresh) { fetchData() }
-    }, [page, refresh]);
+    }, [page, refresh, route]);
 
 
     function goToArticle(id) {
