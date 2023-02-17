@@ -10,6 +10,7 @@ import Card from '../../Composants/Card';
 export default function IndexArticleScreen({ navigation }) {
   const route = useRoute();
   const refresh = route.params.refresh;
+  console.log(refresh)
 
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -26,7 +27,13 @@ export default function IndexArticleScreen({ navigation }) {
   };
 
   useEffect(() => {
+    if (refresh == true){
+        setArticles([])
+        setPage(1)
+        route.params.refresh = false
+    }
     fetchData();
+    console.log(page)
   }, [page, refresh]);
 
   function goToArticle(id) {
@@ -51,11 +58,11 @@ export default function IndexArticleScreen({ navigation }) {
       <FlatList
         data={articles}
         renderItem={({ item }) => (
-        <Pressable key={item.id} onPress={() => goToArticle(item.id)}>
+        <Pressable onPress={() => goToArticle(item.id)}>
            <Card info={item} />
         </Pressable>
         )}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={(item, index) => index.toString()}
         onEndReachedThreshold={0.1}
         onEndReached={() => {
            if (articles.length < totalItems) {
