@@ -11,7 +11,6 @@ export default function ModalAddComment(props) {
 
   const targetId = props.id
   const [NewComment, setNewComment] = useState("");
-  console.log('képasa')
 
   const onChangeComment = (val) => {
     setNewComment(val);
@@ -19,9 +18,9 @@ export default function ModalAddComment(props) {
   const AddComment = () => {
     // Controle size of comment 
     if (NewComment.length >= 10) {
-      postComment(targetId, NewComment, (res => { 
-          props.close()
-          props.fetchData()
+      postComment(targetId, NewComment, (res => {
+        props.close()
+        props.fetchData()
       }))
     } else {
       alert("Comment too short !")
@@ -49,7 +48,6 @@ export default function ModalAddComment(props) {
         text={<MaterialIcons name="add" size={24} color="black" />}
         onPress={AddComment}
       />
-
     </View>
   )
 }

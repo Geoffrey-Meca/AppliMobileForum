@@ -32,7 +32,7 @@ export default function ReadArticle({ navigation }) {
         fetchData();
         if ({ "refresh": true }) { fetchData() }
     }, [articleId, refresh]);
-    
+
     function openAdd() {
         setIsOpenAdd(!isOpenAdd)
     }

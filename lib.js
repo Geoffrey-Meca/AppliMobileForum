@@ -19,7 +19,7 @@ const isLogged = () => {
 const isAdmin = () => {
     const [isAdmin, setIsAdmin] = useState(false);
 
-        SecureStore.getItemAsync('jwt').then((token) => {  
+    SecureStore.getItemAsync('jwt').then((token) => {
         if (token) {
             const decoded = jwtDecode(token)
             if (decoded.roles.includes('ROLE_ADMIN')) {
@@ -35,10 +35,9 @@ const isAdmin = () => {
     return isAdmin;
 }
 
-
 function logOut(navigation) {
     SecureStore.deleteItemAsync('jwt').then(
-        navigation.navigate('Home' , { refresh: true })
+        navigation.navigate('Home', { refresh: true })
     )
 }
 
@@ -57,6 +56,5 @@ module.exports = {
     isLogged,
     isAdmin,
     brassageDate,
-    // useRefreshNavigation,
     logOut
 }
