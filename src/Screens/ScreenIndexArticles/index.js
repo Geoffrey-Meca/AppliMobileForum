@@ -43,13 +43,6 @@ export default function IndexArticleScreen({ route, navigation }) {
 
   }, [page, refresh]);
 
-  function goToArticle(id) {
-    navigation.navigate('ReadArticle', {
-      articleId: id,
-      refresh: true,
-    });
-  }
-
   const renderFooter = () => {
     if (loading) {
     return (
