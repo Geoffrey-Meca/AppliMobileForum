@@ -6,10 +6,11 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#0077B6",
     },
+
     contenerLeft: {
         flex: 1,
         alignItems: "flex-start",
-        marginLeft: "10%"
+        marginLeft: "5%"
     },
     contenerProfil: {
         width: "100%",
@@ -64,6 +65,12 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "space-around"
     },
+    OneLineAdmin: {
+        width: "100%",
+        flexDirection: "row",
+        alignItems: "baseline",
+        justifyContent: "space-between"
+    },
     OneLineP: {
         flexDirection: "row-reverse",
         alignItems: "baseline",
@@ -108,15 +115,26 @@ const styles = StyleSheet.create({
         paddingHorizontal: "5%",
     },
     butonDangerous: {
-        width: '75%',
-        height: 42,
-        borderWidth: 2,
+        width: 35,
+        height: 35,
+        //borderWidth: 2,
         borderRadius: 10,
         backgroundColor: "#F74823",
         justifyContent: "center",
         alignItems: "center",
         margin: 20,
         paddingHorizontal: "5%",
+    },
+    butonStyleIcon: {
+            width: 35,
+            height: 35,
+            //borderWidth: 2,
+            borderRadius: 10,
+            backgroundColor: "#CAF0F8",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: 20,
+            paddingHorizontal: "5%",
     },
     butonStyle: {
         width: '50%',
@@ -293,8 +311,10 @@ const styles = StyleSheet.create({
     },
 
     infoUserAdmin: {
+        width: "100%",
         flexDirection: "row",
-        justifyContent: "space-around"
+        justifyContent: "space-around",
+        alignItems: "baseline",
     },
     linkUserAdmin: {
         color: "#FFFFFF",

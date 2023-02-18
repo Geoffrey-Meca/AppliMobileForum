@@ -8,6 +8,8 @@ import Header from '../../Composants/Header';
 import { logOut } from '../../../lib';
 import { useRoute } from '@react-navigation/native';
 import EditableText from '../../Composants/EditableText';
+import { AntDesign } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function ProfilScreen({ navigation }) {
 
@@ -101,22 +103,24 @@ export default function ProfilScreen({ navigation }) {
                         placeholder='password'
                         secureTextEntry={true}
                     />
-                </View>
+                
                 <ButtonComponent
                     contButon={styles.contenerCenter}
-                    button={styles.butonStyle}
+                    button={styles.butonStyleLitte}
                     txtButton={styles.textButon}
-                    text={"Modifier"}
+                    text={<FontAwesome name="pencil" size={25} color="black" />}
                     onPress={() => editProfilUser(true)}
-                />
+                /></View>
+                <View style={styles.OneLine}>
                 <Text style={styles.titleH2}>Supprimer votre profile</Text>
                 <ButtonComponent
                     contButon={styles.contenerCenter}
-                    button={styles.butonStyle}
+                    button={styles.butonDangerous}
                     txtButton={styles.textButon}
-                    text={"Supprimer"}
+                    text={<AntDesign name="delete" size={25} color="black" />}
                     onPress={removeUser}
                 />
+                </View>
             </ScrollView>
         </SafeAreaView >
     )

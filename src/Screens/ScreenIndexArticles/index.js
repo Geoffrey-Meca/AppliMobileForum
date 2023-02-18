@@ -5,7 +5,10 @@ import styles from '../../../assets/styles/styles';
 import { getArticles } from '../../../api';
 import Header from '../../Composants/Header';
 import { useRoute } from '@react-navigation/native';
+import ButtonComponent from '../../Composants/Bouton/buttonComponent';
+import { Ionicons } from '@expo/vector-icons';
 import Card from '../../Composants/Card';
+
 
 export default function IndexArticleScreen({ route, navigation }) {
   
@@ -53,8 +56,14 @@ export default function IndexArticleScreen({ route, navigation }) {
     };
     
     return (
-   <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.container}>
             <Header nav={navigation} />
+                <ButtonComponent
+                    button={styles.butonStyleLarge}
+                    txtButton={styles.textButon}
+                    text={<Ionicons name="md-add-circle-outline" size={24} color="black" />}
+                    onPress={() => navigation.navigate('AddArticle', { refresh: true })}   contButon={styles.contenerCenter}
+                    />
             <FlatList
                 contentContainerStyle={{ flexGrow: 1 }}
                 data={articles}
@@ -79,5 +88,4 @@ export default function IndexArticleScreen({ route, navigation }) {
             />
         </SafeAreaView>
     );
-
 }

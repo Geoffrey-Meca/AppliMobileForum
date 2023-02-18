@@ -9,6 +9,8 @@ import { useRoute } from '@react-navigation/native';
 import Pagination from '../../Composants/Pagination';
 import styles from '../../../assets/styles/styles';
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
+import { AntDesign } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
 
 
@@ -38,25 +40,27 @@ export default function IndexUsersScreen({ navigation }) {
             <Text style={styles.title}>{"Liste des utilisateurs"}</Text>
             <ScrollView>
                 {users ? (users['hydra:member'].map((item, index) => (
+                    <View style={styles.OneLineAdmin} key={index}>
                     <View style={styles.box} key={index}>
-                        <Text style={styles.tinyText} >User: {item.id}</Text>
                         <View style={styles.infoUserAdmin}>
-                            <Text style={styles.linkUserAdmin} >{item.firstname} {item.lastname} : </Text>
-                            <Text style={styles.linkUserAdmin} >{item.email}</Text>
-                        </View>
-                        <View style={styles.OneLine} >
+                            <View style={styles.contenerLeft}>
+                                <Text style={styles.linkUserAdmin} >{item.firstname} {item.lastname}</Text>
+
+                                <Text style={styles.linkUserAdmin} >{item.email}</Text>
+                            </View>
+                        
                             <ButtonComponent
                                 contButon={styles.contenerCenter}
-                                button={styles.butonStyleLarge}
+                                button={styles.butonStyleIcon}
                                 txtButton={styles.textButon}
-                                text={"Modifier"}
+                                text={<FontAwesome name="pencil" size={25} color="black" />}
                                 onPress={() => navigation.navigate('User', { userId: item.id, refresh: true })}
                             />
                             <ButtonComponent
                                 contButon={styles.contenerCenter}
                                 button={styles.butonDangerous}
                                 txtButton={styles.textButon}
-                                text={"Supprimer"}
+                                text={<AntDesign name="deleteuser" size={25} color="black" />}
                                 onPress={() =>
                                     Alert.alert(
                                         "Vous êtes sur le point de supprimer l'utilisateur",
@@ -75,7 +79,10 @@ export default function IndexUsersScreen({ navigation }) {
                                     )}
                             />
 
+                        
+                       
                         </View>
+                    </View>
                     </View>
                 ))
                 ) : (

@@ -8,7 +8,8 @@ import styles from '../../../assets/styles/styles';
 import { SelectList } from 'react-native-dropdown-select-list'
 import ButtonComponent from '../../Composants/Bouton/buttonComponent';
 import { ScrollView } from 'react-native-gesture-handler';
-
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 export default function UserProfileEditScreen({ navigation }) {
 
   const [user, setUser] = useState('');
@@ -93,16 +94,16 @@ export default function UserProfileEditScreen({ navigation }) {
           <View style={styles.OneLine}>
             <ButtonComponent
               contButon={styles.contenerCenter}
-              button={styles.butonStyleLarge}
+              button={styles.butonStyleIcon}
               txtButton={styles.textButon}
-              text={"Modifier"}
+              text={<FontAwesome name="pencil" size={24} color="black" />}
               onPress={editUser}
             />
             <ButtonComponent
               contButon={styles.contenerCenter}
-              button={styles.butonStyleLarge}
+              button={styles.butonStyleIcon}
               txtButton={styles.textButon}
-              text={"Annuler"}
+              text={<MaterialCommunityIcons name="lock-reset" size={24} color="black" />}
               onPress={() => navigation.navigate('Users', { refresh: true })}
             />
           </View>
